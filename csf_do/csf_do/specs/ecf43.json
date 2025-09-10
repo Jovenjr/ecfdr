@@ -1,0 +1,35 @@
+{
+  "required_paths": [
+    "DetallesItems",
+    "DetallesItems/Item",
+    "DetallesItems/Item/CantidadItem",
+    "DetallesItems/Item/IndicadorBienoServicio",
+    "DetallesItems/Item/IndicadorFacturacion",
+    "DetallesItems/Item/MontoItem",
+    "DetallesItems/Item/NombreItem",
+    "DetallesItems/Item/NumeroLinea",
+    "DetallesItems/Item/PrecioUnitarioItem",
+    "Encabezado",
+    "Encabezado/Emisor",
+    "Encabezado/Emisor/DireccionEmisor",
+    "Encabezado/Emisor/FechaEmision",
+    "Encabezado/Emisor/RNCEmisor",
+    "Encabezado/Emisor/RazonSocialEmisor",
+    "Encabezado/IdDoc",
+    "Encabezado/IdDoc/FechaVencimientoSecuencia",
+    "Encabezado/IdDoc/TipoeCF",
+    "Encabezado/IdDoc/eNCF",
+    "Encabezado/Totales",
+    "Encabezado/Totales/MontoTotal",
+    "Encabezado/Version",
+    "FechaHoraFirma"
+  ],
+  "date_fields": [
+    "Encabezado/Emisor/FechaEmision",
+    "Encabezado/IdDoc/FechaVencimientoSecuencia",
+    "InformacionReferencia/FechaNCFModificado"
+  ],
+  "datetime_fields": [
+    "FechaHoraFirma"
+  ]
+}

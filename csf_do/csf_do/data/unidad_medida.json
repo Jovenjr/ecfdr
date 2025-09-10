@@ -1,0 +1,317 @@
+{
+  "type": "UnidadMedidaType",
+  "entries": [
+    {
+      "code": "1",
+      "label": "BARR\tBarril"
+    },
+    {
+      "code": "2",
+      "label": "BOL\tBolsa"
+    },
+    {
+      "code": "3",
+      "label": "BOT\tBote"
+    },
+    {
+      "code": "4",
+      "label": "BULTO\tBultos"
+    },
+    {
+      "code": "5",
+      "label": "BOTELLA\tBotella"
+    },
+    {
+      "code": "6",
+      "label": "CAJ\tCaja/Cajón"
+    },
+    {
+      "code": "7",
+      "label": "CAJETILLA \tCajetilla"
+    },
+    {
+      "code": "8",
+      "label": "CM\tCentímetro"
+    },
+    {
+      "code": "9",
+      "label": "CIL\tCilindro"
+    },
+    {
+      "code": "10",
+      "label": "CONJ\tConjunto"
+    },
+    {
+      "code": "11",
+      "label": "CONT\tContenedor"
+    },
+    {
+      "code": "12",
+      "label": "DÍA\tDía"
+    },
+    {
+      "code": "13",
+      "label": "DOC\tDocena"
+    },
+    {
+      "code": "14",
+      "label": "FARD\tFardo"
+    },
+    {
+      "code": "15",
+      "label": "GL\tGalones"
+    },
+    {
+      "code": "16",
+      "label": "GRAD\tGrado"
+    },
+    {
+      "code": "17",
+      "label": "GR\tGramo"
+    },
+    {
+      "code": "18",
+      "label": "GRAN\tGranel"
+    },
+    {
+      "code": "19",
+      "label": "HOR\tHora"
+    },
+    {
+      "code": "20",
+      "label": "HUAC\tHuacal"
+    },
+    {
+      "code": "21",
+      "label": "KG\tKilogramo"
+    },
+    {
+      "code": "22",
+      "label": "kWh\tKilovatio Hora"
+    },
+    {
+      "code": "23",
+      "label": "LB\tLibra"
+    },
+    {
+      "code": "24",
+      "label": "LITRO\tLitro"
+    },
+    {
+      "code": "25",
+      "label": "LOT\tLote"
+    },
+    {
+      "code": "26",
+      "label": "M\tMetro"
+    },
+    {
+      "code": "27",
+      "label": "M2\tMetro Cuadrado"
+    },
+    {
+      "code": "28",
+      "label": "M3\tMetro Cúbico"
+    },
+    {
+      "code": "29",
+      "label": "MMBTU\tMillones de Unidades Térmicas"
+    },
+    {
+      "code": "30",
+      "label": "MIN\tMinuto"
+    },
+    {
+      "code": "31",
+      "label": "PAQ\tPaquete"
+    },
+    {
+      "code": "32",
+      "label": "PAR\tPar"
+    },
+    {
+      "code": "33",
+      "label": "PIE\tPie"
+    },
+    {
+      "code": "34",
+      "label": "PZA\tPieza"
+    },
+    {
+      "code": "35",
+      "label": "ROL\tRollo"
+    },
+    {
+      "code": "36",
+      "label": "SOBR\tSobre"
+    },
+    {
+      "code": "37",
+      "label": "SEG\tSegundo"
+    },
+    {
+      "code": "38",
+      "label": "TANQUE\tTanque"
+    },
+    {
+      "code": "39",
+      "label": "TONE\tTonelada"
+    },
+    {
+      "code": "40",
+      "label": "TUB\tTubo"
+    },
+    {
+      "code": "41",
+      "label": "YD\tYarda"
+    },
+    {
+      "code": "42",
+      "label": "YD2\tYarda cuadrada"
+    },
+    {
+      "code": "43",
+      "label": "UND\tUnidad"
+    },
+    {
+      "code": "44",
+      "label": "EA\tElemento"
+    },
+    {
+      "code": "45",
+      "label": "MILLAR\tMillar"
+    },
+    {
+      "code": "46",
+      "label": "SAC\tSaco"
+    },
+    {
+      "code": "47",
+      "label": "LAT\tLata"
+    },
+    {
+      "code": "48",
+      "label": "DIS\tDisplay"
+    },
+    {
+      "code": "49",
+      "label": "BID\tBidón"
+    },
+    {
+      "code": "50",
+      "label": "RAC\tRación"
+    },
+    {
+      "code": "51",
+      "label": "Q\t  Quintal"
+    },
+    {
+      "code": "52",
+      "label": "GRT\tToneladas de registro bruto"
+    },
+    {
+      "code": "53",
+      "label": "P2\tPie Cuadrado"
+    },
+    {
+      "code": "54",
+      "label": "PAX\tPasajero"
+    },
+    {
+      "code": "55",
+      "label": "PULG Pulgadas"
+    },
+    {
+      "code": "56",
+      "label": "STAY Parqueo Barcos En Muelle"
+    },
+    {
+      "code": "57",
+      "label": "BDJ  Bandeja"
+    },
+    {
+      "code": "58",
+      "label": "HA  Hectárea"
+    },
+    {
+      "code": "59",
+      "label": "ML  Mililitro"
+    },
+    {
+      "code": "60",
+      "label": "MG  Miligramo"
+    },
+    {
+      "code": "61",
+      "label": "OZ  Onzas"
+    },
+    {
+      "code": "62",
+      "label": "OZT  Onzas Troy"
+    }
+  ],
+  "values": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+    "24",
+    "25",
+    "26",
+    "27",
+    "28",
+    "29",
+    "30",
+    "31",
+    "32",
+    "33",
+    "34",
+    "35",
+    "36",
+    "37",
+    "38",
+    "39",
+    "40",
+    "41",
+    "42",
+    "43",
+    "44",
+    "45",
+    "46",
+    "47",
+    "48",
+    "49",
+    "50",
+    "51",
+    "52",
+    "53",
+    "54",
+    "55",
+    "56",
+    "57",
+    "58",
+    "59",
+    "60",
+    "61",
+    "62"
+  ]
+}

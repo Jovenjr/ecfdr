@@ -1,0 +1,134 @@
+{
+  "ejemplo_basico": {
+    "descripcion": "e-CF 43 básico con un item",
+    "datos": {
+      "Encabezado": {
+        "Version": "1.0",
+        "IdDoc": {
+          "TipoeCF": 43,
+          "eNCF": "B0100000001",
+          "FechaVencimientoSecuencia": "31-12-2024",
+          "TipoPago": 1
+        },
+        "Emisor": {
+          "RNCEmisor": "12345678901",
+          "RazonSocialEmisor": "EMPRESA EJEMPLO SRL",
+          "DireccionEmisor": "Av. Principal #123, Santo Domingo",
+          "FechaEmision": "15-01-2024"
+        },
+        "Totales": {
+          "MontoTotal": 100.0
+        }
+      },
+      "DetallesItems": {
+        "Item": [
+          {
+            "NumeroLinea": 1,
+            "IndicadorFacturacion": 1,
+            "NombreItem": "Producto de ejemplo",
+            "IndicadorBienoServicio": 1,
+            "CantidadItem": 1.0,
+            "PrecioUnitarioItem": 100.0,
+            "MontoItem": 100.0
+          }
+        ]
+      }
+    }
+  },
+  "ejemplo_completo": {
+    "descripcion": "e-CF 43 completo con todos los campos opcionales",
+    "datos": {
+      "Encabezado": {
+        "Version": "1.0",
+        "IdDoc": {
+          "TipoeCF": 43,
+          "eNCF": "B0100000001",
+          "FechaVencimientoSecuencia": "31-12-2024",
+          "TipoPago": 1,
+          "TotalPaginas": 1
+        },
+        "Emisor": {
+          "RNCEmisor": "12345678901",
+          "RazonSocialEmisor": "EMPRESA EJEMPLO SRL",
+          "NombreComercial": "Empresa Ejemplo",
+          "Sucursal": "Sucursal Central",
+          "DireccionEmisor": "Av. Principal #123, Santo Domingo",
+          "Municipio": "010101",
+          "Provincia": "010000",
+          "CorreoEmisor": "contacto@empresa.com",
+          "WebSite": "www.empresa.com",
+          "ActividadEconomica": "Comercio al por menor",
+          "NumeroFacturaInterna": "FAC-001",
+          "NumeroPedidoInterno": 12345,
+          "InformacionAdicionalEmisor": "Información adicional",
+          "FechaEmision": "15-01-2024"
+        },
+        "Totales": {
+          "MontoExento": 0.0,
+          "MontoTotal": 118.0,
+          "MontoPeriodo": 118.0,
+          "SaldoAnterior": 0.0,
+          "MontoAvancePago": 0.0,
+          "ValorPagar": 118.0
+        }
+      },
+      "DetallesItems": {
+        "Item": [
+          {
+            "NumeroLinea": 1,
+            "IndicadorFacturacion": 1,
+            "NombreItem": "Producto con ITBIS",
+            "IndicadorBienoServicio": 1,
+            "DescripcionItem": "Descripción detallada del producto",
+            "CantidadItem": 2.0,
+            "UnidadMedida": 43,
+            "PrecioUnitarioItem": 50.0,
+            "MontoItem": 100.0
+          },
+          {
+            "NumeroLinea": 2,
+            "IndicadorFacturacion": 4,
+            "NombreItem": "Producto exento",
+            "IndicadorBienoServicio": 1,
+            "DescripcionItem": "Producto exento de ITBIS",
+            "CantidadItem": 1.0,
+            "UnidadMedida": 43,
+            "PrecioUnitarioItem": 18.0,
+            "MontoItem": 18.0
+          }
+        ]
+      },
+      "Subtotales": {
+        "Subtotal": [
+          {
+            "NumeroSubTotal": 1,
+            "DescripcionSubtotal": "Subtotal con ITBIS",
+            "Orden": 1,
+            "SubTotalExento": 0.0,
+            "MontoSubTotal": 100.0,
+            "Lineas": 1
+          },
+          {
+            "NumeroSubTotal": 2,
+            "DescripcionSubtotal": "Subtotal exento",
+            "Orden": 2,
+            "SubTotalExento": 18.0,
+            "MontoSubTotal": 18.0,
+            "Lineas": 1
+          }
+        ]
+      },
+      "Paginacion": {
+        "Pagina": [
+          {
+            "PaginaNo": 1,
+            "NoLineaDesde": 1,
+            "NoLineaHasta": 2,
+            "SubtotalExentoPagina": 18.0,
+            "MontoSubtotalPagina": 118.0
+          }
+        ]
+      }
+    }
+  }
+}

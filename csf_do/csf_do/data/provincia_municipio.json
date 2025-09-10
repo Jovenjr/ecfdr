@@ -1,0 +1,2917 @@
+{
+  "type": "ProvinciaMunicipioType",
+  "entries": [
+    {
+      "code": "010000",
+      "label": "DISTRITO NACIONAL"
+    },
+    {
+      "code": "010100",
+      "label": "MUNICIPIO SANTO DOMINGO DE GUZMÁN"
+    },
+    {
+      "code": "010101",
+      "label": "SANTO DOMINGO DE GUZMÁN (D. M.)."
+    },
+    {
+      "code": "020000",
+      "label": "PROVINCIA AZUA"
+    },
+    {
+      "code": "020100",
+      "label": "MUNICIPIO AZUA"
+    },
+    {
+      "code": "020101",
+      "label": "AZUA (D. M.)."
+    },
+    {
+      "code": "020102",
+      "label": "BARRO ARRIBA (D. M.)."
+    },
+    {
+      "code": "020103",
+      "label": "LAS BARÍAS-LA ESTANCIA (D. M.)."
+    },
+    {
+      "code": "020104",
+      "label": "LOS JOVILLOS (D. M.)."
+    },
+    {
+      "code": "020105",
+      "label": "PUERTO VIEJO (D. M.)."
+    },
+    {
+      "code": "020106",
+      "label": "BARRERAS (D. M.)."
+    },
+    {
+      "code": "020107",
+      "label": "DOÑA EMMA BALAGUER VIUDA VALLEJO (D. M.)."
+    },
+    {
+      "code": "020108",
+      "label": "CLAVELLINA (D. M.)."
+    },
+    {
+      "code": "020109",
+      "label": "LAS LOMAS (D. M.)."
+    },
+    {
+      "code": "020200",
+      "label": "MUNICIPIO LAS CHARCAS"
+    },
+    {
+      "code": "020201",
+      "label": "LAS CHARCAS (D. M.)."
+    },
+    {
+      "code": "020202",
+      "label": "PALMAR DE OCOA (D. M.)."
+    },
+    {
+      "code": "020300",
+      "label": "MUNICIPIO LAS YAYAS DE VIAJAMA"
+    },
+    {
+      "code": "020301",
+      "label": "LAS YAYAS DE VIAJAMA (D. M.)."
+    },
+    {
+      "code": "020302",
+      "label": "VILLARPANDO (D. M.)."
+    },
+    {
+      "code": "020303",
+      "label": "HATO NUEVO CORTÉS (D. M.)."
+    },
+    {
+      "code": "020400",
+      "label": "MUNICIPIO PADRE LAS CASAS"
+    },
+    {
+      "code": "020401",
+      "label": "PADRE LAS CASAS (D. M.)."
+    },
+    {
+      "code": "020402",
+      "label": "LAS LAGUNAS (D. M.)."
+    },
+    {
+      "code": "020403",
+      "label": "LA SIEMBRA (D. M.)."
+    },
+    {
+      "code": "020404",
+      "label": "MONTE BONITO (D. M.)."
+    },
+    {
+      "code": "020405",
+      "label": "LOS FRÍOS (D. M.)."
+    },
+    {
+      "code": "020500",
+      "label": "MUNICIPIO PERALTA"
+    },
+    {
+      "code": "020501",
+      "label": "PERALTA (D. M.)."
+    },
+    {
+      "code": "020600",
+      "label": "MUNICIPIO SABANA YEGUA"
+    },
+    {
+      "code": "020601",
+      "label": "SABANA YEGUA (D. M.)."
+    },
+    {
+      "code": "020602",
+      "label": "PROYECTO 4 (D. M.)."
+    },
+    {
+      "code": "020603",
+      "label": "GANADERO (D. M.)."
+    },
+    {
+      "code": "020604",
+      "label": "PROYECTO 2-C (D. M.)."
+    },
+    {
+      "code": "020700",
+      "label": "MUNICIPIO PUEBLO VIEJO"
+    },
+    {
+      "code": "020701",
+      "label": "PUEBLO VIEJO (D. M.)."
+    },
+    {
+      "code": "020702",
+      "label": "EL ROSARIO (D. M.)."
+    },
+    {
+      "code": "020800",
+      "label": "MUNICIPIO TÁBARA ARRIBA"
+    },
+    {
+      "code": "020801",
+      "label": "TÁBARA ARRIBA (D. M.)."
+    },
+    {
+      "code": "020802",
+      "label": "TÁBARA ABAJO (D. M.)."
+    },
+    {
+      "code": "020803",
+      "label": "AMIAMA GÓMEZ (D. M.)."
+    },
+    {
+      "code": "020804",
+      "label": "LOS TOROS (D. M.)."
+    },
+    {
+      "code": "020900",
+      "label": "MUNICIPIO GUAYABAL"
+    },
+    {
+      "code": "020901",
+      "label": "GUAYABAL (D. M.)."
+    },
+    {
+      "code": "021000",
+      "label": "MUNICIPIO ESTEBANÍA"
+    },
+    {
+      "code": "021001",
+      "label": "ESTEBANÍA (D. M.)."
+    },
+    {
+      "code": "030000",
+      "label": "PROVINCIA BAHORUCO"
+    },
+    {
+      "code": "030001",
+      "label": "MUNICIPIO NEIBA"
+    },
+    {
+      "code": "030101",
+      "label": "NEIBA (D. M.)."
+    },
+    {
+      "code": "030102",
+      "label": "EL PALMAR  (D. M.)."
+    },
+    {
+      "code": "030200",
+      "label": "MUNICIPIO GALVÁN"
+    },
+    {
+      "code": "030201",
+      "label": "GALVÁN (D. M.)."
+    },
+    {
+      "code": "030202",
+      "label": "EL SALADO (D. M.)."
+    },
+    {
+      "code": "030300",
+      "label": "MUNICIPIO TAMAYO"
+    },
+    {
+      "code": "030301",
+      "label": "TAMAYO (D. M.)."
+    },
+    {
+      "code": "030302",
+      "label": "UVILLA (D. M.)."
+    },
+    {
+      "code": "030303",
+      "label": "SANTANA (D. M.)."
+    },
+    {
+      "code": "030304",
+      "label": "MONSERRATE (MONTSERRAT) (D. M.)."
+    },
+    {
+      "code": "030305",
+      "label": "CABEZA DE TORO (D. M.)."
+    },
+    {
+      "code": "030306",
+      "label": "MENA (D. M.)."
+    },
+    {
+      "code": "030307",
+      "label": "SANTA BÁRBARA EL 6 (D. M.)."
+    },
+    {
+      "code": "030400",
+      "label": "MUNICIPIO VILLA JARAGUA"
+    },
+    {
+      "code": "030401",
+      "label": "VILLA JARAGUA (D. M.)."
+    },
+    {
+      "code": "030500",
+      "label": "MUNICIPIO LOS RÍOS"
+    },
+    {
+      "code": "030501",
+      "label": "LOS RÍOS (D. M.)."
+    },
+    {
+      "code": "030502",
+      "label": "LAS CLAVELLINAS (D. M.)."
+    },
+    {
+      "code": "040000",
+      "label": "PROVINCIA BARAHONA"
+    },
+    {
+      "code": "040100",
+      "label": "MUNICIPIO BARAHONA"
+    },
+    {
+      "code": "040101",
+      "label": "BARAHONA (D. M.)."
+    },
+    {
+      "code": "040102",
+      "label": "EL CACHÓN (D. M.)."
+    },
+    {
+      "code": "040103",
+      "label": "LA GUÁZARA (D. M.)."
+    },
+    {
+      "code": "040104",
+      "label": "VILLA CENTRAL (D. M.)."
+    },
+    {
+      "code": "040200",
+      "label": "MUNICIPIO CABRAL"
+    },
+    {
+      "code": "040201",
+      "label": "CABRAL (D. M.)."
+    },
+    {
+      "code": "040300",
+      "label": "MUNICIPIO ENRIQUILLO"
+    },
+    {
+      "code": "040301",
+      "label": "ENRIQUILLO (D. M.)."
+    },
+    {
+      "code": "040302",
+      "label": "ARROYO DULCE (D. M.)."
+    },
+    {
+      "code": "040400",
+      "label": "MUNICIPIO PARAÍSO"
+    },
+    {
+      "code": "040401",
+      "label": "PARAÍSO (D. M.)."
+    },
+    {
+      "code": "040402",
+      "label": "LOS PATOS (D. M.)."
+    },
+    {
+      "code": "040500",
+      "label": "MUNICIPIO VICENTE NOBLE"
+    },
+    {
+      "code": "040501",
+      "label": "VICENTE NOBLE (D. M.)."
+    },
+    {
+      "code": "040502",
+      "label": "CANOA (D. M.)."
+    },
+    {
+      "code": "040503",
+      "label": "QUITA CORAZA (D. M.)."
+    },
+    {
+      "code": "040504",
+      "label": "FONDO NEGRO (D. M.)."
+    },
+    {
+      "code": "040600",
+      "label": "MUNICIPIO EL PEÑÓN"
+    },
+    {
+      "code": "040601",
+      "label": "EL PEÑÓN (D. M.)."
+    },
+    {
+      "code": "040700",
+      "label": "MUNICIPIO LA CIÉNAGA"
+    },
+    {
+      "code": "040701",
+      "label": "LA CIÉNAGA (D. M.)."
+    },
+    {
+      "code": "040702",
+      "label": "BAHORUCO (D. M.)."
+    },
+    {
+      "code": "040800",
+      "label": "MUNICIPIO FUNDACIÓN"
+    },
+    {
+      "code": "040801",
+      "label": "FUNDACIÓN (D. M.)."
+    },
+    {
+      "code": "040802",
+      "label": "PESCADERÍA (D. M.)."
+    },
+    {
+      "code": "040900",
+      "label": "MUNICIPIO LAS SALINAS"
+    },
+    {
+      "code": "040901",
+      "label": "LAS SALINAS (D. M.)."
+    },
+    {
+      "code": "041000",
+      "label": "MUNICIPIO POLO"
+    },
+    {
+      "code": "041001",
+      "label": "POLO (D. M.)."
+    },
+    {
+      "code": "041100",
+      "label": "MUNICIPIO JAQUIMEYES"
+    },
+    {
+      "code": "041101",
+      "label": "JAQUIMEYES (D. M.)."
+    },
+    {
+      "code": "041102",
+      "label": "PALO ALTO (D. M.)."
+    },
+    {
+      "code": "050000",
+      "label": "PROVINCIA DAJABÓN"
+    },
+    {
+      "code": "050100",
+      "label": "MUNICIPIO DAJABÓN"
+    },
+    {
+      "code": "050101",
+      "label": "DAJABÓN (D. M.)."
+    },
+    {
+      "code": "050102",
+      "label": "CAÑONGO (D. M.)."
+    },
+    {
+      "code": "050200",
+      "label": "MUNICIPIO LOMA DE CABRERA"
+    },
+    {
+      "code": "050201",
+      "label": "LOMA DE CABRERA (D. M.)."
+    },
+    {
+      "code": "050202",
+      "label": "CAPOTILLO (D. M.)."
+    },
+    {
+      "code": "050203",
+      "label": "SANTIAGO DE LA CRUZ (D. M.)."
+    },
+    {
+      "code": "050300",
+      "label": "MUNICIPIO PARTIDO"
+    },
+    {
+      "code": "050301",
+      "label": "PARTIDO (D. M.)."
+    },
+    {
+      "code": "050400",
+      "label": "MUNICIPIO RESTAURACIÓN"
+    },
+    {
+      "code": "050401",
+      "label": "RESTAURACIÓN (D. M.)."
+    },
+    {
+      "code": "050500",
+      "label": "MUNICIPIO EL PINO"
+    },
+    {
+      "code": "050501",
+      "label": "EL PINO (D. M.)."
+    },
+    {
+      "code": "050502",
+      "label": "MANUEL BUENO (D. M.)."
+    },
+    {
+      "code": "060000",
+      "label": "PROVINCIA DUARTE"
+    },
+    {
+      "code": "060100",
+      "label": "MUNICIPIO SAN FRANCISCO DE MACORÍS"
+    },
+    {
+      "code": "060101",
+      "label": "SAN FRANCISCO DE MACORÍS (D. M.)."
+    },
+    {
+      "code": "060102",
+      "label": "LA PEÑA (D. M.)."
+    },
+    {
+      "code": "060103",
+      "label": "CENOVÍ (D. M.)."
+    },
+    {
+      "code": "060104",
+      "label": "JAYA (D. M.)."
+    },
+    {
+      "code": "060105",
+      "label": "PRESIDENTE DON ANTONIO GUZMÁN FERNÁNDEZ (D. M.)."
+    },
+    {
+      "code": "060200",
+      "label": "MUNICIPIO ARENOSO"
+    },
+    {
+      "code": "060201",
+      "label": "ARENOSO (D. M.)."
+    },
+    {
+      "code": "060202",
+      "label": "LAS COLES (D. M.)."
+    },
+    {
+      "code": "060203",
+      "label": "EL AGUACATE (D. M.)."
+    },
+    {
+      "code": "060300",
+      "label": "MUNICIPIO CASTILLO"
+    },
+    {
+      "code": "060301",
+      "label": "CASTILLO (D. M.)."
+    },
+    {
+      "code": "060400",
+      "label": "MUNICIPIO PIMENTEL"
+    },
+    {
+      "code": "060401",
+      "label": "PIMENTEL (D. M.)."
+    },
+    {
+      "code": "060500",
+      "label": "MUNICIPIO VILLA RIVA"
+    },
+    {
+      "code": "060501",
+      "label": "VILLA RIVA (D. M.)."
+    },
+    {
+      "code": "060502",
+      "label": "AGUA SANTA DEL YUNA  (D. M.)."
+    },
+    {
+      "code": "060503",
+      "label": "CRISTO REY DE GUARAGUAO (D. M.)."
+    },
+    {
+      "code": "060504",
+      "label": "LAS TARANAS (D. M.)."
+    },
+    {
+      "code": "060505",
+      "label": "BARRAQUITO (D. M.)."
+    },
+    {
+      "code": "060600",
+      "label": "MUNICIPIO LAS GUÁRANAS"
+    },
+    {
+      "code": "060601",
+      "label": "LAS GUÁRANAS (D. M.)."
+    },
+    {
+      "code": "060700",
+      "label": "MUNICIPIO EUGENIO MARÍA DE HOSTOS"
+    },
+    {
+      "code": "060701",
+      "label": "EUGENIO MARÍA DE HOSTOS (D. M.)."
+    },
+    {
+      "code": "060702",
+      "label": "SABANA GRANDE (D. M.)."
+    },
+    {
+      "code": "070000",
+      "label": "PROVINCIA ELÍAS PIÑA"
+    },
+    {
+      "code": "070100",
+      "label": "MUNICIPIO COMENDADOR"
+    },
+    {
+      "code": "070101",
+      "label": "COMENDADOR (D. M.)."
+    },
+    {
+      "code": "070102",
+      "label": "SABANA LARGA (D. M.)."
+    },
+    {
+      "code": "070103",
+      "label": "GUAYABO  (D. M.)."
+    },
+    {
+      "code": "070200",
+      "label": "MUNICIPIO BÁNICA"
+    },
+    {
+      "code": "070201",
+      "label": "BÁNICA (D. M.)."
+    },
+    {
+      "code": "070202",
+      "label": "SABANA CRUZ (D. M.)."
+    },
+    {
+      "code": "070203",
+      "label": "SABANA HIGÜERO (D. M.)."
+    },
+    {
+      "code": "070300",
+      "label": "MUNICIPIO EL LLANO"
+    },
+    {
+      "code": "070301",
+      "label": "EL LLANO (D. M.)."
+    },
+    {
+      "code": "070302",
+      "label": "GUANITO (D. M.)."
+    },
+    {
+      "code": "070400",
+      "label": "MUNICIPIO HONDO VALLE"
+    },
+    {
+      "code": "070401",
+      "label": "HONDO VALLE (D. M.)."
+    },
+    {
+      "code": "070402",
+      "label": "RANCHO DE LA GUARDIA (D. M.)."
+    },
+    {
+      "code": "070500",
+      "label": "MUNICIPIO PEDRO SANTANA"
+    },
+    {
+      "code": "070501",
+      "label": "PEDRO SANTANA (D. M.)."
+    },
+    {
+      "code": "070502",
+      "label": "RÍO LIMPIO (D. M.)."
+    },
+    {
+      "code": "070600",
+      "label": "MUNICIPIO JUAN SANTIAGO"
+    },
+    {
+      "code": "070601",
+      "label": "JUAN SANTIAGO (D. M.)."
+    },
+    {
+      "code": "080000",
+      "label": "PROVINCIA EL SEIBO"
+    },
+    {
+      "code": "080100",
+      "label": "MUNICIPIO EL SEIBO"
+    },
+    {
+      "code": "080101",
+      "label": "EL SEIBO (D. M.)."
+    },
+    {
+      "code": "080102",
+      "label": "PEDRO SÁNCHEZ (D. M.)."
+    },
+    {
+      "code": "080103",
+      "label": "SAN FRANCISCO-VICENTILLO (D. M.)."
+    },
+    {
+      "code": "080104",
+      "label": "SANTA LUCÍA (D. M.)."
+    },
+    {
+      "code": "080200",
+      "label": "MUNICIPIO MICHES"
+    },
+    {
+      "code": "080201",
+      "label": "MICHES (D. M.)."
+    },
+    {
+      "code": "080202",
+      "label": "EL CEDRO (D. M.)."
+    },
+    {
+      "code": "080203",
+      "label": "LA GINA (D. M.)."
+    },
+    {
+      "code": "090000",
+      "label": "PROVINCIA ESPAILLAT"
+    },
+    {
+      "code": "090100",
+      "label": "MUNICIPIO MOCA"
+    },
+    {
+      "code": "090101",
+      "label": "MOCA (D. M.)."
+    },
+    {
+      "code": "090102",
+      "label": "JOSÉ CONTRERAS (D. M.)."
+    },
+    {
+      "code": "090103",
+      "label": "SAN VÍCTOR (D. M.)."
+    },
+    {
+      "code": "090104",
+      "label": "JUAN LÓPEZ (D. M.)."
+    },
+    {
+      "code": "090105",
+      "label": "LAS LAGUNAS (D. M.)."
+    },
+    {
+      "code": "090106",
+      "label": "CANCA LA REYNA  (D. M.)."
+    },
+    {
+      "code": "090107",
+      "label": "EL HIGÜERITO (D. M.)."
+    },
+    {
+      "code": "090108",
+      "label": "MONTE DE LA JAGUA (D. M.)."
+    },
+    {
+      "code": "090109",
+      "label": "LA ORTEGA (D. M.)."
+    },
+    {
+      "code": "090200",
+      "label": "MUNICIPIO CAYETANO GERMOSÉN"
+    },
+    {
+      "code": "090201",
+      "label": "CAYETANO GERMOSÉN (D. M.)."
+    },
+    {
+      "code": "090300",
+      "label": "MUNICIPIO GASPAR HERNÁNDEZ"
+    },
+    {
+      "code": "090301",
+      "label": "GASPAR HERNÁNDEZ (D. M.)."
+    },
+    {
+      "code": "090302",
+      "label": "JOBA ARRIBA (D. M.)."
+    },
+    {
+      "code": "090303",
+      "label": "VERAGUA (D. M.)."
+    },
+    {
+      "code": "090304",
+      "label": "VILLA MAGANTE (D. M.)."
+    },
+    {
+      "code": "090400",
+      "label": "MUNICIPIO JAMAO AL NORTE"
+    },
+    {
+      "code": "090401",
+      "label": "JAMAO AL NORTE (D. M.)."
+    },
+    {
+      "code": "100000",
+      "label": "PROVINCIA INDEPENDENCIA"
+    },
+    {
+      "code": "100100",
+      "label": "MUNICIPIO JIMANÍ"
+    },
+    {
+      "code": "100101",
+      "label": "JIMANÍ (D. M.)."
+    },
+    {
+      "code": "100102",
+      "label": "EL LIMÓN (D. M.)."
+    },
+    {
+      "code": "100103",
+      "label": "BOCA DE CACHÓN (D. M.)."
+    },
+    {
+      "code": "100200",
+      "label": "MUNICIPIO DUVERGÉ"
+    },
+    {
+      "code": "100201",
+      "label": "DUVERGÉ (D. M.)."
+    },
+    {
+      "code": "100202",
+      "label": "VENGAN A VER (D. M.)."
+    },
+    {
+      "code": "100300",
+      "label": "MUNICIPIO LA DESCUBIERTA"
+    },
+    {
+      "code": "100301",
+      "label": "LA DESCUBIERTA (D. M.)."
+    },
+    {
+      "code": "100400",
+      "label": "MUNICIPIO POSTRER RÍO"
+    },
+    {
+      "code": "100401",
+      "label": "POSTRER RÍO (D. M.)."
+    },
+    {
+      "code": "100402",
+      "label": "GUAYABAL (D. M.)."
+    },
+    {
+      "code": "100500",
+      "label": "MUNICIPIO CRISTÓBAL"
+    },
+    {
+      "code": "100501",
+      "label": "CRISTÓBAL (D. M.)."
+    },
+    {
+      "code": "100502",
+      "label": "BATEY 8 (D. M.)."
+    },
+    {
+      "code": "100600",
+      "label": "MUNICIPIO MELLA"
+    },
+    {
+      "code": "100601",
+      "label": "MELLA (D. M.)."
+    },
+    {
+      "code": "100602",
+      "label": "LA COLONIA (D. M.)."
+    },
+    {
+      "code": "110000",
+      "label": "PROVINCIA LA ALTAGRACIA"
+    },
+    {
+      "code": "110100",
+      "label": "MUNICIPIO HIGÜEY"
+    },
+    {
+      "code": "110101",
+      "label": "HIGÜEY (D. M.)."
+    },
+    {
+      "code": "110102",
+      "label": "LAS LAGUNAS DE NISIBÓN (D. M.)."
+    },
+    {
+      "code": "110103",
+      "label": "LA OTRA BANDA (D. M.)."
+    },
+    {
+      "code": "110104",
+      "label": "VERÓN PUNTA CANA (D. M.) (Incluye Bávaro)"
+    },
+    {
+      "code": "110200",
+      "label": "MUNICIPIO SAN RAFAEL DEL YUMA"
+    },
+    {
+      "code": "110201",
+      "label": "SAN RAFAEL DEL YUMA (D. M.)."
+    },
+    {
+      "code": "110202",
+      "label": "BOCA DE YUMA (D. M.)."
+    },
+    {
+      "code": "110203",
+      "label": "BAYAHÍBE (D. M.)."
+    },
+    {
+      "code": "120000",
+      "label": "PROVINCIA LA ROMANA"
+    },
+    {
+      "code": "120100",
+      "label": "MUNICIPIO LA ROMANA"
+    },
+    {
+      "code": "120101",
+      "label": "LA ROMANA (D. M.)."
+    },
+    {
+      "code": "120102",
+      "label": "CALETA (D. M.)."
+    },
+    {
+      "code": "120200",
+      "label": "MUNICIPIO GUAYMATE"
+    },
+    {
+      "code": "120201",
+      "label": "GUAYMATE (D. M.)."
+    },
+    {
+      "code": "120300",
+      "label": "MUNICIPIO VILLA HERMOSA"
+    },
+    {
+      "code": "120301",
+      "label": "VILLA HERMOSA (D. M.)."
+    },
+    {
+      "code": "120302",
+      "label": "CUMAYASA (D. M.)."
+    },
+    {
+      "code": "130000",
+      "label": "PROVINCIA LA VEGA"
+    },
+    {
+      "code": "130100",
+      "label": "MUNICIPIO LA VEGA"
+    },
+    {
+      "code": "130101",
+      "label": "LA VEGA (D. M.)."
+    },
+    {
+      "code": "130102",
+      "label": "RÍO VERDE ARRIBA (D. M.)."
+    },
+    {
+      "code": "130103",
+      "label": "EL RANCHITO (D. M.)."
+    },
+    {
+      "code": "130104",
+      "label": "TAVERAS (D. M.)."
+    },
+    {
+      "code": "130105",
+      "label": "DON JUAN RODRÍGUEZ (D.M.)"
+    },
+    {
+      "code": "130200",
+      "label": "MUNICIPIO CONSTANZA"
+    },
+    {
+      "code": "130201",
+      "label": "CONSTANZA (D. M.)."
+    },
+    {
+      "code": "130202",
+      "label": "TIREO (D. M.)."
+    },
+    {
+      "code": "130203",
+      "label": "LA SABINA (D. M.)."
+    },
+    {
+      "code": "130300",
+      "label": "MUNICIPIO JARABACOA"
+    },
+    {
+      "code": "130301",
+      "label": "JARABACOA (D. M.)."
+    },
+    {
+      "code": "130302",
+      "label": "BUENA VISTA (D. M.)."
+    },
+    {
+      "code": "130303",
+      "label": "MANABAO (D. M.)."
+    },
+    {
+      "code": "130400",
+      "label": "MUNICIPIO JIMA ABAJO"
+    },
+    {
+      "code": "130401",
+      "label": "JIMA ABAJO (D. M.)."
+    },
+    {
+      "code": "130402",
+      "label": "RINCÓN (D. M.)."
+    },
+    {
+      "code": "140000",
+      "label": "PROVINCIA MARÍA TRINIDAD SÁNCHEZ"
+    },
+    {
+      "code": "140100",
+      "label": "MUNICIPIO NAGUA"
+    },
+    {
+      "code": "140101",
+      "label": "NAGUA (D. M.)."
+    },
+    {
+      "code": "140102",
+      "label": "SAN JOSÉ DE MATANZAS (D. M.)."
+    },
+    {
+      "code": "140103",
+      "label": "LAS GORDAS (D. M.)."
+    },
+    {
+      "code": "140104",
+      "label": "ARROYO AL MEDIO (D. M.)."
+    },
+    {
+      "code": "140200",
+      "label": "MUNICIPIO CABRERA"
+    },
+    {
+      "code": "140201",
+      "label": "CABRERA (D. M.)."
+    },
+    {
+      "code": "140202",
+      "label": "ARROYO SALADO (D. M.)."
+    },
+    {
+      "code": "140203",
+      "label": "LA ENTRADA (D. M.)."
+    },
+    {
+      "code": "140300",
+      "label": "MUNICIPIO EL FACTOR"
+    },
+    {
+      "code": "140301",
+      "label": "EL FACTOR (D. M.)."
+    },
+    {
+      "code": "140302",
+      "label": "EL POZO (D. M.)."
+    },
+    {
+      "code": "140400",
+      "label": "MUNICIPIO RÍO SAN JUAN"
+    },
+    {
+      "code": "140401",
+      "label": "RÍO SAN JUAN (D. M.)."
+    },
+    {
+      "code": "150000",
+      "label": "PROVINCIA MONTE CRISTI"
+    },
+    {
+      "code": "150100",
+      "label": "MUNICIPIO MONTE CRISTI"
+    },
+    {
+      "code": "150101",
+      "label": "MONTE CRISTI (D. M.)."
+    },
+    {
+      "code": "150200",
+      "label": "MUNICIPIO CASTAÑUELAS"
+    },
+    {
+      "code": "150201",
+      "label": "CASTAÑUELAS (D. M.)."
+    },
+    {
+      "code": "150202",
+      "label": "PALO VERDE (D. M.)."
+    },
+    {
+      "code": "150300",
+      "label": "MUNICIPIO GUAYUBÍN"
+    },
+    {
+      "code": "150301",
+      "label": "GUAYUBÍN (D. M.)."
+    },
+    {
+      "code": "150302",
+      "label": "VILLA ELISA (D. M.)."
+    },
+    {
+      "code": "150303",
+      "label": "HATILLO PALMA (D. M.)."
+    },
+    {
+      "code": "150304",
+      "label": "CANA CHAPETÓN (D. M.)."
+    },
+    {
+      "code": "150400",
+      "label": "MUNICIPIO LAS MATAS DE SANTA CRUZ"
+    },
+    {
+      "code": "150401",
+      "label": "LAS MATAS DE SANTA CRUZ (D. M.)."
+    },
+    {
+      "code": "150500",
+      "label": "MUNICIPIO PEPILLO SALCEDO"
+    },
+    {
+      "code": "150501",
+      "label": "PEPILLO SALCEDO (MANZANILLO)"
+    },
+    {
+      "code": "150502",
+      "label": "SANTA MARÍA (D. M.)"
+    },
+    {
+      "code": "150600",
+      "label": "MUNICIPIO VILLA VÁSQUEZ"
+    },
+    {
+      "code": "150601",
+      "label": "VILLA VÁSQUEZ"
+    },
+    {
+      "code": "160000",
+      "label": "PROVINCIA PEDERNALES"
+    },
+    {
+      "code": "160100",
+      "label": "MUNICIPIO PEDERNALES"
+    },
+    {
+      "code": "160101",
+      "label": "PEDERNALES"
+    },
+    {
+      "code": "160102",
+      "label": "JOSÉ FRANCISCO PEÑA GÓMEZ (D. M.)."
+    },
+    {
+      "code": "160200",
+      "label": "MUNICIPIO OVIEDO"
+    },
+    {
+      "code": "160201",
+      "label": "OVIEDO"
+    },
+    {
+      "code": "160202",
+      "label": "JUANCHO (D. M.)."
+    },
+    {
+      "code": "170000",
+      "label": "PROVINCIA PERAVIA"
+    },
+    {
+      "code": "170100",
+      "label": "MUNICIPIO BANÍ"
+    },
+    {
+      "code": "170101",
+      "label": "BANÍ (D. M.)."
+    },
+    {
+      "code": "170102",
+      "label": "MATANZAS (D. M.)."
+    },
+    {
+      "code": "170103",
+      "label": "VILLA FUNDACIÓN (D. M.)."
+    },
+    {
+      "code": "170104",
+      "label": "SABANA BUEY (D. M.)."
+    },
+    {
+      "code": "170105",
+      "label": "PAYA (D. M.)."
+    },
+    {
+      "code": "170106",
+      "label": "VILLA SOMBRERO (D. M.)."
+    },
+    {
+      "code": "170107",
+      "label": "EL CARRETÓN (D. M.)."
+    },
+    {
+      "code": "170108",
+      "label": "CATALINA (D. M.)."
+    },
+    {
+      "code": "170109",
+      "label": "EL LIMONAL (D. M.)."
+    },
+    {
+      "code": "170110",
+      "label": "LAS BARÍAS (D. M.)."
+    },
+    {
+      "code": "170200",
+      "label": "MUNICIPIO NIZAO"
+    },
+    {
+      "code": "170201",
+      "label": "NIZAO"
+    },
+    {
+      "code": "170202",
+      "label": "PIZARRETE (D. M.)."
+    },
+    {
+      "code": "170203",
+      "label": "SANTANA (D. M.)."
+    },
+    {
+      "code": "170300",
+      "label": "MATANZAS"
+    },
+    {
+      "code": "170301",
+      "label": "MATANZAS"
+    },
+    {
+      "code": "180000",
+      "label": "PROVINCIA PUERTO PLATA"
+    },
+    {
+      "code": "180100",
+      "label": "MUNICIPIO PUERTO PLATA"
+    },
+    {
+      "code": "180101",
+      "label": "PUERTO PLATA (D. M.)."
+    },
+    {
+      "code": "180102",
+      "label": "YÁSICA ARRIBA (D. M.)."
+    },
+    {
+      "code": "180103",
+      "label": "MAIMÓN (D. M.)."
+    },
+    {
+      "code": "180200",
+      "label": "MUNICIPIO ALTAMIRA"
+    },
+    {
+      "code": "180201",
+      "label": "ALTAMIRA"
+    },
+    {
+      "code": "180202",
+      "label": "RÍO GRANDE (D. M.)."
+    },
+    {
+      "code": "180300",
+      "label": "MUNICIPIO GUANANICO"
+    },
+    {
+      "code": "180301",
+      "label": "GUANANICO"
+    },
+    {
+      "code": "180400",
+      "label": "MUNICIPIO IMBERT"
+    },
+    {
+      "code": "180401",
+      "label": "IMBERT"
+    },
+    {
+      "code": "180500",
+      "label": "MUNICIPIO LOS HIDALGOS"
+    },
+    {
+      "code": "180501",
+      "label": "LOS HIDALGOS"
+    },
+    {
+      "code": "180502",
+      "label": "NAVAS (D. M.)."
+    },
+    {
+      "code": "180600",
+      "label": "MUNICIPIO LUPERÓN"
+    },
+    {
+      "code": "180601",
+      "label": "LUPERÓN"
+    },
+    {
+      "code": "180602",
+      "label": "LA ISABELA (D. M.)."
+    },
+    {
+      "code": "180603",
+      "label": "BELLOSO (D. M.)."
+    },
+    {
+      "code": "180604",
+      "label": "EL ESTRECHO DE LUPERÓN OMAR BROSS (D. M.)."
+    },
+    {
+      "code": "180700",
+      "label": "MUNICIPIO SOSÚA"
+    },
+    {
+      "code": "180701",
+      "label": "SOSÚA"
+    },
+    {
+      "code": "180702",
+      "label": "CABARETE (D. M.)."
+    },
+    {
+      "code": "180703",
+      "label": "SABANETA DE YÁSICA (D. M.)."
+    },
+    {
+      "code": "180800",
+      "label": "MUNICIPIO VILLA ISABELA"
+    },
+    {
+      "code": "180801",
+      "label": "VILLA ISABELA"
+    },
+    {
+      "code": "180802",
+      "label": "ESTERO HONDO (D. M.)."
+    },
+    {
+      "code": "180803",
+      "label": "LA JAIBA (D. M.)."
+    },
+    {
+      "code": "180804",
+      "label": "GUALETE (D. M.)."
+    },
+    {
+      "code": "180900",
+      "label": "MUNICIPIO VILLA MONTELLANO"
+    },
+    {
+      "code": "180901",
+      "label": "VILLA MONTELLANO"
+    },
+    {
+      "code": "190000",
+      "label": "PROVINCIA HERMANAS MIRABAL"
+    },
+    {
+      "code": "190100",
+      "label": "MUNICIPIO SALCEDO"
+    },
+    {
+      "code": "190101",
+      "label": "SALCEDO"
+    },
+    {
+      "code": "190102",
+      "label": "JAMAO AFUERA (D. M.)."
+    },
+    {
+      "code": "190200",
+      "label": "MUNICIPIO TENARES"
+    },
+    {
+      "code": "190201",
+      "label": "TENARES"
+    },
+    {
+      "code": "190202",
+      "label": "BLANCO (D. M.)."
+    },
+    {
+      "code": "190300",
+      "label": "MUNICIPIO VILLA TAPIA"
+    },
+    {
+      "code": "190301",
+      "label": "VILLA TAPIA"
+    },
+    {
+      "code": "200000",
+      "label": "PROVINCIA SAMANÁ"
+    },
+    {
+      "code": "200100",
+      "label": "MUNICIPIO SAMANÁ"
+    },
+    {
+      "code": "200101",
+      "label": "SAMANÁ"
+    },
+    {
+      "code": "200102",
+      "label": "EL LIMÓN  (D. M.)."
+    },
+    {
+      "code": "200103",
+      "label": "ARROYO BARRIL (D. M.)."
+    },
+    {
+      "code": "200104",
+      "label": "LAS GALERAS (D. M.)."
+    },
+    {
+      "code": "200200",
+      "label": "MUNICIPIO SÁNCHEZ"
+    },
+    {
+      "code": "200201",
+      "label": "SÁNCHEZ (D. M.)."
+    },
+    {
+      "code": "200300",
+      "label": "MUNICIPIO LAS TERRENAS"
+    },
+    {
+      "code": "200301",
+      "label": "LAS TERRENAS"
+    },
+    {
+      "code": "210000",
+      "label": "PROVINCIA SAN CRISTÓBAL"
+    },
+    {
+      "code": "210100",
+      "label": "MUNICIPIO SAN CRISTÓBAL"
+    },
+    {
+      "code": "210101",
+      "label": "SAN CRISTÓBAL (D. M.)."
+    },
+    {
+      "code": "210102",
+      "label": "HATO DAMAS (D. M.)."
+    },
+    {
+      "code": "210103",
+      "label": "HATILLO (D. M.)."
+    },
+    {
+      "code": "210200",
+      "label": "MUNICIPIO SABANA GRANDE DE PALENQUE"
+    },
+    {
+      "code": "210201",
+      "label": "SABANA GRANDE DE PALENQUE (D. M.)."
+    },
+    {
+      "code": "210300",
+      "label": "MUNICIPIO BAJOS DE HAINA"
+    },
+    {
+      "code": "210301",
+      "label": "BAJOS DE HAINA"
+    },
+    {
+      "code": "210302",
+      "label": "EL CARRIL (D. M.)."
+    },
+    {
+      "code": "210303",
+      "label": "QUITA SUEÑO (D. M.)."
+    },
+    {
+      "code": "210400",
+      "label": "MUNICIPIO CAMBITA GARABITOS"
+    },
+    {
+      "code": "210401",
+      "label": "CAMBITA GARABITOS"
+    },
+    {
+      "code": "210402",
+      "label": "CAMBITA EL PUEBLECITO (D. M.)."
+    },
+    {
+      "code": "210500",
+      "label": "MUNICIPIO VILLA ALTAGRACIA"
+    },
+    {
+      "code": "210501",
+      "label": "VILLA ALTAGRACIA"
+    },
+    {
+      "code": "210502",
+      "label": "SAN JOSÉ DEL PUERTO (D. M.)."
+    },
+    {
+      "code": "210503",
+      "label": "MEDINA (D. M.)."
+    },
+    {
+      "code": "210504",
+      "label": "LA CUCHILLA (D. M.)."
+    },
+    {
+      "code": "210600",
+      "label": "MUNICIPIO YAGUATE"
+    },
+    {
+      "code": "210601",
+      "label": "YAGUATE (D. M.)."
+    },
+    {
+      "code": "210602",
+      "label": "DOÑA ANA (D. M.)"
+    },
+    {
+      "code": "210700",
+      "label": "MUNICIPIO SAN GREGORIO DE NIGUA"
+    },
+    {
+      "code": "210701",
+      "label": "SAN GREGORIO DE NIGUA"
+    },
+    {
+      "code": "210800",
+      "label": "MUNICIPIO LOS CACAOS"
+    },
+    {
+      "code": "210801",
+      "label": "LOS CACAOS (D. M.)."
+    },
+    {
+      "code": "220000",
+      "label": "PROVINCIA SAN JUAN"
+    },
+    {
+      "code": "220100",
+      "label": "MUNICIPIO SAN JUAN"
+    },
+    {
+      "code": "220101",
+      "label": "SAN JUAN"
+    },
+    {
+      "code": "220102",
+      "label": "PEDRO CORTO (D. M.)."
+    },
+    {
+      "code": "220103",
+      "label": "SABANETA (D. M.)."
+    },
+    {
+      "code": "220104",
+      "label": "SABANA ALTA (D. M.)."
+    },
+    {
+      "code": "220105",
+      "label": "EL ROSARIO (D. M.)."
+    },
+    {
+      "code": "220106",
+      "label": "HATO DEL PADRE (D. M.)."
+    },
+    {
+      "code": "220107",
+      "label": "GUANITO (D. M.)."
+    },
+    {
+      "code": "220108",
+      "label": "LA JAGUA (D. M.)."
+    },
+    {
+      "code": "220109",
+      "label": "LAS MAGUANAS-HATO NUEVO (D. M.)."
+    },
+    {
+      "code": "220110",
+      "label": "LAS CHARCAS DE MARÍA NOVA (D. M.)."
+    },
+    {
+      "code": "220111",
+      "label": "LAS ZANJAS (D. M.)"
+    },
+    {
+      "code": "220200",
+      "label": "MUNICIPIO BOHECHÍO"
+    },
+    {
+      "code": "220201",
+      "label": "BOHECHÍO"
+    },
+    {
+      "code": "220202",
+      "label": "ARROYO CANO (D. M.)."
+    },
+    {
+      "code": "220203",
+      "label": "YAQUE (D. M.)."
+    },
+    {
+      "code": "220300",
+      "label": "MUNICIPIO EL CERCADO"
+    },
+    {
+      "code": "220301",
+      "label": "EL CERCADO"
+    },
+    {
+      "code": "220302",
+      "label": "DERRUMBADERO (D. M.)"
+    },
+    {
+      "code": "220303",
+      "label": "BATISTA (D. M.)"
+    },
+    {
+      "code": "220400",
+      "label": "MUNICIPIO JUAN DE HERRERA"
+    },
+    {
+      "code": "220401",
+      "label": "JUAN DE HERRERA"
+    },
+    {
+      "code": "220402",
+      "label": "JÍNOVA (D. M.)."
+    },
+    {
+      "code": "220500",
+      "label": "MUNICIPIO LAS MATAS DE FARFÁN"
+    },
+    {
+      "code": "220501",
+      "label": "LAS MATAS DE FARFÁN"
+    },
+    {
+      "code": "220502",
+      "label": "MATAYAYA (D. M.)."
+    },
+    {
+      "code": "220503",
+      "label": "CARRERA DE YEGUAS (D. M.)."
+    },
+    {
+      "code": "220600",
+      "label": "MUNICIPIO VALLEJUELO"
+    },
+    {
+      "code": "220601",
+      "label": "VALLEJUELO"
+    },
+    {
+      "code": "220602",
+      "label": "JORJILLO (D. M.)."
+    },
+    {
+      "code": "230000",
+      "label": "PROVINCIA SAN PEDRO DE MACORÍS"
+    },
+    {
+      "code": "230100",
+      "label": "MUNICIPIO SAN PEDRO DE MACORÍS"
+    },
+    {
+      "code": "230101",
+      "label": "SAN PEDRO DE MACORÍS"
+    },
+    {
+      "code": "230200",
+      "label": "MUNICIPIO LOS LLANOS"
+    },
+    {
+      "code": "230201",
+      "label": "LOS LLANOS"
+    },
+    {
+      "code": "230202",
+      "label": "EL PUERTO (D. M.)."
+    },
+    {
+      "code": "230203",
+      "label": "GAUTIER (D. M.)."
+    },
+    {
+      "code": "230300",
+      "label": "MUNICIPIO RAMÓN SANTANA"
+    },
+    {
+      "code": "230301",
+      "label": "RAMÓN SANTANA"
+    },
+    {
+      "code": "230400",
+      "label": "MUNICIPIO CONSUELO"
+    },
+    {
+      "code": "230401",
+      "label": "CONSUELO"
+    },
+    {
+      "code": "230500",
+      "label": "MUNICIPIO QUISQUEYA"
+    },
+    {
+      "code": "230501",
+      "label": "QUISQUEYA"
+    },
+    {
+      "code": "230600",
+      "label": "MUNICIPIO GUAYACANES"
+    },
+    {
+      "code": "230601",
+      "label": "GUAYACANES"
+    },
+    {
+      "code": "240000",
+      "label": "PROVINCIA SANCHEZ RAMÍREZ"
+    },
+    {
+      "code": "240100",
+      "label": "MUNICIPIO COTUÍ"
+    },
+    {
+      "code": "240101",
+      "label": "COTUÍ"
+    },
+    {
+      "code": "240102",
+      "label": "QUITA SUEÑO (D. M.)."
+    },
+    {
+      "code": "240103",
+      "label": "CABALLERO (D. M.)."
+    },
+    {
+      "code": "240104",
+      "label": "COMEDERO ARRIBA (D. M.)."
+    },
+    {
+      "code": "240105",
+      "label": "PLATANAL  (D. M.)."
+    },
+    {
+      "code": "240106",
+      "label": "ZAMBRANA ABAJO"
+    },
+    {
+      "code": "240200",
+      "label": "MUNICIPIO CEVICOS"
+    },
+    {
+      "code": "240201",
+      "label": "CEVICOS"
+    },
+    {
+      "code": "240202",
+      "label": "LA CUEVA (D. M.)."
+    },
+    {
+      "code": "240300",
+      "label": "MUNICIPIO FANTINO"
+    },
+    {
+      "code": "240301",
+      "label": "FANTINO"
+    },
+    {
+      "code": "240400",
+      "label": "MUNICIPIO LA MATA"
+    },
+    {
+      "code": "240401",
+      "label": "LA MATA"
+    },
+    {
+      "code": "240402",
+      "label": "LA BIJA (D. M.)."
+    },
+    {
+      "code": "240403",
+      "label": "ANGELINA (D. M.)."
+    },
+    {
+      "code": "240404",
+      "label": "HERNANDO ALONZO (D. M.)."
+    },
+    {
+      "code": "250000",
+      "label": "PROVINCIA SANTIAGO"
+    },
+    {
+      "code": "250100",
+      "label": "MUNICIPIO SANTIAGO"
+    },
+    {
+      "code": "250101",
+      "label": "SANTIAGO"
+    },
+    {
+      "code": "250102",
+      "label": "PEDRO GARCÍA (D. M.)."
+    },
+    {
+      "code": "250104",
+      "label": "BAITOA (D. M.)."
+    },
+    {
+      "code": "250105",
+      "label": "LA CANELA (D. M.)."
+    },
+    {
+      "code": "250106",
+      "label": "SAN FRANCISCO DE JACAGUA (D. M.)."
+    },
+    {
+      "code": "250107",
+      "label": "HATO DEL YAQUE (D. M.)."
+    },
+    {
+      "code": "250200",
+      "label": "MUNICIPIO BISONÓ"
+    },
+    {
+      "code": "250201",
+      "label": "VILLA BISONÓ (NAVARRETE) (D. M.)."
+    },
+    {
+      "code": "250300",
+      "label": "MUNICIPIO JÁNICO"
+    },
+    {
+      "code": "250301",
+      "label": "JÁNICO"
+    },
+    {
+      "code": "250302",
+      "label": "JUNCALITO (D. M.)."
+    },
+    {
+      "code": "250303",
+      "label": "EL CAIMITO (D. M.)."
+    },
+    {
+      "code": "250400",
+      "label": "MUNICIPIO LICEY AL MEDIO"
+    },
+    {
+      "code": "250401",
+      "label": "LICEY AL MEDIO"
+    },
+    {
+      "code": "250402",
+      "label": "LAS PALOMAS (D. M.)."
+    },
+    {
+      "code": "250500",
+      "label": "MUNICIPIO SAN JOSÉ DE LAS MATAS"
+    },
+    {
+      "code": "250501",
+      "label": "SAN JOSÉ DE LAS MATAS"
+    },
+    {
+      "code": "250502",
+      "label": "EL RUBIO (D. M.)."
+    },
+    {
+      "code": "250503",
+      "label": "LA CUESTA (D. M.)."
+    },
+    {
+      "code": "250504",
+      "label": "LAS PLACETAS (D. M.)."
+    },
+    {
+      "code": "250600",
+      "label": "MUNICIPIO TAMBORIL"
+    },
+    {
+      "code": "250601",
+      "label": "TAMBORIL"
+    },
+    {
+      "code": "250602",
+      "label": "CANCA LA PIEDRA (D. M.)."
+    },
+    {
+      "code": "250700",
+      "label": "MUNICIPIO VILLA GONZÁLEZ"
+    },
+    {
+      "code": "250701",
+      "label": "VILLA GONZÁLEZ"
+    },
+    {
+      "code": "250702",
+      "label": "PALMAR ARRIBA (D. M.)."
+    },
+    {
+      "code": "250703",
+      "label": "EL LIMÓN (D. M.)."
+    },
+    {
+      "code": "250800",
+      "label": "MUNICIPIO PUÑAL"
+    },
+    {
+      "code": "250801",
+      "label": "PUÑAL"
+    },
+    {
+      "code": "250802",
+      "label": "GUAYABAL (D. M.)."
+    },
+    {
+      "code": "250803",
+      "label": "CANABACOA (D. M.)."
+    },
+    {
+      "code": "250900",
+      "label": "MUNICIPIO SABANA IGLESIA"
+    },
+    {
+      "code": "250901",
+      "label": "SABANA IGLESIA"
+    },
+    {
+      "code": "251000",
+      "label": "BAITOA"
+    },
+    {
+      "code": "251001",
+      "label": "BAITOA"
+    },
+    {
+      "code": "260000",
+      "label": "PROVINCIA SANTIAGO RODRÍGUEZ"
+    },
+    {
+      "code": "260100",
+      "label": "MUNICIPIO SAN IGNACIO DE SABANETA"
+    },
+    {
+      "code": "260101",
+      "label": "SAN IGNACIO DE SABANETA (D. M.)."
+    },
+    {
+      "code": "260200",
+      "label": "MUNICIPIO VILLA LOS ALMÁCIGOS"
+    },
+    {
+      "code": "260201",
+      "label": "VILLA LOS ALMÁCIGOS (D. M.)."
+    },
+    {
+      "code": "260300",
+      "label": "MUNICIPIO MONCIÓN"
+    },
+    {
+      "code": "260301",
+      "label": "MONCIÓN (D. M.)."
+    },
+    {
+      "code": "270000",
+      "label": "PROVINCIA VALVERDE"
+    },
+    {
+      "code": "270100",
+      "label": "MUNICIPIO MAO"
+    },
+    {
+      "code": "270101",
+      "label": "MAO (D. M.)."
+    },
+    {
+      "code": "270102",
+      "label": "AMINA (D. M.)."
+    },
+    {
+      "code": "270103",
+      "label": "JAIBÓN (PUEBLO NUEVO) (D. M.)."
+    },
+    {
+      "code": "270104",
+      "label": "GUATAPANAL (D. M.)."
+    },
+    {
+      "code": "270200",
+      "label": "MUNICIPIO ESPERANZA"
+    },
+    {
+      "code": "270201",
+      "label": "ESPERANZA"
+    },
+    {
+      "code": "270202",
+      "label": "MAIZAL (D. M.)."
+    },
+    {
+      "code": "270203",
+      "label": "JICOMÉ (D. M.)."
+    },
+    {
+      "code": "270204",
+      "label": "BOCA DE MAO (D. M.)."
+    },
+    {
+      "code": "270205",
+      "label": "PARADERO (D. M.)."
+    },
+    {
+      "code": "270300",
+      "label": "MUNICIPIO LAGUNA SALADA"
+    },
+    {
+      "code": "270301",
+      "label": "LAGUNA SALADA (D. M.)."
+    },
+    {
+      "code": "270302",
+      "label": "JAIBÓN (D. M.)."
+    },
+    {
+      "code": "270303",
+      "label": "LA CAYA (D. M.)."
+    },
+    {
+      "code": "270304",
+      "label": "CRUCE DE GUAYACANES (D. M.)."
+    },
+    {
+      "code": "280000",
+      "label": "PROVINCIA MONSEÑOR NOUEL"
+    },
+    {
+      "code": "280100",
+      "label": "MUNICIPIO BONAO"
+    },
+    {
+      "code": "280101",
+      "label": "BONAO (D. M.)."
+    },
+    {
+      "code": "280102",
+      "label": "SABANA DEL PUERTO (D. M.)."
+    },
+    {
+      "code": "280103",
+      "label": "JUMA BEJUCAL (D. M.)."
+    },
+    {
+      "code": "280104",
+      "label": "ARROYO  TORO - MASIPEDRO (D. M.)."
+    },
+    {
+      "code": "280105",
+      "label": "JAYACO (D. M.)."
+    },
+    {
+      "code": "280106",
+      "label": "LA SALVIA - LOS QUEMADOS (D. M.)."
+    },
+    {
+      "code": "280200",
+      "label": "MUNICIPIO MAIMÓN"
+    },
+    {
+      "code": "280201",
+      "label": "MAIMÓN (D. M.)."
+    },
+    {
+      "code": "280300",
+      "label": "MUNICIPIO PIEDRA BLANCA"
+    },
+    {
+      "code": "280301",
+      "label": "PIEDRA BLANCA (D. M.)."
+    },
+    {
+      "code": "280302",
+      "label": "VILLA DE SONADOR (D. M.)."
+    },
+    {
+      "code": "280303",
+      "label": "JUAN ADRIÁN (D. M.)."
+    },
+    {
+      "code": "290000",
+      "label": "PROVINCIA MONTE PLATA"
+    },
+    {
+      "code": "290100",
+      "label": "MUNICIPIO MONTE PLATA"
+    },
+    {
+      "code": "290101",
+      "label": "MONTE PLATA (D. M.)."
+    },
+    {
+      "code": "290102",
+      "label": "DON JUAN (D. M.)."
+    },
+    {
+      "code": "290103",
+      "label": "CHIRINO (D. M.)."
+    },
+    {
+      "code": "290104",
+      "label": "BOYÁ (D. M.)."
+    },
+    {
+      "code": "290200",
+      "label": "MUNICIPIO BAYAGUANA"
+    },
+    {
+      "code": "290201",
+      "label": "BAYAGUANA (D. M.)."
+    },
+    {
+      "code": "290300",
+      "label": "MUNICIPIO SABANA GRANDE DE BOYÁ"
+    },
+    {
+      "code": "290301",
+      "label": "SABANA GRANDE DE BOYÁ (D. M.)."
+    },
+    {
+      "code": "290302",
+      "label": "GONZALO (D. M.)."
+    },
+    {
+      "code": "290303",
+      "label": "MAJAGUAL (D. M.)."
+    },
+    {
+      "code": "290400",
+      "label": "MUNICIPIO YAMASÁ"
+    },
+    {
+      "code": "290402",
+      "label": "LOS BOTADOS (D. M.)."
+    },
+    {
+      "code": "290403",
+      "label": "MAMÁ TINGÓ (D. M.)."
+    },
+    {
+      "code": "290500",
+      "label": "MUNICIPIO PERALVILLO"
+    },
+    {
+      "code": "290501",
+      "label": "PERALVILLO (D. M.)."
+    },
+    {
+      "code": "300000",
+      "label": "PROVINCIA HATO MAYOR"
+    },
+    {
+      "code": "300100",
+      "label": "MUNICIPIO HATO MAYOR"
+    },
+    {
+      "code": "300101",
+      "label": "HATO MAYOR (D. M.)."
+    },
+    {
+      "code": "300102",
+      "label": "YERBA BUENA (D. M.)."
+    },
+    {
+      "code": "300103",
+      "label": "MATA PALACIO (D. M.)."
+    },
+    {
+      "code": "300104",
+      "label": "GUAYABO DULCE (D. M.)."
+    },
+    {
+      "code": "300200",
+      "label": "MUNICIPIO SABANA DE LA MAR"
+    },
+    {
+      "code": "300201",
+      "label": "SABANA DE LA MAR (D. M.)."
+    },
+    {
+      "code": "300202",
+      "label": "ELUPINA CORDERO DE LAS CAÑITAS (D. M.)."
+    },
+    {
+      "code": "300300",
+      "label": "MUNICIPIO EL VALLE"
+    },
+    {
+      "code": "300301",
+      "label": "EL VALLE (D. M.)."
+    },
+    {
+      "code": "310000",
+      "label": "PROVINCIA SAN JOSÉ DE OCOA"
+    },
+    {
+      "code": "310100",
+      "label": "MUNICIPIO SAN JOSÉ DE OCOA"
+    },
+    {
+      "code": "310101",
+      "label": "SAN JOSÉ DE OCOA (D. M.)."
+    },
+    {
+      "code": "310102",
+      "label": "LA CIÉNAGA (D. M.)."
+    },
+    {
+      "code": "310103",
+      "label": "NIZAO - LAS AUYAMAS (D. M.)."
+    },
+    {
+      "code": "310104",
+      "label": "EL PINAR (D. M.)."
+    },
+    {
+      "code": "310105",
+      "label": "EL NARANJAL (D. M.)."
+    },
+    {
+      "code": "310200",
+      "label": "MUNICIPIO SABANA LARGA"
+    },
+    {
+      "code": "310201",
+      "label": "SABANA LARGA (D. M.)."
+    },
+    {
+      "code": "310300",
+      "label": "MUNICIPIO RANCHO ARRIBA"
+    },
+    {
+      "code": "310301",
+      "label": "RANCHO ARRIBA (D. M.)."
+    },
+    {
+      "code": "320000",
+      "label": "PROVINCIA SANTO DOMINGO"
+    },
+    {
+      "code": "320100",
+      "label": "MUNICIPIO SANTO DOMINGO ESTE"
+    },
+    {
+      "code": "320101",
+      "label": "SANTO DOMINGO ESTE (D. M.)."
+    },
+    {
+      "code": "320102",
+      "label": "SAN LUIS (D. M.)."
+    },
+    {
+      "code": "320200",
+      "label": "MUNICIPIO SANTO DOMINGO OESTE"
+    },
+    {
+      "code": "320201",
+      "label": "SANTO DOMINGO OESTE (D. M.)."
+    },
+    {
+      "code": "320300",
+      "label": "MUNICIPIO SANTO DOMINGO NORTE"
+    },
+    {
+      "code": "320301",
+      "label": "SANTO DOMINGO NORTE (D. M.)."
+    },
+    {
+      "code": "320302",
+      "label": "LA VICTORIA (D. M.)."
+    },
+    {
+      "code": "320400",
+      "label": "MUNICIPIO BOCA CHICA"
+    },
+    {
+      "code": "320401",
+      "label": "BOCA CHICA (D. M.)."
+    },
+    {
+      "code": "320402",
+      "label": "LA CALETA (D. M.)."
+    },
+    {
+      "code": "320500",
+      "label": "MUNICIPIO SAN ANTONIO DE GUERRA"
+    },
+    {
+      "code": "320501",
+      "label": "SAN ANTONIO DE GUERRA (D. M.)."
+    },
+    {
+      "code": "320502",
+      "label": "HATO VIEJO (D. M.)."
+    },
+    {
+      "code": "320600",
+      "label": "MUNICIPIO LOS ALCARRIZOS"
+    },
+    {
+      "code": "320601",
+      "label": "LOS ALCARRIZOS (D. M.)."
+    },
+    {
+      "code": "320602",
+      "label": "PALMAREJO-VILLA LINDA (D. M.)."
+    },
+    {
+      "code": "320603",
+      "label": "PANTOJA (D. M.)."
+    },
+    {
+      "code": "320700",
+      "label": "MUNICIPIO PEDRO BRAND"
+    },
+    {
+      "code": "320701",
+      "label": "PEDRO BRAND (D. M.)."
+    },
+    {
+      "code": "320702",
+      "label": "LA GUÁYIGA (D. M.)."
+    },
+    {
+      "code": "320703",
+      "label": "LA CUABA (D. M.)."
+    }
+  ],
+  "values": [
+    "010000",
+    "010100",
+    "010101",
+    "020000",
+    "020100",
+    "020101",
+    "020102",
+    "020103",
+    "020104",
+    "020105",
+    "020106",
+    "020107",
+    "020108",
+    "020109",
+    "020200",
+    "020201",
+    "020202",
+    "020300",
+    "020301",
+    "020302",
+    "020303",
+    "020400",
+    "020401",
+    "020402",
+    "020403",
+    "020404",
+    "020405",
+    "020500",
+    "020501",
+    "020600",
+    "020601",
+    "020602",
+    "020603",
+    "020604",
+    "020700",
+    "020701",
+    "020702",
+    "020800",
+    "020801",
+    "020802",
+    "020803",
+    "020804",
+    "020900",
+    "020901",
+    "021000",
+    "021001",
+    "030000",
+    "030001",
+    "030101",
+    "030102",
+    "030200",
+    "030201",
+    "030202",
+    "030300",
+    "030301",
+    "030302",
+    "030303",
+    "030304",
+    "030305",
+    "030306",
+    "030307",
+    "030400",
+    "030401",
+    "030500",
+    "030501",
+    "030502",
+    "040000",
+    "040100",
+    "040101",
+    "040102",
+    "040103",
+    "040104",
+    "040200",
+    "040201",
+    "040300",
+    "040301",
+    "040302",
+    "040400",
+    "040401",
+    "040402",
+    "040500",
+    "040501",
+    "040502",
+    "040503",
+    "040504",
+    "040600",
+    "040601",
+    "040700",
+    "040701",
+    "040702",
+    "040800",
+    "040801",
+    "040802",
+    "040900",
+    "040901",
+    "041000",
+    "041001",
+    "041100",
+    "041101",
+    "041102",
+    "050000",
+    "050100",
+    "050101",
+    "050102",
+    "050200",
+    "050201",
+    "050202",
+    "050203",
+    "050300",
+    "050301",
+    "050400",
+    "050401",
+    "050500",
+    "050501",
+    "050502",
+    "060000",
+    "060100",
+    "060101",
+    "060102",
+    "060103",
+    "060104",
+    "060105",
+    "060200",
+    "060201",
+    "060202",
+    "060203",
+    "060300",
+    "060301",
+    "060400",
+    "060401",
+    "060500",
+    "060501",
+    "060502",
+    "060503",
+    "060504",
+    "060505",
+    "060600",
+    "060601",
+    "060700",
+    "060701",
+    "060702",
+    "070000",
+    "070100",
+    "070101",
+    "070102",
+    "070103",
+    "070200",
+    "070201",
+    "070202",
+    "070203",
+    "070300",
+    "070301",
+    "070302",
+    "070400",
+    "070401",
+    "070402",
+    "070500",
+    "070501",
+    "070502",
+    "070600",
+    "070601",
+    "080000",
+    "080100",
+    "080101",
+    "080102",
+    "080103",
+    "080104",
+    "080200",
+    "080201",
+    "080202",
+    "080203",
+    "090000",
+    "090100",
+    "090101",
+    "090102",
+    "090103",
+    "090104",
+    "090105",
+    "090106",
+    "090107",
+    "090108",
+    "090109",
+    "090200",
+    "090201",
+    "090300",
+    "090301",
+    "090302",
+    "090303",
+    "090304",
+    "090400",
+    "090401",
+    "100000",
+    "100100",
+    "100101",
+    "100102",
+    "100103",
+    "100200",
+    "100201",
+    "100202",
+    "100300",
+    "100301",
+    "100400",
+    "100401",
+    "100402",
+    "100500",
+    "100501",
+    "100502",
+    "100600",
+    "100601",
+    "100602",
+    "110000",
+    "110100",
+    "110101",
+    "110102",
+    "110103",
+    "110104",
+    "110200",
+    "110201",
+    "110202",
+    "110203",
+    "120000",
+    "120100",
+    "120101",
+    "120102",
+    "120200",
+    "120201",
+    "120300",
+    "120301",
+    "120302",
+    "130000",
+    "130100",
+    "130101",
+    "130102",
+    "130103",
+    "130104",
+    "130105",
+    "130200",
+    "130201",
+    "130202",
+    "130203",
+    "130300",
+    "130301",
+    "130302",
+    "130303",
+    "130400",
+    "130401",
+    "130402",
+    "140000",
+    "140100",
+    "140101",
+    "140102",
+    "140103",
+    "140104",
+    "140200",
+    "140201",
+    "140202",
+    "140203",
+    "140300",
+    "140301",
+    "140302",
+    "140400",
+    "140401",
+    "150000",
+    "150100",
+    "150101",
+    "150200",
+    "150201",
+    "150202",
+    "150300",
+    "150301",
+    "150302",
+    "150303",
+    "150304",
+    "150400",
+    "150401",
+    "150500",
+    "150501",
+    "150502",
+    "150600",
+    "150601",
+    "160000",
+    "160100",
+    "160101",
+    "160102",
+    "160200",
+    "160201",
+    "160202",
+    "170000",
+    "170100",
+    "170101",
+    "170102",
+    "170103",
+    "170104",
+    "170105",
+    "170106",
+    "170107",
+    "170108",
+    "170109",
+    "170110",
+    "170200",
+    "170201",
+    "170202",
+    "170203",
+    "170300",
+    "170301",
+    "180000",
+    "180100",
+    "180101",
+    "180102",
+    "180103",
+    "180200",
+    "180201",
+    "180202",
+    "180300",
+    "180301",
+    "180400",
+    "180401",
+    "180500",
+    "180501",
+    "180502",
+    "180600",
+    "180601",
+    "180602",
+    "180603",
+    "180604",
+    "180700",
+    "180701",
+    "180702",
+    "180703",
+    "180800",
+    "180801",
+    "180802",
+    "180803",
+    "180804",
+    "180900",
+    "180901",
+    "190000",
+    "190100",
+    "190101",
+    "190102",
+    "190200",
+    "190201",
+    "190202",
+    "190300",
+    "190301",
+    "200000",
+    "200100",
+    "200101",
+    "200102",
+    "200103",
+    "200104",
+    "200200",
+    "200201",
+    "200300",
+    "200301",
+    "210000",
+    "210100",
+    "210101",
+    "210102",
+    "210103",
+    "210200",
+    "210201",
+    "210300",
+    "210301",
+    "210302",
+    "210303",
+    "210400",
+    "210401",
+    "210402",
+    "210500",
+    "210501",
+    "210502",
+    "210503",
+    "210504",
+    "210600",
+    "210601",
+    "210602",
+    "210700",
+    "210701",
+    "210800",
+    "210801",
+    "220000",
+    "220100",
+    "220101",
+    "220102",
+    "220103",
+    "220104",
+    "220105",
+    "220106",
+    "220107",
+    "220108",
+    "220109",
+    "220110",
+    "220111",
+    "220200",
+    "220201",
+    "220202",
+    "220203",
+    "220300",
+    "220301",
+    "220302",
+    "220303",
+    "220400",
+    "220401",
+    "220402",
+    "220500",
+    "220501",
+    "220502",
+    "220503",
+    "220600",
+    "220601",
+    "220602",
+    "230000",
+    "230100",
+    "230101",
+    "230200",
+    "230201",
+    "230202",
+    "230203",
+    "230300",
+    "230301",
+    "230400",
+    "230401",
+    "230500",
+    "230501",
+    "230600",
+    "230601",
+    "240000",
+    "240100",
+    "240101",
+    "240102",
+    "240103",
+    "240104",
+    "240105",
+    "240106",
+    "240200",
+    "240201",
+    "240202",
+    "240300",
+    "240301",
+    "240400",
+    "240401",
+    "240402",
+    "240403",
+    "240404",
+    "250000",
+    "250100",
+    "250101",
+    "250102",
+    "250104",
+    "250105",
+    "250106",
+    "250107",
+    "250200",
+    "250201",
+    "250300",
+    "250301",
+    "250302",
+    "250303",
+    "250400",
+    "250401",
+    "250402",
+    "250500",
+    "250501",
+    "250502",
+    "250503",
+    "250504",
+    "250600",
+    "250601",
+    "250602",
+    "250700",
+    "250701",
+    "250702",
+    "250703",
+    "250800",
+    "250801",
+    "250802",
+    "250803",
+    "250900",
+    "250901",
+    "251000",
+    "251001",
+    "260000",
+    "260100",
+    "260101",
+    "260200",
+    "260201",
+    "260300",
+    "260301",
+    "270000",
+    "270100",
+    "270101",
+    "270102",
+    "270103",
+    "270104",
+    "270200",
+    "270201",
+    "270202",
+    "270203",
+    "270204",
+    "270205",
+    "270300",
+    "270301",
+    "270302",
+    "270303",
+    "270304",
+    "280000",
+    "280100",
+    "280101",
+    "280102",
+    "280103",
+    "280104",
+    "280105",
+    "280106",
+    "280200",
+    "280201",
+    "280300",
+    "280301",
+    "280302",
+    "280303",
+    "290000",
+    "290100",
+    "290101",
+    "290102",
+    "290103",
+    "290104",
+    "290200",
+    "290201",
+    "290300",
+    "290301",
+    "290302",
+    "290303",
+    "290400",
+    "290402",
+    "290403",
+    "290500",
+    "290501",
+    "300000",
+    "300100",
+    "300101",
+    "300102",
+    "300103",
+    "300104",
+    "300200",
+    "300201",
+    "300202",
+    "300300",
+    "300301",
+    "310000",
+    "310100",
+    "310101",
+    "310102",
+    "310103",
+    "310104",
+    "310105",
+    "310200",
+    "310201",
+    "310300",
+    "310301",
+    "320000",
+    "320100",
+    "320101",
+    "320102",
+    "320200",
+    "320201",
+    "320300",
+    "320301",
+    "320302",
+    "320400",
+    "320401",
+    "320402",
+    "320500",
+    "320501",
+    "320502",
+    "320600",
+    "320601",
+    "320602",
+    "320603",
+    "320700",
+    "320701",
+    "320702",
+    "320703"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+ "actions": [],
+ "creation": "2025-09-09 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 0,
+ "engine": "InnoDB",
+ "field_order": [
+  "sequence_type",
+  "serie",
+  "range_from",
+  "range_to",
+  "current",
+  "is_contingency"
+ ],
+ "fields": [
+  {"fieldname": "sequence_type", "fieldtype": "Select", "label": "Tipo e-CF", "reqd": 1, "options": "31 Factura Crédito Fiscal\n32 Factura Consumo\n33 Nota Débito\n34 Nota Crédito\n41 Compras\n43 Gastos Menores\n44 Regímenes Especiales\n45 Gubernamental\n46 Exportaciones\n47 Pagos Exterior"},
+  {"fieldname": "serie", "fieldtype": "Select", "label": "Serie", "options": "E\nB", "reqd": 1, "default": "E", "description": "E = Electrónica, B = Contingencia"},
+  {"fieldname": "range_from", "fieldtype": "Int", "label": "Desde", "reqd": 1},
+  {"fieldname": "range_to", "fieldtype": "Int", "label": "Hasta", "reqd": 1},
+  {"fieldname": "current", "fieldtype": "Int", "label": "Actual", "reqd": 1, "default": 0},
+  {"fieldname": "is_contingency", "fieldtype": "Check", "label": "Contingencia (Serie B)", "default": "0"}
+ ],
+ "is_single": 0,
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2025-09-09 00:00:00.000000",
+ "module": "CSF DO",
+ "name": "e-CF Sequence",
+ "owner": "Administrator",
+ "permissions": [
+  {"read": 1, "write": 1, "create": 1, "delete": 1, "role": "System Manager"}
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

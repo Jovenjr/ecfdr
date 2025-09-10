@@ -1,0 +1,48 @@
+{
+  "required_paths": [
+    "DetallesItems",
+    "DetallesItems/Item",
+    "DetallesItems/Item/CantidadItem",
+    "DetallesItems/Item/IndicadorBienoServicio",
+    "DetallesItems/Item/IndicadorFacturacion",
+    "DetallesItems/Item/MontoItem",
+    "DetallesItems/Item/NombreItem",
+    "DetallesItems/Item/NumeroLinea",
+    "DetallesItems/Item/PrecioUnitarioItem",
+    "Encabezado",
+    "Encabezado/Comprador",
+    "Encabezado/Comprador/RNCComprador",
+    "Encabezado/Comprador/RazonSocialComprador",
+    "Encabezado/Emisor",
+    "Encabezado/Emisor/DireccionEmisor",
+    "Encabezado/Emisor/FechaEmision",
+    "Encabezado/Emisor/RNCEmisor",
+    "Encabezado/Emisor/RazonSocialEmisor",
+    "Encabezado/IdDoc",
+    "Encabezado/IdDoc/FechaVencimientoSecuencia",
+    "Encabezado/IdDoc/TipoIngresos",
+    "Encabezado/IdDoc/TipoPago",
+    "Encabezado/IdDoc/TipoeCF",
+    "Encabezado/IdDoc/eNCF",
+    "Encabezado/Totales",
+    "Encabezado/Totales/MontoTotal",
+    "Encabezado/Version",
+    "FechaHoraFirma"
+  ],
+  "date_fields": [
+    "DetallesItems/Item/FechaElaboracion",
+    "DetallesItems/Item/FechaVencimientoItem",
+    "Encabezado/Comprador/FechaEntrega",
+    "Encabezado/Comprador/FechaOrdenCompra",
+    "Encabezado/Emisor/FechaEmision",
+    "Encabezado/IdDoc/FechaDesde",
+    "Encabezado/IdDoc/FechaHasta",
+    "Encabezado/IdDoc/FechaLimitePago",
+    "Encabezado/IdDoc/FechaVencimientoSecuencia",
+    "Encabezado/InformacionesAdicionales/FechaEmbarque",
+    "InformacionReferencia/FechaNCFModificado"
+  ],
+  "datetime_fields": [
+    "FechaHoraFirma"
+  ]
+}

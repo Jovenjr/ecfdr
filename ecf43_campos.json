@@ -1,0 +1,490 @@
+{
+  "titulo": "e-CF 43 - Gastos Menores Electrónico",
+  "version": "1.0",
+  "campos_requeridos": {
+    "Encabezado": {
+      "Version": {
+        "tipo": "versionType",
+        "requerido": true,
+        "descripcion": "Versión del e-CF"
+      },
+      "IdDoc": {
+        "TipoeCF": {
+          "tipo": "TipoeCFType",
+          "requerido": true,
+          "descripcion": "Tipo de e-CF (43 para Gastos Menores)"
+        },
+        "eNCF": {
+          "tipo": "eNCFValidationType",
+          "requerido": true,
+          "descripcion": "Número de Comprobante Fiscal"
+        },
+        "FechaVencimientoSecuencia": {
+          "tipo": "FechaValidationType",
+          "requerido": true,
+          "descripcion": "Fecha de vencimiento de la secuencia"
+        },
+        "TipoPago": {
+          "tipo": "TipoPagoType",
+          "requerido": false,
+          "descripcion": "Tipo de pago (1=Contado, 2=Crédito, 3=Gratuito)"
+        },
+        "TotalPaginas": {
+          "tipo": "Integer4ValidationTypeMayorUno",
+          "requerido": false,
+          "descripcion": "Total de páginas del documento"
+        }
+      },
+      "Emisor": {
+        "RNCEmisor": {
+          "tipo": "RNCValidationType",
+          "requerido": true,
+          "descripcion": "RNC del emisor"
+        },
+        "RazonSocialEmisor": {
+          "tipo": "AlfNum150Type",
+          "requerido": true,
+          "descripcion": "Razón social del emisor"
+        },
+        "NombreComercial": {
+          "tipo": "AlfNum150Type",
+          "requerido": false,
+          "descripcion": "Nombre comercial"
+        },
+        "Sucursal": {
+          "tipo": "AlfNum20Type",
+          "requerido": false,
+          "descripcion": "Sucursal"
+        },
+        "DireccionEmisor": {
+          "tipo": "AlfNum100Type",
+          "requerido": true,
+          "descripcion": "Dirección del emisor"
+        },
+        "Municipio": {
+          "tipo": "ProvinciaMunicipioType",
+          "requerido": false,
+          "descripcion": "Código del municipio"
+        },
+        "Provincia": {
+          "tipo": "ProvinciaMunicipioType",
+          "requerido": false,
+          "descripcion": "Código de la provincia"
+        },
+        "TablaTelefonoEmisor": {
+          "TelefonoEmisor": {
+            "tipo": "TelefonoValidationType",
+            "requerido": false,
+            "descripcion": "Teléfono del emisor (máximo 3)"
+          }
+        },
+        "CorreoEmisor": {
+          "tipo": "CorreoValidationType",
+          "requerido": false,
+          "descripcion": "Correo electrónico del emisor"
+        },
+        "WebSite": {
+          "tipo": "AlfNum50Type",
+          "requerido": false,
+          "descripcion": "Sitio web"
+        },
+        "ActividadEconomica": {
+          "tipo": "AlfNum100Type",
+          "requerido": false,
+          "descripcion": "Actividad económica"
+        },
+        "NumeroFacturaInterna": {
+          "tipo": "AlfNum20Type",
+          "requerido": false,
+          "descripcion": "Número de factura interna"
+        },
+        "NumeroPedidoInterno": {
+          "tipo": "Integer20ValidationType",
+          "requerido": false,
+          "descripcion": "Número de pedido interno"
+        },
+        "InformacionAdicionalEmisor": {
+          "tipo": "AlfNum250Type",
+          "requerido": false,
+          "descripcion": "Información adicional del emisor"
+        },
+        "FechaEmision": {
+          "tipo": "FechaValidationType",
+          "requerido": true,
+          "descripcion": "Fecha de emisión"
+        }
+      },
+      "Totales": {
+        "MontoExento": {
+          "tipo": "Decimal18D1or2ValidationTypeMayorIgualCero",
+          "requerido": false,
+          "descripcion": "Monto exento"
+        },
+        "MontoTotal": {
+          "tipo": "Decimal18D1or2ValidationTypeMayorIgualCero",
+          "requerido": true,
+          "descripcion": "Monto total"
+        },
+        "MontoPeriodo": {
+          "tipo": "Decimal18D1or2ValidationTypeNegativoPositivo",
+          "requerido": false,
+          "descripcion": "Monto del período"
+        },
+        "SaldoAnterior": {
+          "tipo": "Decimal18D1or2ValidationTypeNegativoPositivo",
+          "requerido": false,
+          "descripcion": "Saldo anterior"
+        },
+        "MontoAvancePago": {
+          "tipo": "Decimal18D1or2ValidationTypeMayorIgualCero",
+          "requerido": false,
+          "descripcion": "Monto de avance de pago"
+        },
+        "ValorPagar": {
+          "tipo": "Decimal18D1or2ValidationTypeNegativoPositivo",
+          "requerido": false,
+          "descripcion": "Valor a pagar"
+        }
+      },
+      "OtraMoneda": {
+        "TipoMoneda": {
+          "tipo": "TipoMonedaType",
+          "requerido": false,
+          "descripcion": "Tipo de moneda"
+        },
+        "TipoCambio": {
+          "tipo": "Decimal7D1or4ValidationTypeMayorCero",
+          "requerido": false,
+          "descripcion": "Tipo de cambio"
+        },
+        "MontoExentoOtraMoneda": {
+          "tipo": "Decimal18D1or2ValidationTypeMayorIgualCero",
+          "requerido": false,
+          "descripcion": "Monto exento en otra moneda"
+        },
+        "MontoTotalOtraMoneda": {
+          "tipo": "Decimal18D1or2ValidationTypeMayorIgualCero",
+          "requerido": false,
+          "descripcion": "Monto total en otra moneda"
+        }
+      }
+    },
+    "DetallesItems": {
+      "Item": {
+        "NumeroLinea": {
+          "tipo": "NumeroLineaType",
+          "requerido": true,
+          "descripcion": "Número de línea (1-1000)"
+        },
+        "TablaCodigosItem": {
+          "CodigosItem": {
+            "TipoCodigo": {
+              "tipo": "AlfNum14Type",
+              "requerido": true,
+              "descripcion": "Tipo de código del item"
+            },
+            "CodigoItem": {
+              "tipo": "AlfNum35Type",
+              "requerido": true,
+              "descripcion": "Código del item"
+            }
+          }
+        },
+        "IndicadorFacturacion": {
+          "tipo": "IndicadorFacturacionType",
+          "requerido": true,
+          "descripcion": "Indicador de facturación (0-4)"
+        },
+        "NombreItem": {
+          "tipo": "AlfNum80Type",
+          "requerido": true,
+          "descripcion": "Nombre del item"
+        },
+        "IndicadorBienoServicio": {
+          "tipo": "IndicadorBienoServicioType",
+          "requerido": true,
+          "descripcion": "Indicador bien o servicio (1=Bien, 2=Servicio)"
+        },
+        "DescripcionItem": {
+          "tipo": "AlfNum1000Type",
+          "requerido": false,
+          "descripcion": "Descripción del item"
+        },
+        "CantidadItem": {
+          "tipo": "Decimal18D1or2ValidationTypeMayorCero",
+          "requerido": true,
+          "descripcion": "Cantidad del item"
+        },
+        "UnidadMedida": {
+          "tipo": "UnidadMedidaType",
+          "requerido": false,
+          "descripcion": "Unidad de medida"
+        },
+        "PrecioUnitarioItem": {
+          "tipo": "Decimal20D1or4ValidationTypeMayorIgualCero",
+          "requerido": true,
+          "descripcion": "Precio unitario del item"
+        },
+        "OtraMonedaDetalle": {
+          "PrecioOtraMoneda": {
+            "tipo": "Decimal20D1or4ValidationTypeMayorIgualCero",
+            "requerido": false,
+            "descripcion": "Precio en otra moneda"
+          },
+          "DescuentoOtraMoneda": {
+            "tipo": "Decimal18D1or2ValidationTypeMayorIgualCero",
+            "requerido": false,
+            "descripcion": "Descuento en otra moneda"
+          },
+          "RecargoOtraMoneda": {
+            "tipo": "Decimal18D1or2ValidationTypeMayorIgualCero",
+            "requerido": false,
+            "descripcion": "Recargo en otra moneda"
+          },
+          "MontoItemOtraMoneda": {
+            "tipo": "Decimal18D1or2ValidationTypeMayorIgualCero",
+            "requerido": false,
+            "descripcion": "Monto del item en otra moneda"
+          }
+        },
+        "MontoItem": {
+          "tipo": "Decimal18D1or2ValidationTypeMayorIgualCero",
+          "requerido": true,
+          "descripcion": "Monto del item"
+        }
+      }
+    }
+  },
+  "campos_opcionales": {
+    "Subtotales": {
+      "Subtotal": {
+        "NumeroSubTotal": {
+          "tipo": "Integer2ValidationType",
+          "requerido": false,
+          "descripcion": "Número del subtotal"
+        },
+        "DescripcionSubtotal": {
+          "tipo": "AlfNum40Type",
+          "requerido": false,
+          "descripcion": "Descripción del subtotal"
+        },
+        "Orden": {
+          "tipo": "Integer2ValidationType",
+          "requerido": false,
+          "descripcion": "Orden del subtotal"
+        },
+        "SubTotalExento": {
+          "tipo": "Decimal18D1or2ValidationTypeMayorIgualCero",
+          "requerido": false,
+          "descripcion": "Subtotal exento"
+        },
+        "MontoSubTotal": {
+          "tipo": "Decimal18D1or2ValidationTypeMayorIgualCero",
+          "requerido": false,
+          "descripcion": "Monto del subtotal"
+        },
+        "Lineas": {
+          "tipo": "Integer2ValidationType",
+          "requerido": false,
+          "descripcion": "Número de líneas"
+        }
+      }
+    },
+    "Paginacion": {
+      "Pagina": {
+        "PaginaNo": {
+          "tipo": "Integer4V1To1000ValidationType",
+          "requerido": false,
+          "descripcion": "Número de página"
+        },
+        "NoLineaDesde": {
+          "tipo": "Integer4V1To1000ValidationType",
+          "requerido": false,
+          "descripcion": "Número de línea desde"
+        },
+        "NoLineaHasta": {
+          "tipo": "Integer4V1To1000ValidationType",
+          "requerido": false,
+          "descripcion": "Número de línea hasta"
+        },
+        "SubtotalExentoPagina": {
+          "tipo": "Decimal18D1or2ValidationTypeMayorIgualCero",
+          "requerido": false,
+          "descripcion": "Subtotal exento de la página"
+        },
+        "MontoSubtotalPagina": {
+          "tipo": "Decimal18D1or2ValidationTypeMayorIgualCero",
+          "requerido": false,
+          "descripcion": "Monto subtotal de la página"
+        }
+      }
+    },
+    "InformacionReferencia": {
+      "NCFModificado": {
+        "tipo": "AlfNum11a19ValidationType",
+        "requerido": false,
+        "descripcion": "NCF modificado"
+      },
+      "RNCOtroContribuyente": {
+        "tipo": "RNCValidationType",
+        "requerido": false,
+        "descripcion": "RNC de otro contribuyente"
+      },
+      "FechaNCFModificado": {
+        "tipo": "FechaValidationType",
+        "requerido": false,
+        "descripcion": "Fecha del NCF modificado"
+      },
+      "CodigoModificacion": {
+        "tipo": "CodigoModificacionType",
+        "requerido": false,
+        "descripcion": "Código de modificación"
+      }
+    }
+  },
+  "tipos_datos": {
+    "TipoeCFType": {
+      "valores": [
+        31,
+        32,
+        33,
+        34,
+        41,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "descripcion": "Tipos de e-CF (43 = Gastos Menores Electrónico)"
+    },
+    "TipoPagoType": {
+      "valores": [
+        1,
+        2,
+        3
+      ],
+      "descripcion": "1=Contado, 2=Crédito, 3=Gratuito"
+    },
+    "IndicadorFacturacionType": {
+      "valores": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "descripcion": "0=No Facturable (18%), 1=ITBIS 1 (18%), 2=ITBIS 2 (16%), 3=ITBIS 3 (0%), 4=Exento (E)"
+    },
+    "IndicadorBienoServicioType": {
+      "valores": [
+        1,
+        2
+      ],
+      "descripcion": "1=Bien, 2=Servicio"
+    },
+    "CodigoModificacionType": {
+      "valores": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "descripcion": "1=Anula NCF, 2=Corrige texto, 3=Corrige montos, 4=Reemplazo contingencia, 5=Referencia FCE"
+    },
+    "TipoMonedaType": {
+      "valores": [
+        "BRL",
+        "CAD",
+        "CHF",
+        "CHY",
+        "XDR",
+        "DKK",
+        "EUR",
+        "GBP",
+        "JPY",
+        "NOK",
+        "SCP",
+        "SEK",
+        "USD",
+        "VEF",
+        "HTG",
+        "MXN"
+      ],
+      "descripcion": "Códigos de monedas internacionales"
+    },
+    "UnidadMedidaType": {
+      "valores": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62
+      ],
+      "descripcion": "Códigos de unidades de medida (1-62)"
+    },
+    "ProvinciaMunicipioType": {
+      "valores": "Códigos de 6 dígitos para provincias y municipios de República Dominicana",
+      "descripcion": "Ver lista completa en el XSD (líneas 437-1022)"
+    }
+  },
+  "plantilla_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<ECF>\n    <Encabezado>\n        <Version>1.0</Version>\n        <IdDoc>\n            <TipoeCF>43</TipoeCF>\n            <eNCF>B0100000001</eNCF>\n            <FechaVencimientoSecuencia>31-12-2024</FechaVencimientoSecuencia>\n            <TipoPago>1</TipoPago>\n        </IdDoc>\n        <Emisor>\n            <RNCEmisor>12345678901</RNCEmisor>\n            <RazonSocialEmisor>EMPRESA EJEMPLO SRL</RazonSocialEmisor>\n            <DireccionEmisor>Av. Principal #123, Santo Domingo</DireccionEmisor>\n            <FechaEmision>15-01-2024</FechaEmision>\n        </Emisor>\n        <Totales>\n            <MontoTotal>100.00</MontoTotal>\n        </Totales>\n    </Encabezado>\n    <DetallesItems>\n        <Item>\n            <NumeroLinea>1</NumeroLinea>\n            <IndicadorFacturacion>1</IndicadorFacturacion>\n            <NombreItem>Producto de ejemplo</NombreItem>\n            <IndicadorBienoServicio>1</IndicadorBienoServicio>\n            <CantidadItem>1.00</CantidadItem>\n            <PrecioUnitarioItem>100.00</PrecioUnitarioItem>\n            <MontoItem>100.00</MontoItem>\n        </Item>\n    </DetallesItems>\n    <FechaHoraFirma>15-01-2024 10:30:00</FechaHoraFirma>\n</ECF>"
+}

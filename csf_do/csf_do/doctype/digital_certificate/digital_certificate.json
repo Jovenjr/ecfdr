@@ -1,0 +1,43 @@
+{
+ "actions": [],
+ "creation": "2025-09-09 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 0,
+ "engine": "InnoDB",
+ "field_order": [
+  "certificate_name",
+  "provider",
+  "sn_owner_id",
+  "section_paths",
+  "cert_path",
+  "key_path",
+  "section_validity",
+  "valid_from",
+  "valid_to",
+  "is_active"
+ ],
+ "fields": [
+  {"fieldname": "certificate_name", "fieldtype": "Data", "label": "Nombre del Certificado", "reqd": 1},
+  {"fieldname": "provider", "fieldtype": "Select", "label": "Proveedor (CA)", "options": "Viafirma\nDigifirma\nOtro"},
+  {"fieldname": "sn_owner_id", "fieldtype": "Data", "label": "SN (RNC/Cédula/Pasaporte)", "reqd": 1, "description": "Debe coincidir con el propietario del certificado"},
+  {"fieldname": "section_paths", "fieldtype": "Section Break", "label": "Rutas"},
+  {"fieldname": "cert_path", "fieldtype": "Data", "label": "Ruta Certificado (p12/pfx)"},
+  {"fieldname": "key_path", "fieldtype": "Data", "label": "Ruta Clave Privada (si aplica)"},
+  {"fieldname": "section_validity", "fieldtype": "Section Break", "label": "Vigencia"},
+  {"fieldname": "valid_from", "fieldtype": "Date", "label": "Válido Desde"},
+  {"fieldname": "valid_to", "fieldtype": "Date", "label": "Válido Hasta"},
+  {"fieldname": "is_active", "fieldtype": "Check", "label": "Activo", "default": "0"}
+ ],
+ "is_single": 0,
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2025-09-09 00:00:00.000000",
+ "module": "CSF DO",
+ "name": "Digital Certificate",
+ "owner": "Administrator",
+ "permissions": [
+  {"read": 1, "write": 1, "create": 1, "delete": 1, "role": "System Manager"}
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

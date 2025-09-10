@@ -1,0 +1,53 @@
+{
+ "actions": [],
+ "creation": "2025-09-09 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 0,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_envs",
+  "precert_base_url",
+  "cert_base_url",
+  "prod_base_url",
+  "verify_ssl",
+  "section_auth",
+  "client_id",
+  "client_secret",
+  "token_ttl_minutes",
+  "section_overrides",
+  "auth_semilla_url",
+  "auth_token_url",
+  "recepcion_ecf_url",
+  "consulta_estado_url",
+  "directorio_servicios_url"
+ ],
+ "fields": [
+  {"fieldname": "section_envs", "fieldtype": "Section Break", "label": "Ambientes"},
+  {"fieldname": "precert_base_url", "fieldtype": "Data", "label": "Pre-Certificación Base URL", "reqd": 1},
+  {"fieldname": "cert_base_url", "fieldtype": "Data", "label": "Certificación Base URL", "reqd": 1},
+  {"fieldname": "prod_base_url", "fieldtype": "Data", "label": "Producción Base URL", "reqd": 1},
+  {"fieldname": "verify_ssl", "fieldtype": "Check", "label": "Verificar SSL", "default": "1"},
+  {"fieldname": "section_auth", "fieldtype": "Section Break", "label": "Autenticación"},
+  {"fieldname": "client_id", "fieldtype": "Data", "label": "Client ID"},
+  {"fieldname": "client_secret", "fieldtype": "Password", "label": "Client Secret"},
+  {"fieldname": "token_ttl_minutes", "fieldtype": "Int", "label": "Token TTL (min)", "default": 60},
+  {"fieldname": "section_overrides", "fieldtype": "Section Break", "label": "Overrides de Endpoints (Opcional)"},
+  {"fieldname": "auth_semilla_url", "fieldtype": "Data", "label": "URL Semilla (override)"},
+  {"fieldname": "auth_token_url", "fieldtype": "Data", "label": "URL Token (override)"},
+  {"fieldname": "recepcion_ecf_url", "fieldtype": "Data", "label": "URL Recepción e-CF (override)"},
+  {"fieldname": "consulta_estado_url", "fieldtype": "Data", "label": "URL Consulta Estado (override)"},
+  {"fieldname": "directorio_servicios_url", "fieldtype": "Data", "label": "URL Directorio Servicios (override)"}
+ ],
+ "is_single": 1,
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2025-09-09 00:00:00.000000",
+ "module": "CSF DO",
+ "name": "DGII Configuration",
+ "owner": "Administrator",
+ "permissions": [
+  {"read": 1, "write": 1, "create": 1, "delete": 1, "submit": 0, "cancel": 0, "amend": 0, "export": 1, "print": 1, "report": 1, "share": 1, "email": 1, "role": "System Manager"}
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

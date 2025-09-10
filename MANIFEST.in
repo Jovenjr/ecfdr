@@ -4,15 +4,20 @@ include *.json
 include *.md
 include *.py
 include *.txt
-recursive-include csf_ke *.css
-recursive-include csf_ke *.csv
-recursive-include csf_ke *.html
-recursive-include csf_ke *.ico
-recursive-include csf_ke *.js
-recursive-include csf_ke *.json
-recursive-include csf_ke *.md
-recursive-include csf_ke *.png
-recursive-include csf_ke *.py
-recursive-include csf_ke *.svg
-recursive-include csf_ke *.txt
-recursive-exclude csf_ke *.pyc
+recursive-include csf_do *.css
+recursive-include csf_do *.csv
+recursive-include csf_do *.html
+recursive-include csf_do *.ico
+recursive-include csf_do *.js
+recursive-include csf_do *.json
+recursive-include csf_do *.md
+recursive-include csf_do *.png
+recursive-include csf_do *.py
+recursive-include csf_do *.svg
+recursive-include csf_do *.txt
+recursive-exclude csf_do *.pyc
+# Include DGII XSD schemas packaged with the app
+recursive-include csf_do *.xsd
++# Exclude Kenya leftovers from the Dominican package
+recursive-exclude csf_do/csf_do/doctype/csf_ke *
+exclude csf_do/config/csf_ke.py

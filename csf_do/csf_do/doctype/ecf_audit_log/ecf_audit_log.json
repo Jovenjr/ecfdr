@@ -1,0 +1,47 @@
+{
+ "actions": [],
+ "creation": "2025-09-09 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 0,
+ "engine": "InnoDB",
+ "field_order": [
+  "track_id",
+  "encf",
+  "tipo_ecf",
+  "ambiente",
+  "rnc_emisor",
+  "rnc_comprador",
+  "estado",
+  "intentos",
+  "last_error",
+  "payload_hash",
+  "request_ts",
+  "response_ts"
+ ],
+ "fields": [
+  {"fieldname": "track_id", "fieldtype": "Data", "label": "TrackId DGII", "reqd": 1},
+  {"fieldname": "encf", "fieldtype": "Data", "label": "e-NCF", "reqd": 1},
+  {"fieldname": "tipo_ecf", "fieldtype": "Select", "label": "Tipo e-CF", "options": "31\n32\n33\n34\n41\n43\n44\n45\n46\n47", "reqd": 1},
+  {"fieldname": "ambiente", "fieldtype": "Select", "label": "Ambiente", "options": "Pre-Certificación\nCertificación\nProducción", "reqd": 1},
+  {"fieldname": "rnc_emisor", "fieldtype": "Data", "label": "RNC Emisor", "reqd": 1},
+  {"fieldname": "rnc_comprador", "fieldtype": "Data", "label": "RNC Comprador"},
+  {"fieldname": "estado", "fieldtype": "Select", "label": "Estado DGII", "options": "Aceptado\nRechazado\nAceptado Condicional\nEn Proceso", "reqd": 1},
+  {"fieldname": "intentos", "fieldtype": "Int", "label": "Intentos", "default": 0},
+  {"fieldname": "last_error", "fieldtype": "Small Text", "label": "Último Error DGII"},
+  {"fieldname": "payload_hash", "fieldtype": "Data", "label": "Hash XML (SHA-256)"},
+  {"fieldname": "request_ts", "fieldtype": "Datetime", "label": "Fecha/Hora Envío"},
+  {"fieldname": "response_ts", "fieldtype": "Datetime", "label": "Fecha/Hora Respuesta"}
+ ],
+ "is_single": 0,
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2025-09-09 00:00:00.000000",
+ "module": "CSF DO",
+ "name": "e-CF Audit Log",
+ "owner": "Administrator",
+ "permissions": [
+  {"read": 1, "write": 1, "create": 1, "delete": 1, "role": "System Manager"}
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

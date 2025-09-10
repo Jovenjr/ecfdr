@@ -1,0 +1,87 @@
+{
+  "type": "TipoMonedaType",
+  "entries": [
+    {
+      "code": "BRL",
+      "label": "REAL BRASILENO"
+    },
+    {
+      "code": "CAD",
+      "label": "DOLAR CANADIENSE"
+    },
+    {
+      "code": "CHF",
+      "label": "FRANCO SUIZO"
+    },
+    {
+      "code": "CHY",
+      "label": "YUAN CHINO"
+    },
+    {
+      "code": "XDR",
+      "label": "DERECHO ESPECIAL DE GIRO"
+    },
+    {
+      "code": "DKK",
+      "label": "CORONA DANESA"
+    },
+    {
+      "code": "EUR",
+      "label": "EURO"
+    },
+    {
+      "code": "GBP",
+      "label": "LIBRA ESTERLINA"
+    },
+    {
+      "code": "JPY",
+      "label": "YEN JAPONES"
+    },
+    {
+      "code": "NOK",
+      "label": "CORONA NORUEGA"
+    },
+    {
+      "code": "SCP",
+      "label": "LIBRA ESCOCESA"
+    },
+    {
+      "code": "SEK",
+      "label": "CORONA SUECA"
+    },
+    {
+      "code": "USD",
+      "label": "DOLAR ESTADOUNIDENSE"
+    },
+    {
+      "code": "VEF",
+      "label": "BOLIVAR FUERTE VENEZOLANO"
+    },
+    {
+      "code": "HTG",
+      "label": "GURDA HAITIANA"
+    },
+    {
+      "code": "MXN",
+      "label": "PESO MEXICANO"
+    }
+  ],
+  "values": [
+    "BRL",
+    "CAD",
+    "CHF",
+    "CHY",
+    "XDR",
+    "DKK",
+    "EUR",
+    "GBP",
+    "JPY",
+    "NOK",
+    "SCP",
+    "SEK",
+    "USD",
+    "VEF",
+    "HTG",
+    "MXN"
+  ]
+}
