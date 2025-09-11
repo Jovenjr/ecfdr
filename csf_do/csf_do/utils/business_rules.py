@@ -106,7 +106,4 @@ def validate_pre_send_basic(data: Dict) -> List[str]:
 
     return errs
 
-<<<<<<< Current (Your changes)
->>>>>>> Incoming (Background Agent changes)
-=======
->>>>>>> Incoming (Background Agent changes)
+ 

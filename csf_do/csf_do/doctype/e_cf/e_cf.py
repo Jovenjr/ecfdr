@@ -4,7 +4,7 @@ from typing import Any, Dict
 import frappe
 from frappe.model.document import Document
 
-from csf_do.csf_do.utils.ecf_service import enviar_ecf_config, consultar_estado_config
+from csf_do.csf_do.utils.ecf_service import enviar_ecf_config, consultar_estado_config, anular_encf
 from csf_do.csf_do.utils.qr_code_generator import build_qr_payload_from_xml, get_qr_code
 from csf_do.csf_do.utils.field_validators import validate_encf, validate_rnc
 from csf_do.csf_do.utils.input_validator import validate_against_spec
@@ -149,12 +149,37 @@ def _status_job(name: str, ambiente: str) -> None:
 
 @frappe.whitelist()
 def anular(name: str, motivo: str | None = None) -> Dict:
-    # Placeholder: la DGII define proceso RFCE/Anulación específico
+    """Construye y envía ANECF para anulación del e-NCF del doc actual."""
     doc: ECF = frappe.get_doc("e-CF", name)  # type: ignore
-    doc.estado_dgii = "Anulado"
-    doc.logs = (doc.logs or "") + f"\nAnulado manualmente. Motivo: {motivo or '-'}"
+    if not doc.encf:
+        frappe.throw("No hay e-NCF en el documento para anular.")
+    rnc_emisor = doc.rnc_emisor or frappe.get_cached_value("Company", frappe.defaults.get_user_default("Company"), "tax_id")
+    anulaciones = [{
+        "NoLinea": 1,
+        "TipoeCF": doc.tipo_ecf,
+        "Desde": doc.encf,
+        "Hasta": doc.encf,
+        "Cantidad": 1,
+    }]
+    # Usar configuración de ambiente 'custom' por defecto
+    from csf_do.csf_do.utils.dgii_config import get_active_dgii_config
+    cfg = get_active_dgii_config(ambiente="custom") or {}
+    base_url = str(cfg.get("base_url") or "mock://anecf")
+
+    resp = anular_encf(
+        rnc_emisor=rnc_emisor,
+        anulaciones=anulaciones,
+        base_url=base_url,
+    )
+
+    # Persistir estado y logs
+    doc.estado_dgii = resp.get("estado") or "Anulado"
+    if resp.get("track_id"):
+        doc.track_id = resp.get("track_id")
+    doc.logs = (doc.logs or "") + f"\nSolicitud de anulación enviada. Motivo: {motivo or '-'}"
+    doc.last_response = frappe.as_json(resp or {})
     doc.save(ignore_permissions=True)
     frappe.db.commit()
-    return {"status": "ok", "estado": doc.estado_dgii}
+    return {"status": "ok", "estado": doc.estado_dgii, "track_id": resp.get("track_id")}
 
 
