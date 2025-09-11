@@ -1,0 +1,9 @@
+{
+ "report_name": "e-CF Status Dashboard",
+ "doctype": "Report",
+ "ref_doctype": "e-CF",
+ "report_type": "Script Report",
+ "is_standard": "Yes",
+ "module": "CSF DO"
+}
+

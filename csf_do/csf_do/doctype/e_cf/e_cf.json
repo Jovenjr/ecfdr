@@ -1,0 +1,61 @@
+{
+ "actions": [],
+ "creation": "2025-09-11 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 0,
+ "engine": "InnoDB",
+ "field_order": [
+  "estado_dgii",
+  "tipo_ecf",
+  "encf",
+  "rnc_emisor",
+  "rnc_comprador",
+  "track_id",
+  "sales_invoice",
+  "purchase_invoice",
+  "sequence",
+  "signed_xml",
+  "qr_image_base64",
+  "codigo_seguridad",
+  "errores",
+  "logs",
+  "last_response"
+ ],
+ "fields": [
+  {"fieldname": "estado_dgii", "fieldtype": "Select", "label": "Estado DGII", "options": "Pendiente\nEn Proceso\nObservado\nAceptado\nRechazado\nAnulado", "reqd": 1, "default": "Pendiente"},
+  {"fieldname": "tipo_ecf", "fieldtype": "Select", "label": "Tipo e-CF", "options": "31\n32\n33\n34\n41\n43\n44\n45\n46\n47", "reqd": 1},
+  {"fieldname": "encf", "fieldtype": "Data", "label": "e-NCF", "reqd": 0, "in_list_view": 1},
+  {"fieldname": "rnc_emisor", "fieldtype": "Data", "label": "RNC Emisor", "reqd": 0},
+  {"fieldname": "rnc_comprador", "fieldtype": "Data", "label": "RNC Comprador", "reqd": 0},
+  {"fieldname": "track_id", "fieldtype": "Data", "label": "Track ID DGII", "read_only": 1, "in_list_view": 1},
+  {"fieldname": "sales_invoice", "fieldtype": "Link", "label": "Sales Invoice", "options": "Sales Invoice"},
+  {"fieldname": "purchase_invoice", "fieldtype": "Link", "label": "Purchase Invoice", "options": "Purchase Invoice"},
+  {"fieldname": "sequence", "fieldtype": "Link", "label": "e-CF Sequence", "options": "e-CF Sequence"},
+  {"fieldname": "signed_xml", "fieldtype": "Long Text", "label": "XML Firmado", "read_only": 1},
+  {"fieldname": "qr_image_base64", "fieldtype": "Long Text", "label": "QR (base64)", "read_only": 1},
+  {"fieldname": "codigo_seguridad", "fieldtype": "Data", "label": "Código de Seguridad", "read_only": 1},
+  {"fieldname": "errores", "fieldtype": "Small Text", "label": "Errores"},
+  {"fieldname": "logs", "fieldtype": "Small Text", "label": "Logs"},
+  {"fieldname": "last_response", "fieldtype": "Small Text", "label": "Última Respuesta DGII", "read_only": 1}
+ ],
+ "is_single": 0,
+ "index_web_pages_for_search": 0,
+ "links": [
+   {"link_doctype": "Sales Invoice", "link_fieldname": "sales_invoice"},
+   {"link_doctype": "Purchase Invoice", "link_fieldname": "purchase_invoice"},
+   {"link_doctype": "e-CF Sequence", "link_fieldname": "sequence"}
+ ],
+ "modified": "2025-09-11 00:00:00.000000",
+ "module": "CSF DO",
+ "name": "e-CF",
+ "owner": "Administrator",
+ "permissions": [
+  {"read": 1, "write": 1, "create": 1, "delete": 1, "submit": 0, "role": "Emisor e-CF"},
+  {"read": 1, "write": 1, "create": 1, "delete": 0, "submit": 0, "role": "Administrador e-CF"},
+  {"read": 1, "write": 0, "create": 0, "delete": 0, "submit": 0, "role": "Aprobador Comercial"},
+  {"read": 1, "write": 1, "create": 1, "delete": 1, "role": "System Manager"}
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}
+

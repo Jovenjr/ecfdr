@@ -52,3 +52,39 @@ def validate_montos_gravados_y_exentos_vs_indicador(
     return errors
 
 
+<<<<<<< Current (Your changes)
+=======
+def validate_pre_send_basic(data: Dict) -> List[str]:
+    """Validaciones previas al envío: totales vs items, RNC y eNCF si presentes.
+
+    Retorna lista de errores amigables, vacía si todo OK.
+    """
+    from .field_validators import validate_encf, validate_rnc
+
+    errs: List[str] = []
+    encabezado = data.get("encabezado") or {}
+    iddoc = encabezado.get("iddoc") or encabezado.get("IdDoc") or {}
+    emisor = encabezado.get("emisor") or encabezado.get("Emisor") or {}
+    totales = encabezado.get("totales") or encabezado.get("Totales") or {}
+    items = data.get("detalles") or data.get("DetallesItems") or []
+
+    # Validaciones de formato suaves
+    try:
+        validate_encf(iddoc.get("eNCF") or iddoc.get("encf"))
+    except Exception as e:  # noqa: BLE001
+        errs.append(str(e))
+    try:
+        validate_rnc(emisor.get("RNCEmisor") or emisor.get("rnc_emisor"), field_name="RNC Emisor")
+    except Exception as e:  # noqa: BLE001
+        errs.append(str(e))
+
+    # Coherencia totales vs items por indicador
+    try:
+        errs.extend(validate_montos_gravados_y_exentos_vs_indicador(totales, items))
+    except Exception:
+        pass
+
+    return errs
+
+
+>>>>>>> Incoming (Background Agent changes)

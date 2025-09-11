@@ -31,6 +31,10 @@ fixtures = [
             ]
         ],
     },
+    {
+        "doctype": "Role",
+        "filters": [["role_name", "in", ["Emisor e-CF", "Aprobador Comercial", "Administrador e-CF"]]],
+    },
 ]
 
 # Includes in <head>
@@ -56,7 +60,10 @@ fixtures = [
 
 # include js in doctype views
 
-doctype_js = {"Customer": "csf_do/overrides/customer.js"}
+doctype_js = {
+    "Customer": "csf_do/overrides/customer.js",
+    "Sales Invoice": "csf_do/overrides/sales_invoice_ecf.js",
+}
 
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}

@@ -1,0 +1,56 @@
+{
+ "doc_type": "e-CF",
+ "module": "CSF DO",
+ "name": "e-CF RI",
+ "print_format_type": "Jinja",
+ "disabled": 0,
+ "raw_printing": 0,
+ "custom_format": 1,
+ "format_data": "",
+ "html": """
+<div style=\"font-family: Inter, Arial, sans-serif; font-size: 12px;\">
+  <h3 style=\"margin:0 0 8px\">Representación Impresa e-CF</h3>
+  <div>
+    <strong>e-NCF:</strong> {{ doc.encf or '-' }}<br/>
+    <strong>Tipo:</strong> {{ doc.tipo_ecf or '-' }}<br/>
+    <strong>Estado DGII:</strong> {{ doc.estado_dgii or '-' }}<br/>
+    <strong>Track ID:</strong> {{ doc.track_id or '-' }}
+  </div>
+  <hr/>
+  <div style=\"display:flex; gap:16px; align-items:flex-start;\">
+    <div>
+      {% if doc.qr_image_base64 %}
+        <img src=\"{{ doc.qr_image_base64 }}\" alt=\"QR\" style=\"width:140px;height:140px\"/>
+      {% else %}
+        {% if doc.signed_xml and doc.codigo_seguridad %}
+          {% set payload = frappe.get_jinja_env().globals.get('csf_do.csf_do.utils.qr_code_generator.build_qr_payload_from_xml')(doc.signed_xml, doc.codigo_seguridad) %}
+          {% if payload and payload.texto %}
+            <img src=\"{{ get_qr_code(payload.texto) }}\" alt=\"QR\" style=\"width:140px;height:140px\"/>
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    </div>
+    <div>
+      <strong>Código Seguridad:</strong> {{ doc.codigo_seguridad or '-' }}<br/>
+      <strong>Consulta:</strong>
+      {% if doc.signed_xml and doc.codigo_seguridad %}
+        {% set payload = frappe.get_jinja_env().globals.get('csf_do.csf_do.utils.qr_code_generator.build_qr_payload_from_xml')(doc.signed_xml, doc.codigo_seguridad) %}
+        {% if payload and payload.url %}
+          <a href=\"{{ payload.url }}\">{{ payload.url }}</a>
+        {% else %}
+          -
+        {% endif %}
+      {% else %}
+        -
+      {% endif %}
+    </div>
+  </div>
+  <hr/>
+  <div>
+    <strong>Errores/Observaciones:</strong>
+    <pre style=\"white-space:pre-wrap\">{{ doc.errores or '-' }}</pre>
+  </div>
+</div>
+"""
+}
+
