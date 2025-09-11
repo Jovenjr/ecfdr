@@ -164,23 +164,11 @@ doc_events = {
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"csf_do.tasks.all"
-# 	],
-# 	"daily": [
-# 		"csf_do.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"csf_do.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"csf_do.tasks.weekly"
-# 	]
-# 	"monthly": [
-# 		"csf_do.tasks.monthly"
-# 	]
-# }
+scheduler_events = {
+    "hourly": [
+        "csf_do.csf_do.scheduler.dgii_status_auto_consult.run",
+    ],
+}
 
 
 # Testing
