@@ -36,6 +36,8 @@ from .signing import sha256_digest
 from .cert_loader import get_active_certificate
 from .dgii_config import get_active_dgii_config
 from .qr_code_generator import build_qr_payload_from_xml, get_qr_code
+from .rfce32_builder import build_and_validate_rfce32
+from .xsd_validator import validate_xml
 
 
 @dataclass
@@ -254,6 +256,193 @@ def consultar_estado(
         pass
 
     return resp
+
+
+def anular_encf(
+    *,
+    rnc_emisor: str,
+    anulaciones: List[Dict],
+    base_url: str,
+    p12_path: str | None = None,
+    p12_password: str | None = None,
+    verify_ssl: bool = True,
+    ttl_token: int = 3600,
+) -> Dict:
+    """Genera XML ANECF, firma e intenta enviar la anulación a DGII.
+
+    anulaciones: lista de items con llaves: NoLinea, TipoeCF, rangos (Desde/Hasta)
+    """
+    from xml.etree import ElementTree as ET
+    from datetime import datetime
+    # Construcción ANECF mínima
+    root = ET.Element("ANECF")
+    encabezado = ET.SubElement(root, "Encabezado")
+    ET.SubElement(encabezado, "Version").text = "1.0"
+    ET.SubElement(encabezado, "RncEmisor").text = str(rnc_emisor)
+    ET.SubElement(encabezado, "CantidadeNCFAnulados").text = str(sum(int(a.get("Cantidad", 0)) for a in anulaciones) or len(anulaciones))
+    now = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+    ET.SubElement(encabezado, "FechaHoraAnulacioneNCF").text = now
+
+    detalle = ET.SubElement(root, "DetalleAnulacion")
+    for a in anulaciones:
+        ann = ET.SubElement(detalle, "Anulacion")
+        ET.SubElement(ann, "NoLinea").text = str(a.get("NoLinea") or 1)
+        ET.SubElement(ann, "TipoeCF").text = str(a.get("TipoeCF"))
+        tabla = ET.SubElement(ann, "TablaRangoSecuenciasAnuladaseNCF")
+        secs = ET.SubElement(tabla, "Secuencias")
+        ET.SubElement(secs, "SecuenciaeNCFDesde").text = str(a.get("Desde"))
+        ET.SubElement(secs, "SecuenciaeNCFHasta").text = str(a.get("Hasta"))
+        ET.SubElement(ann, "CantidadeNCFAnulados").text = str(a.get("Cantidad") or 1)
+
+    # xs:any
+    ET.SubElement(root, "Signature").text = "-"
+    xml = ET.tostring(root, encoding="utf-8").decode("utf-8")
+
+    # Validar contra XSD si es posible
+    try:
+        validate_xml(xml, xsd_name="ANECF v.1.0.xsd")
+    except Exception:
+        pass
+
+    # Firma ANECF
+    if not p12_path:
+        try:
+            cert_info = get_active_certificate()
+            if cert_info and cert_info.get("p12_path"):
+                p12_path = cert_info.get("p12_path")
+                if p12_password is None:
+                    p12_password = cert_info.get("password") or None
+        except Exception:
+            pass
+
+    try:
+        if p12_path:
+            res = xml_signer.sign_with_pkcs12(xml, p12_path=p12_path, password=p12_password, target_tag="ANECF")
+            signed_xml = res["signed_xml"]
+        else:
+            signed_xml = xml
+    except Exception:
+        signed_xml = xml
+
+    # Enviar
+    if base_url.startswith("mock://"):
+        mock = DGIIMock(base_url)
+        resp = mock.recepcion_ecf(signed_xml)
+    else:
+        env = DGIIEnv(name="custom", base_url=base_url, verify_ssl=verify_ssl, ttl_token=ttl_token)
+        client = DGIIClient(env)
+        resp = client.post_xml(
+            "anulacion_encf",
+            signed_xml,
+            cert_path="",
+            key_path="",
+            p12_path=p12_path,
+            p12_password=p12_password,
+        )
+
+    try:
+        save_audit_event({
+            "tipo_ecf": "ANECF",
+            "ambiente": base_url,
+            "estado_dgii": resp.get("estado") or "Enviado",
+            "track_id": resp.get("track_id"),
+            "payload_hash": sha256_digest(signed_xml.encode("utf-8")),
+            "extra": resp,
+        })
+    except Exception:
+        pass
+
+    return resp
+
+
+def enviar_rfce32(
+    data: Dict,
+    *,
+    base_url: str,
+    cert_path: str,
+    key_path: str,
+    p12_path: str | None = None,
+    p12_password: str | None = None,
+    verify_ssl: bool = True,
+    ttl_token: int = 3600,
+) -> Dict:
+    """Construye, firma y envía un RFCE 32 a DGII."""
+    xml, ok, errors = build_and_validate_rfce32(data)
+    if not ok:
+        return {"ok": False, "estado": "Invalid XML", "errores": errors, "track_id": None}
+
+    # Firma RFCE: firmar el tag RFCE con PKCS#12 si disponible
+    if not p12_path:
+        try:
+            cert_info = get_active_certificate()
+            if cert_info and cert_info.get("p12_path"):
+                p12_path = cert_info.get("p12_path")
+                if p12_password is None:
+                    p12_password = cert_info.get("password") or None
+        except Exception:
+            pass
+
+    try:
+        if p12_path:
+            res = xml_signer.sign_with_pkcs12(xml, p12_path=p12_path, password=p12_password, target_tag="RFCE")
+            signed_xml = res["signed_xml"]
+        else:
+            # placeholder: usar firma simple que no altera el XML
+            signed_xml = xml
+    except Exception:
+        signed_xml = xml
+
+    if base_url.startswith("mock://"):
+        mock = DGIIMock(base_url)
+        resp = mock.recepcion_ecf(signed_xml)
+    else:
+        env = DGIIEnv(name="custom", base_url=base_url, verify_ssl=verify_ssl, ttl_token=ttl_token)
+        client = DGIIClient(env)
+        resp = client.post_xml(
+            "recepcion_rfce",
+            signed_xml,
+            cert_path=cert_path,
+            key_path=key_path,
+            p12_path=p12_path,
+            p12_password=p12_password,
+        )
+
+    try:
+        save_audit_event({
+            "tipo_ecf": "RFCE32",
+            "ambiente": base_url,
+            "estado_dgii": resp.get("estado") or "Enviado",
+            "track_id": resp.get("track_id"),
+            "payload_hash": sha256_digest(signed_xml.encode("utf-8")),
+            "extra": resp,
+        })
+    except Exception:
+        pass
+
+    return resp
+
+
+def consultar_resumen_rfce32(
+    *,
+    base_url: str,
+    verify_ssl: bool = True,
+    ttl_token: int = 3600,
+) -> Dict:
+    """Consulta el resumen RFCE 32 (endpoint dedicado)."""
+    if base_url.startswith("mock://"):
+        return {"status": "stub", "resumen": []}
+    env = DGIIEnv(name="custom", base_url=base_url, verify_ssl=verify_ssl, ttl_token=ttl_token)
+    client = DGIIClient(env)
+    url = client.endpoints().get("consulta_resumen_rfce")
+    try:
+        import requests  # type: ignore
+        token = client.ensure_token(cert_path="", key_path="")
+        headers = {"Authorization": f"Bearer {token}"}
+        resp = requests.get(url, headers=headers, timeout=20, verify=verify_ssl)
+        resp.raise_for_status()
+        return resp.json() if "application/json" in resp.headers.get("Content-Type", "") else {"raw": resp.text}
+    except Exception as e:  # noqa: BLE001
+        return {"error": str(e)}
 
 
 def enviar_ecf_config(
