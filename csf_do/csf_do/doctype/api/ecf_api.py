@@ -47,6 +47,15 @@ def _get_next_encf_for_tipo(tipo: str) -> Tuple[str, Optional[str]]:
     Retorna (encf, sequence_name). Lanza si no hay secuencia disponible.
     Formato: Serie (E/B) + Tipo (2 dígitos) + correlativo 10 dígitos => 13 chars
     """
+    # Si hay contingencia activa en configuración, priorizar Serie B
+    contingency_first = False
+    try:
+        from csf_do.csf_do.utils.dgii_config import get_active_dgii_config
+        cfg = get_active_dgii_config(ambiente="custom") or {}
+        contingency_first = bool(cfg.get("contingency_mode"))
+    except Exception:
+        contingency_first = False
+
     sequences: List[Dict[str, Any]] = frappe.get_all(
         "e-CF Sequence",
         filters={"sequence_type": ["like", f"{str(tipo)}%"], "serie": ["in", ["E", "B"]]},
@@ -55,6 +64,9 @@ def _get_next_encf_for_tipo(tipo: str) -> Tuple[str, Optional[str]]:
     )
     if not sequences:
         raise frappe.ValidationError("No hay secuencias configuradas para el tipo e-CF indicado")
+    # Reordenar para priorizar B en contingencia
+    if contingency_first:
+        sequences.sort(key=lambda s: (0 if s.get("serie") == "B" else 1, s.get("modified", "")))
     for seq in sequences:
         current = int(seq.get("current") or 0)
         range_to = int(seq.get("range_to") or 0)

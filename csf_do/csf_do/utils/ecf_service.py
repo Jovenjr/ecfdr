@@ -38,6 +38,7 @@ from .dgii_config import get_active_dgii_config
 from .qr_code_generator import build_qr_payload_from_xml, get_qr_code
 from .rfce32_builder import build_and_validate_rfce32
 from .xsd_validator import validate_xml
+from xml.etree import ElementTree as ET
 
 
 @dataclass
@@ -352,6 +353,44 @@ def anular_encf(
     except Exception:
         pass
 
+    return resp
+
+
+def recepcion_aprobacion_comercial(
+    data_xml: str,
+    *,
+    base_url: str,
+    verify_ssl: bool = True,
+    ttl_token: int = 3600,
+) -> Dict:
+    """Envía un XML de Aprobación/Rechazo Comercial (ACECF/ARECF) a DGII."""
+    # Validar que raíz sea ACECF o ARECF para nocaut temprano
+    try:
+        root = ET.fromstring(data_xml)
+        if root.tag not in ("ACECF", "ARECF"):
+            raise ValueError("XML no corresponde a ACECF/ARECF")
+    except Exception:
+        return {"ok": False, "error": "XML inválido ACECF/ARECF"}
+
+    if base_url.startswith("mock://"):
+        mock = DGIIMock(base_url)
+        resp = mock.recepcion_ecf(data_xml)
+    else:
+        env = DGIIEnv(name="custom", base_url=base_url, verify_ssl=verify_ssl, ttl_token=ttl_token)
+        client = DGIIClient(env)
+        resp = client.post_xml("recepcion_aprobacion", data_xml, cert_path="", key_path="")
+
+    try:
+        save_audit_event({
+            "tipo_ecf": root.tag,
+            "ambiente": base_url,
+            "estado_dgii": resp.get("estado") or "Enviado",
+            "track_id": resp.get("track_id"),
+            "payload_hash": sha256_digest(data_xml.encode("utf-8")),
+            "extra": resp,
+        })
+    except Exception:
+        pass
     return resp
 
 
