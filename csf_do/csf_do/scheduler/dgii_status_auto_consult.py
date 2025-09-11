@@ -29,8 +29,6 @@ def run() -> None:
         except Exception as e:  # noqa: BLE001
             frappe.logger().warning(f"Auto-consulta DGII fallo para {row['name']}: {e}")
 
-<<<<<<< Current (Your changes)
-=======
     # Monitoreo básico: expiración de certificados digitales (si el Doctype existe)
     try:
         if frappe.db.table_exists("Digital Certificate"):
@@ -56,5 +54,4 @@ def run() -> None:
     except Exception:
         pass
 
->>>>>>> Incoming (Background Agent changes)
 

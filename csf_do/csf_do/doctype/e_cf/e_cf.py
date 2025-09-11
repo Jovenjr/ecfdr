@@ -182,7 +182,11 @@ def anular(name: str, motivo: str | None = None) -> Dict:
     frappe.db.commit()
 <<<<<<< Current (Your changes)
 <<<<<<< Current (Your changes)
+<<<<<<< Current (Your changes)
     return {"status": "ok", "estado": doc.estado_dgii}
+=======
+    return {"status": "ok", "estado": doc.estado_dgii, "track_id": resp.get("track_id")}
+>>>>>>> Incoming (Background Agent changes)
 =======
     return {"status": "ok", "estado": doc.estado_dgii, "track_id": resp.get("track_id")}
 >>>>>>> Incoming (Background Agent changes)

@@ -93,6 +93,10 @@ def get_active_dgii_config(ambiente: str = "custom") -> Optional[Dict[str, Any]]
         "overrides": {k: v for k, v in overrides.items() if v},
 <<<<<<< Current (Your changes)
 <<<<<<< Current (Your changes)
+<<<<<<< Current (Your changes)
+=======
+        "contingency_mode": bool(getattr(doc, "contingency_mode", 0)),
+>>>>>>> Incoming (Background Agent changes)
 =======
         "contingency_mode": bool(getattr(doc, "contingency_mode", 0)),
 >>>>>>> Incoming (Background Agent changes)

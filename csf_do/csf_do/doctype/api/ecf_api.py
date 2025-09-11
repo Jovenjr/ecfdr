@@ -241,6 +241,10 @@ def anular_desde_sales_invoice(name: str, motivo: str | None = None) -> Dict[str
 <<<<<<< Current (Your changes)
 <<<<<<< Current (Your changes)
 <<<<<<< Current (Your changes)
+<<<<<<< Current (Your changes)
+>>>>>>> Incoming (Background Agent changes)
+=======
+ 
 >>>>>>> Incoming (Background Agent changes)
 =======
  

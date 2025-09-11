@@ -106,20 +106,6 @@ def validate_pre_send_basic(data: Dict) -> List[str]:
 
     return errs
 
-<<<<<<< Current (Your changes)
-<<<<<<< Current (Your changes)
-<<<<<<< Current (Your changes)
-<<<<<<< Current (Your changes)
->>>>>>> Incoming (Background Agent changes)
-=======
->>>>>>> Incoming (Background Agent changes)
-=======
- 
->>>>>>> Incoming (Background Agent changes)
-=======
- 
->>>>>>> Incoming (Background Agent changes)
-=======
 
 def apply_norma_07_07_split(items: List[Dict]) -> List[Dict]:
     """Aplica la división 90/10 (exento/gravado) cuando corresponda.
@@ -143,4 +129,3 @@ def apply_norma_07_07_split(items: List[Dict]) -> List[Dict]:
     return out
 
  
->>>>>>> Incoming (Background Agent changes)

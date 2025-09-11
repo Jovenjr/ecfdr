@@ -28,6 +28,46 @@ frappe.ui.form.on('Sales Invoice', {
             }, 'Enviar e-CF');
         }, 'e-CF');
 
+<<<<<<< Current (Your changes)
+=======
+        // RFCE (Resumen Factura Consumo) - Envío mínimo a partir de la factura
+        frm.add_custom_button('Enviar RFCE 32', () => {
+            // Construcción mínima: reutiliza datos de la factura para RFCE
+            frappe.call({
+                method: 'frappe.call',
+                args: {
+                    method: 'csf_do.csf_do.utils.ecf_service.enviar_rfce32',
+                    args: {
+                        data: {
+                            encabezado: {
+                                Version: '1.0',
+                                IdDoc: {
+                                    TipoeCF: '32', eNCF: frm.doc.__encf || 'E320000000001', TipoIngresos: '1', TipoPago: (frm.doc.outstanding_amount && Math.abs(frm.doc.outstanding_amount) > 0.01) ? '2' : '1'
+                                },
+                                Emisor: {
+                                    RNCEmisor: frm.doc.company_tax_id || '', RazonSocialEmisor: frm.doc.company, FechaEmision: frm.doc.posting_date
+                                },
+                                Comprador: { RNCComprador: frm.doc.tax_id || '', RazonSocialComprador: frm.doc.customer_name },
+                                Totales: { MontoTotal: String(frm.doc.grand_total || frm.doc.base_grand_total || 0) }
+                            },
+                            CodigoSeguridadeCF: frm.doc.__codigo_seguridad || 'ABCDEF'
+                        },
+                        base_url: 'mock://precert', cert_path: '', key_path: ''
+                    }
+                }
+            }).then(() => frappe.show_alert('RFCE 32 enviado (mock)'));
+        }, 'e-CF');
+
+        frm.add_custom_button('Consultar Resumen RFCE', () => {
+            frappe.call({
+                method: 'frappe.call',
+                args: { method: 'csf_do.csf_do.utils.ecf_service.consultar_resumen_rfce32', args: { base_url: 'mock://precert' } }
+            }).then(r => {
+                frappe.msgprint(__('Respuesta RFCE: {0}', [JSON.stringify(r && r.message || {}, null, 2)]));
+            });
+        }, 'e-CF');
+
+>>>>>>> Incoming (Background Agent changes)
         // Consult status button (desde Sales Invoice)
         frm.add_custom_button('Consultar Estado e-CF', () => {
             frappe.call({
