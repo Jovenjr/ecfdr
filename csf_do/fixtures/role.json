@@ -1,0 +1,5 @@
+[
+  {"doctype": "Role", "role_name": "Emisor e-CF", "desk_access": 1},
+  {"doctype": "Role", "role_name": "Aprobador Comercial", "desk_access": 1},
+  {"doctype": "Role", "role_name": "Administrador e-CF", "desk_access": 1}
+]
