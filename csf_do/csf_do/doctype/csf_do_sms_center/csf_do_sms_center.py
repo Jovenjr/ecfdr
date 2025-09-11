@@ -8,7 +8,7 @@ from frappe.core.doctype.sms_settings.sms_settings import send_sms
 from frappe.utils import cstr
 
 
-class CSFKESMSCenter(Document):
+class CSFDOSMSCenter(Document):
     @frappe.whitelist()
     def create_receiver_list(self):
         rec, where_clause = "", ""
