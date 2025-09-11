@@ -9,6 +9,7 @@ from csf_do.csf_do.utils.qr_code_generator import build_qr_payload_from_xml, get
 from csf_do.csf_do.utils.field_validators import validate_encf, validate_rnc
 from csf_do.csf_do.utils.input_validator import validate_against_spec
 from csf_do.csf_do.utils.business_rules import validate_pre_send_basic
+from csf_do.csf_do.utils.dgii_errors import build_friendly_error_message
 
 
 class ECF(Document):
@@ -96,7 +97,8 @@ def _send_job(name: str, tipo: str, data: Dict | None, ambiente: str) -> None:
             frappe.db.commit()
             return
         except Exception as e:  # noqa: BLE001
-            last_error = str(e)
+            last_error = build_friendly_error_message(e) or str(e)
+            doc.errores = (doc.errores or "") + ("\n" + last_error)
             doc.logs = (doc.logs or "") + f"\nIntento {attempt}: {last_error}"
             doc.save(ignore_permissions=True)
             frappe.db.commit()
@@ -132,6 +134,11 @@ def _status_job(name: str, ambiente: str) -> None:
         estado = (resp or {}).get("estado") or doc.estado_dgii
         doc.estado_dgii = estado
         doc.last_response = frappe.as_json(resp or {})
+        # Mensaje amigable si Observado/Rechazado
+        if str(estado).lower() in ("observado", "rechazado"):
+            friendly = build_friendly_error_message(resp)
+            if friendly:
+                doc.errores = (doc.errores or "") + ("\n" + friendly)
         doc.save(ignore_permissions=True)
         frappe.db.commit()
     except Exception as e:  # noqa: BLE001
