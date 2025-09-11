@@ -29,4 +29,32 @@ def run() -> None:
         except Exception as e:  # noqa: BLE001
             frappe.logger().warning(f"Auto-consulta DGII fallo para {row['name']}: {e}")
 
+<<<<<<< Current (Your changes)
+=======
+    # Monitoreo básico: expiración de certificados digitales (si el Doctype existe)
+    try:
+        if frappe.db.table_exists("Digital Certificate"):
+            certs = frappe.get_all(
+                "Digital Certificate",
+                filters={"is_active": 1},
+                fields=["name", "valid_to"],
+            ) or []
+            from datetime import datetime, timedelta
+            now = datetime.now().date()
+            for c in certs:
+                vt = c.get("valid_to")
+                if vt:
+                    try:
+                        days = (vt - now).days  # type: ignore[operator]
+                        if days <= 30:
+                            frappe.log_error(
+                                title="Alerta: Certificado por expirar",
+                                message=f"Certificado {c['name']} expira en {days} días",
+                            )
+                    except Exception:
+                        pass
+    except Exception:
+        pass
+
+>>>>>>> Incoming (Background Agent changes)
 

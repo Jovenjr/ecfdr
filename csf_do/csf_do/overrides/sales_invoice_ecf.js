@@ -16,27 +16,38 @@ frappe.ui.form.on('Sales Invoice', {
             }
         });
 
-        // Send e-CF button
+        // Send e-CF button (desde Sales Invoice)
         frm.add_custom_button('Enviar e-CF', () => {
             frappe.prompt([
-                {label: 'Tipo e-CF', fieldname: 'tipo', fieldtype: 'Select', options: '31\n32\n33\n34\n41\n43\n44\n45\n46\n47', reqd: 1},
-                {label: 'Documento e-CF', fieldname: 'ecf_name', fieldtype: 'Link', options: 'e-CF', reqd: 1, default: frm.__ecf_name}
+                {label: 'Tipo e-CF', fieldname: 'tipo', fieldtype: 'Select', options: '31\n32\n33\n34\n41\n43\n44\n45\n46\n47', reqd: 1}
             ], (vals) => {
                 frappe.call({
-                    method: 'csf_do.csf_do.doctype.api.ecf_api.enviar_ecf',
-                    args: { name: vals.ecf_name, tipo: vals.tipo },
-                }).then(() => frappe.show_alert('Envío e-CF encolado'));
+                    method: 'csf_do.csf_do.doctype.api.ecf_api.enviar_ecf_desde_sales_invoice',
+                    args: { name: frm.doc.name, tipo: vals.tipo },
+                }).then(() => frappe.show_alert('Envío e-CF encolado desde Sales Invoice'));
             }, 'Enviar e-CF');
         }, 'e-CF');
 
-        // Consult status button
+        // Consult status button (desde Sales Invoice)
         frm.add_custom_button('Consultar Estado e-CF', () => {
-            const ecf_name = frm.__ecf_name;
-            if (!ecf_name) { frappe.msgprint('No hay e-CF vinculado.'); return; }
             frappe.call({
-                method: 'csf_do.csf_do.doctype.api.ecf_api.consultar_estado',
-                args: { name: ecf_name },
+                method: 'csf_do.csf_do.doctype.api.ecf_api.consultar_estado_desde_sales_invoice',
+                args: { name: frm.doc.name },
             }).then(() => frappe.show_alert('Consulta encolada'));
+        }, 'e-CF');
+
+        // Anular e-NCF
+        frm.add_custom_button(__('Anular e-NCF'), () => {
+            frappe.prompt([
+                { fieldname: 'motivo', fieldtype: 'Small Text', label: __('Motivo de Anulación'), reqd: 0 }
+            ], (vals) => {
+                frappe.call({
+                    method: 'csf_do.csf_do.doctype.api.ecf_api.anular_desde_sales_invoice',
+                    args: { name: frm.doc.name, motivo: vals.motivo },
+                }).then(() => {
+                    frappe.show_alert({ message: __('Solicitud de anulación enviada'), indicator: 'orange' });
+                });
+            }, __('Anular e-NCF'));
         }, 'e-CF');
     }
 });

@@ -24,22 +24,36 @@ def _load_from_frappe() -> Optional[Dict[str, str]]:
             # Intento como Single
             try:
                 doc = frappe.get_single("Digital Certificate")
-                p12_path = getattr(doc, "p12_path", None) or getattr(doc, "file_path", None)
+                # Soportar distintos esquemas de campos según el Doctype
+                is_active = getattr(doc, "is_active", None)
+                active = getattr(doc, "active", None)
+                activo = is_active if is_active is not None else (active if active is not None else 1)
+                # Priorizar ruta PKCS#12 si existe en cert_path o p12_path
+                p12_path = (
+                    getattr(doc, "p12_path", None)
+                    or getattr(doc, "cert_path", None)
+                    or getattr(doc, "file_path", None)
+                )
                 password = getattr(doc, "password", None)
-                activo = getattr(doc, "active", 1)
                 if activo and p12_path:
                     return {"p12_path": p12_path, "password": password or ""}
             except Exception:
                 # Intento como listado con campo activo
                 try:
+                    # Intento flexible: campos is_active/active y cert_path/p12_path/file_path
                     row = frappe.get_all(
                         "Digital Certificate",
+                        filters={"is_active": 1},
+                        fields=["name", "p12_path", "cert_path", "file_path", "password"],
+                        limit=1,
+                    ) or frappe.get_all(
+                        "Digital Certificate",
                         filters={"active": 1},
-                        fields=["name", "p12_path as p12_path", "file_path as file_path", "password"],
+                        fields=["name", "p12_path", "cert_path", "file_path", "password"],
                         limit=1,
                     )
                     if row:
-                        p12_path = row[0].get("p12_path") or row[0].get("file_path")
+                        p12_path = row[0].get("p12_path") or row[0].get("cert_path") or row[0].get("file_path")
                         password = row[0].get("password")
                         if p12_path:
                             return {"p12_path": p12_path, "password": password or ""}
