@@ -167,6 +167,7 @@ doc_events = {
 scheduler_events = {
     "hourly": [
         "csf_do.csf_do.scheduler.dgii_status_auto_consult.run",
+        # TODO: añadir monitores/alertas (expiración de certificados, estado servicios)
     ],
 }
 

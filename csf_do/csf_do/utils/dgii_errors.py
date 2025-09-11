@@ -3,11 +3,19 @@ from typing import Any, Dict, Optional
 
 
 _CODE_TO_MESSAGE = {
-    # Placeholders; ajustar cuando se conozcan códigos reales DGII
+    # Nota: estos códigos son ilustrativos y deben ajustarse a la tabla oficial DGII
     "0": "En Proceso",
     "1": "Aceptado",
-    "2": "Observado por DGII",
-    "3": "Rechazado por DGII",
+    "2": "Observado",
+    "3": "Rechazado",
+    "400": "Solicitud inválida",
+    "401": "No autorizado (token inválido/expirado)",
+    "403": "Prohibido (credenciales insuficientes)",
+    "404": "No encontrado",
+    "408": "Tiempo de espera excedido",
+    "422": "Validación fallida (estructura o reglas)",
+    "429": "Demasiadas solicitudes (rate limit)",
+    "500": "Error interno del servicio DGII",
 }
 
 

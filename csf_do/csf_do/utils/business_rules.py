@@ -106,4 +106,26 @@ def validate_pre_send_basic(data: Dict) -> List[str]:
 
     return errs
 
+
+def apply_norma_07_07_split(items: List[Dict]) -> List[Dict]:
+    """Aplica la división 90/10 (exento/gravado) cuando corresponda.
+
+    Esta implementación es conservadora y solo duplica líneas marcadas con un flag 'NG07_07'.
+    """
+    out: List[Dict] = []
+    for it in items or []:
+        if str(it.get("NG07_07") or "").lower() in ("1", "true", "yes"):
+            monto = _to_decimal(it.get("MontoItem"))
+            if monto <= 0:
+                out.append(it)
+                continue
+            exento = (monto * Decimal("0.90")).quantize(Decimal("0.01"))
+            gravado = (monto - exento).quantize(Decimal("0.01"))
+            base = {k: v for k, v in it.items() if k not in ("MontoItem", "IndicadorFacturacion", "NumeroLinea")}
+            out.append({"NumeroLinea": f"{it.get('NumeroLinea')}A", "IndicadorFacturacion": "0", "MontoItem": f"{exento:.2f}", **base})
+            out.append({"NumeroLinea": f"{it.get('NumeroLinea')}B", "IndicadorFacturacion": "1", "MontoItem": f"{gravado:.2f}", **base})
+        else:
+            out.append(it)
+    return out
+
  
