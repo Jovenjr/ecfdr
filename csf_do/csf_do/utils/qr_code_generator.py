@@ -35,6 +35,20 @@ def bytes_to_base64_string(data: bytes) -> str:
 	return b64encode(data).decode("utf-8")
 
 
+def _resolve_qr_base_url(consulta_base_url: Optional[str]) -> Optional[str]:
+    if consulta_base_url:
+        return consulta_base_url
+    try:
+        import frappe  # type: ignore
+        if frappe.db.table_exists("DGII QR Configuration"):
+            doc = frappe.get_single("DGII QR Configuration")
+            # Fallback simple
+            return doc.get("prod_qr_base") or doc.get("cert_qr_base") or doc.get("precert_qr_base") or None
+    except Exception:
+        return consulta_base_url
+    return consulta_base_url
+
+
 def build_qr_payload_from_xml(signed_xml: str, codigo_seguridad: str, *, consulta_base_url: Optional[str] = None) -> Dict[str, str]:
 	"""Extrae campos necesarios del XML firmado (RNCEmisor, eNCF, MontoTotal, FechaEmision)
 	para construir el payload del QR. Retorna un dict con 'texto' (para el QR) y 'url' (si se armó).
@@ -62,8 +76,9 @@ def build_qr_payload_from_xml(signed_xml: str, codigo_seguridad: str, *, consult
 	# Formato de texto QR (ajustable a pauta DGII; aquí usamos pares clave=valor separados por '|')
 	texto = f"RNC={rnc_emisor}|eNCF={e_ncf}|FechaEmision={fecha_emision}|MontoTotal={monto_total}|CodigoSeguridad={codigo_seguridad}"
 	url = None
-	if consulta_base_url:
-		sep = "&" if "?" in consulta_base_url else "?"
-		url = f"{consulta_base_url}{sep}rnc={rnc_emisor}&encf={e_ncf}&cs={codigo_seguridad}"
+	base = _resolve_qr_base_url(consulta_base_url)
+	if base:
+		sep = "&" if "?" in base else "?"
+		url = f"{base}{sep}rnc={rnc_emisor}&encf={e_ncf}&cs={codigo_seguridad}"
 	return {"texto": texto, "url": url}
 

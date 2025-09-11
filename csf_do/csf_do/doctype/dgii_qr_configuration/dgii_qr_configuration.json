@@ -1,0 +1,32 @@
+{
+ "actions": [],
+ "creation": "2025-09-09 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 0,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_urls",
+  "precert_qr_base",
+  "cert_qr_base",
+  "prod_qr_base"
+ ],
+ "fields": [
+  {"fieldname": "section_urls", "fieldtype": "Section Break", "label": "URLs de Consulta QR"},
+  {"fieldname": "precert_qr_base", "fieldtype": "Data", "label": "Pre-Cert QR Base URL", "description": "e.g. https://precert.dgii/consulta"},
+  {"fieldname": "cert_qr_base", "fieldtype": "Data", "label": "Certificación QR Base URL"},
+  {"fieldname": "prod_qr_base", "fieldtype": "Data", "label": "Producción QR Base URL"}
+ ],
+ "is_single": 1,
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2025-09-09 00:00:00.000000",
+ "module": "CSF DO",
+ "name": "DGII QR Configuration",
+ "owner": "Administrator",
+ "permissions": [
+  {"read": 1, "write": 1, "create": 1, "delete": 1, "submit": 0, "cancel": 0, "amend": 0, "export": 1, "print": 1, "report": 1, "share": 1, "email": 1, "role": "System Manager"}
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}
+
