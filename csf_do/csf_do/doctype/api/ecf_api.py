@@ -3,6 +3,7 @@ from typing import Dict, Any, Optional, Tuple, List
 from frappe.rate_limiter import rate_limit
 
 import frappe
+from csf_do.csf_do.utils.ecf_service import enviar_rfce32_config, consultar_resumen_rfce32_config
 
 
 @frappe.whitelist()
@@ -237,5 +238,30 @@ def anular_desde_sales_invoice(name: str, motivo: str | None = None) -> Dict[str
         name=row[0]["name"],
         motivo=motivo,
     )
+
+
+@frappe.whitelist()
+@rate_limit(key="user", limit=20, seconds=60)
+def enviar_rfce_desde_sales_invoice(name: str, ambiente: str = "custom") -> Dict[str, Any]:
+    si = frappe.get_doc("Sales Invoice", name)
+    outstanding = float(si.get("outstanding_amount") or 0)
+    tipo_pago = "1" if abs(outstanding) < 0.01 else "2"
+    data = {
+        "encabezado": {
+            "Version": "1.0",
+            "IdDoc": {"TipoeCF": "32", "eNCF": si.get("__encf") or "E320000000001", "TipoIngresos": "1", "TipoPago": tipo_pago},
+            "Emisor": {"RNCEmisor": frappe.get_cached_value("Company", si.company, "tax_id"), "RazonSocialEmisor": si.company, "FechaEmision": str(si.posting_date)},
+            "Comprador": {"RNCComprador": frappe.get_cached_value("Customer", si.customer, "tax_id") if si.customer else None, "RazonSocialComprador": si.get("customer_name")},
+            "Totales": {"MontoTotal": f"{float(si.get('grand_total') or si.get('base_grand_total') or 0):.2f}"},
+        },
+        "CodigoSeguridadeCF": si.get("__codigo_seguridad") or "ABCDEF",
+    }
+    return enviar_rfce32_config(data, ambiente=ambiente)
+
+
+@frappe.whitelist()
+@rate_limit(key="user", limit=30, seconds=60)
+def consultar_resumen_rfce(ambiente: str = "custom") -> Dict[str, Any]:
+    return consultar_resumen_rfce32_config(ambiente=ambiente)
 
  

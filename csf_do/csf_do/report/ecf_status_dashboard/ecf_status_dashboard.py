@@ -24,11 +24,27 @@ def execute(filters=None):
     if not dt:
         return columns, []
 
-    rows = frappe.get_all(
-        dt,
-        fields=["creation", "tipo_ecf", "ambiente", "estado_dgii", "track_id", "signature_hash"],
-        order_by="creation desc",
-        limit=200,
+    filters = filters or {}
+    conditions = []
+    values = {}
+    if filters.get("from_date"):
+        conditions.append("creation >= %(from_date)s")
+        values["from_date"] = filters["from_date"]
+    if filters.get("to_date"):
+        conditions.append("creation <= %(to_date)s")
+        values["to_date"] = filters["to_date"]
+    if filters.get("tipo_ecf"):
+        conditions.append("tipo_ecf = %(tipo_ecf)s")
+        values["tipo_ecf"] = filters["tipo_ecf"]
+    if filters.get("estado_dgii"):
+        conditions.append("estado_dgii = %(estado_dgii)s")
+        values["estado_dgii"] = filters["estado_dgii"]
+
+    where = (" where " + " and ".join(conditions)) if conditions else ""
+    rows = frappe.db.sql(
+        f"select creation, tipo_ecf, ambiente, estado_dgii, track_id, signature_hash from `tab{dt}` {where} order by creation desc limit 200",
+        values,
+        as_dict=True,
     )
     return columns, rows
 

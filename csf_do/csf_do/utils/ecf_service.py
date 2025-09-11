@@ -356,6 +356,52 @@ def anular_encf(
     return resp
 
 
+def enviar_rfce32_config(
+    data: Dict,
+    *,
+    ambiente: str = "custom",
+    p12_path: str | None = None,
+    p12_password: str | None = None,
+) -> Dict:
+    """Wrapper que usa `DGII Configuration` y `Digital Certificate` para enviar RFCE."""
+    cfg = get_active_dgii_config(ambiente=ambiente)
+    if not cfg or not cfg.get("base_url"):
+        raise RuntimeError("No se encontró configuración DGII válida para RFCE")
+    if not p12_path:
+        try:
+            cert_info = get_active_certificate()
+            if cert_info and cert_info.get("p12_path"):
+                p12_path = cert_info.get("p12_path")
+                if p12_password is None:
+                    p12_password = cert_info.get("password") or None
+        except Exception:
+            pass
+    return enviar_rfce32(
+        data,
+        base_url=str(cfg["base_url"]),
+        cert_path="",
+        key_path="",
+        p12_path=p12_path,
+        p12_password=p12_password,
+        verify_ssl=bool(cfg.get("verify_ssl", True)),
+        ttl_token=int(cfg.get("ttl_token", 3600)),
+    )
+
+
+def consultar_resumen_rfce32_config(
+    *,
+    ambiente: str = "custom",
+) -> Dict:
+    cfg = get_active_dgii_config(ambiente=ambiente)
+    if not cfg or not cfg.get("base_url"):
+        raise RuntimeError("No se encontró configuración DGII válida para consulta RFCE")
+    return consultar_resumen_rfce32(
+        base_url=str(cfg["base_url"]),
+        verify_ssl=bool(cfg.get("verify_ssl", True)),
+        ttl_token=int(cfg.get("ttl_token", 3600)),
+    )
+
+
 def recepcion_aprobacion_comercial(
     data_xml: str,
     *,
