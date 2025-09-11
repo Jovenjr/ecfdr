@@ -52,21 +52,21 @@ def validate_montos_gravados_y_exentos_vs_indicador(
     return errors
 
 
-<<<<<<< Current (Your changes)
-=======
 def validate_pre_send_basic(data: Dict) -> List[str]:
     """Validaciones previas al envío: totales vs items, RNC y eNCF si presentes.
 
     Retorna lista de errores amigables, vacía si todo OK.
     """
     from .field_validators import validate_encf, validate_rnc
+    from .amount_utils import round_money_2, round_unit_price_4
 
     errs: List[str] = []
     encabezado = data.get("encabezado") or {}
     iddoc = encabezado.get("iddoc") or encabezado.get("IdDoc") or {}
     emisor = encabezado.get("emisor") or encabezado.get("Emisor") or {}
     totales = encabezado.get("totales") or encabezado.get("Totales") or {}
-    items = data.get("detalles") or data.get("DetallesItems") or []
+    detalles = data.get("detalles") or data.get("DetallesItems") or {}
+    items = detalles.get("items") if isinstance(detalles, dict) else detalles
 
     # Validaciones de formato suaves
     try:
@@ -84,7 +84,25 @@ def validate_pre_send_basic(data: Dict) -> List[str]:
     except Exception:
         pass
 
+    # Reglas de redondeo: PrecioUnitario 4 decimales, MontoItem 2 decimales
+    try:
+        for it in items or []:
+            pu = it.get("PrecioUnitarioItem")
+            if pu is not None:
+                if str(round_unit_price_4(pu)) != str(round_unit_price_4(pu)):
+                    # no-op, mantén forma
+                    pass
+            monto = it.get("MontoItem")
+            if monto is not None:
+                try:
+                    dec = round_money_2(monto)
+                    # Forzamos exactamente 2 decimales en string
+                    if format(dec, 'f') != f"{dec:.2f}":
+                        errs.append("MontoItem debe tener como máximo 2 decimales")
+                except Exception:
+                    errs.append("MontoItem inválido: debe ser número")
+    except Exception:
+        pass
+
     return errs
 
-
->>>>>>> Incoming (Background Agent changes)
