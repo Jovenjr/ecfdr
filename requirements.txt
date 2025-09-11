@@ -2,3 +2,6 @@ frappe
 erpnext
 qrcode==7.4.2
 lxml>=4.9
+signxml>=3.2.0
+cryptography>=42.0.0
+requests>=2.31.0

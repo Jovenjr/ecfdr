@@ -20,6 +20,13 @@ from typing import Dict, Tuple, List, Optional
 from .ecf43_builder import build_and_validate_ecf43
 from .ecf31_builder import build_and_validate_ecf31
 from .ecf32_builder import build_and_validate_ecf32
+from .ecf33_builder import build_and_validate_ecf33
+from .ecf34_builder import build_and_validate_ecf34
+from .ecf41_builder import build_and_validate_ecf41
+from .ecf44_builder import build_and_validate_ecf44
+from .ecf45_builder import build_and_validate_ecf45
+from .ecf46_builder import build_and_validate_ecf46
+from .ecf47_builder import build_and_validate_ecf47
 from .signing import sign_xml, SignatureResult
 from . import xml_signer
 from .dgii_client import DGIIClient, DGIIEnv
@@ -58,14 +65,29 @@ def enviar_ecf(
     Retorna ECFResult con el estado preliminar y un TrackId stub.
     """
     # 1) Construcción + Validación XSD por tipo
-    if str(tipo) == "43":
+    tipo_str = str(tipo)
+    if tipo_str == "43":
         xml, ok, errors = build_and_validate_ecf43(data)
-    elif str(tipo) == "31":
+    elif tipo_str == "31":
         xml, ok, errors = build_and_validate_ecf31(data)
-    elif str(tipo) == "32":
+    elif tipo_str == "32":
         xml, ok, errors = build_and_validate_ecf32(data)
+    elif tipo_str == "33":
+        xml, ok, errors = build_and_validate_ecf33(data)
+    elif tipo_str == "34":
+        xml, ok, errors = build_and_validate_ecf34(data)
+    elif tipo_str == "41":
+        xml, ok, errors = build_and_validate_ecf41(data)
+    elif tipo_str == "44":
+        xml, ok, errors = build_and_validate_ecf44(data)
+    elif tipo_str == "45":
+        xml, ok, errors = build_and_validate_ecf45(data)
+    elif tipo_str == "46":
+        xml, ok, errors = build_and_validate_ecf46(data)
+    elif tipo_str == "47":
+        xml, ok, errors = build_and_validate_ecf47(data)
     else:
-        raise NotImplementedError(f"Tipo e-CF no soportado aún en ecf_service: {tipo}")
+        raise NotImplementedError(f"Tipo e-CF no soportado en ecf_service: {tipo}")
     if not ok:
         # Auditoría best-effort del fallo de validación
         try:

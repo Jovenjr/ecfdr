@@ -37,8 +37,7 @@ def anular_encf(name: str, motivo: str | None = None) -> Dict[str, Any]:
     )
 
 
-<<<<<<< Current (Your changes)
-=======
+ 
 
 # ---- NUEVOS ENDPOINTS: Sales Invoice -> e-CF ----
 
@@ -227,4 +226,4 @@ def anular_desde_sales_invoice(name: str, motivo: str | None = None) -> Dict[str
         motivo=motivo,
     )
 
->>>>>>> Incoming (Background Agent changes)
+ 
