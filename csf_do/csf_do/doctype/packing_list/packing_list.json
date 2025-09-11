@@ -1,4 +1,4 @@
-{
+﻿{
  "actions": [],
  "allow_events_in_timeline": 1,
  "allow_rename": 1,
@@ -169,7 +169,7 @@
  "links": [],
  "modified": "2024-08-16 11:12:46.270852",
  "modified_by": "Administrator",
- "module": "CSF KE",
+ "module": "CSF DO",
  "name": "Packing List",
  "owner": "Administrator",
  "permissions": [

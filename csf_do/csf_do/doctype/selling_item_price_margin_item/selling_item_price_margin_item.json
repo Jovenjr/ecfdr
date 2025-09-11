@@ -1,4 +1,4 @@
-{
+﻿{
  "actions": [],
  "allow_rename": 1,
  "creation": "2024-12-12 17:08:58.595321",
@@ -63,7 +63,7 @@
  "links": [],
  "modified": "2024-12-16 16:21:53.264727",
  "modified_by": "Administrator",
- "module": "CSF KE",
+ "module": "CSF DO",
  "name": "Selling Item Price Margin Item",
  "owner": "Administrator",
  "permissions": [],

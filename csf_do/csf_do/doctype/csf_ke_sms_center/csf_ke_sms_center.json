@@ -1,4 +1,4 @@
-{
+﻿{
   "actions": [],
   "creation": "2023-07-24 09:40:14.157698",
   "default_view": "List",
@@ -135,7 +135,7 @@
   "links": [],
   "modified": "2023-07-26 16:55:28.012739",
   "modified_by": "Administrator",
-  "module": "CSF KE",
+  "module": "CSF DO",
   "name": "CSF KE SMS Center",
   "owner": "Administrator",
   "permissions": [

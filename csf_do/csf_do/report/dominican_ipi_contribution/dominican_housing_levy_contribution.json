@@ -1,4 +1,4 @@
-{
+﻿{
  "add_total_row": 1,
  "add_translate_data": 0,
  "columns": [],
@@ -13,7 +13,7 @@
  "letterhead": null,
  "modified": "2025-07-02 11:53:03.383937",
  "modified_by": "Administrator",
- "module": "CSF KE",
+ "module": "CSF DO",
  "name": "Dominican Republic IPI Contribution",
  "owner": "Administrator",
  "prepared_report": 0,

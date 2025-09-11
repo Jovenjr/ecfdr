@@ -1,4 +1,4 @@
-{
+﻿{
   "add_total_row": 1,
   "add_translate_data": 0,
   "columns": [],
@@ -13,7 +13,7 @@
   "letterhead": null,
   "modified": "2025-07-28 12:22:49.755683",
   "modified_by": "Administrator",
-  "module": "CSF KE",
+  "module": "CSF DO",
   "name": "Payment Period Based On Invoice Date Enhanced",
   "owner": "Administrator",
   "prepared_report": 1,

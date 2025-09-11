@@ -1,4 +1,4 @@
-{
+﻿{
  "actions": [],
  "allow_rename": 1,
  "autoname": "field:title",
@@ -20,7 +20,7 @@
  "links": [],
  "modified": "2024-11-16 17:43:10.666679",
  "modified_by": "Administrator",
- "module": "CSF KE",
+ "module": "CSF DO",
  "name": "Relationship",
  "naming_rule": "By fieldname",
  "owner": "Administrator",

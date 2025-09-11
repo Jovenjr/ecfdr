@@ -1,4 +1,4 @@
-{
+﻿{
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
@@ -34,7 +34,7 @@
  "links": [],
  "modified": "2023-08-23 11:04:53.786295",
  "modified_by": "Administrator",
- "module": "CSF KE",
+ "module": "CSF DO",
  "name": "Employee Separation Type",
  "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",

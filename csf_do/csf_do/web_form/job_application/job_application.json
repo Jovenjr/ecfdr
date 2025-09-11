@@ -1,4 +1,4 @@
-{
+﻿{
  "allow_comments": 1,
  "allow_delete": 0,
  "allow_edit": 0,
@@ -21,7 +21,7 @@
  "max_attachment_size": 0,
  "modified": "2023-11-28 12:23:42.814798",
  "modified_by": "Administrator",
- "module": "CSF KE",
+ "module": "CSF DO",
  "name": "job-application",
  "owner": "Administrator",
  "published": 1,

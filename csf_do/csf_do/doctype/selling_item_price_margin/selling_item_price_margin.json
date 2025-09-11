@@ -1,4 +1,4 @@
-{
+﻿{
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
@@ -185,7 +185,7 @@
  "links": [],
  "modified": "2024-12-18 15:33:13.842299",
  "modified_by": "Administrator",
- "module": "CSF KE",
+ "module": "CSF DO",
  "name": "Selling Item Price Margin",
  "naming_rule": "Expression",
  "owner": "Administrator",

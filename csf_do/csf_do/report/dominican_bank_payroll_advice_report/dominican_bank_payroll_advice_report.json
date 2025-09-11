@@ -1,4 +1,4 @@
-{
+﻿{
  "add_total_row": 1,
  "columns": [],
  "creation": "2021-08-31 19:12:45.314328",
@@ -12,7 +12,7 @@
  "letter_head": "Standard",
  "modified": "2022-05-12 09:18:44.563186",
  "modified_by": "Administrator",
- "module": "CSF KE",
+ "module": "CSF DO",
  "name": "Dominican Republic Bank Payroll Advice Report",
  "owner": "Administrator",
  "prepared_report": 0,

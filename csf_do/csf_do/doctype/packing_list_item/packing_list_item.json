@@ -1,4 +1,4 @@
-{
+﻿{
  "actions": [],
  "creation": "2020-02-21 22:36:56.533645",
  "doctype": "DocType",
@@ -111,7 +111,7 @@
  "links": [],
  "modified": "2021-02-11 21:36:07.900286",
  "modified_by": "Administrator",
- "module": "CSF KE",
+ "module": "CSF DO",
  "name": "Packing List Item",
  "owner": "Administrator",
  "permissions": [],

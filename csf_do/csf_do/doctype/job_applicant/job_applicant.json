@@ -1,4 +1,4 @@
-{
+﻿{
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
@@ -196,7 +196,7 @@
  "links": [],
  "modified": "2023-11-28 12:58:14.010616",
  "modified_by": "Administrator",
- "module": "CSF KE",
+ "module": "CSF DO",
  "name": "Job Applicant",
  "naming_rule": "Expression (old style)",
  "owner": "Administrator",

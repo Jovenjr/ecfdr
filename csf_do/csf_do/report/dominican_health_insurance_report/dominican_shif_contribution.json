@@ -1,4 +1,4 @@
-{
+﻿{
  "add_total_row": 1,
  "add_translate_data": 0,
  "columns": [],
@@ -13,7 +13,7 @@
  "letterhead": null,
  "modified": "2025-07-01 15:33:36.818485",
  "modified_by": "Administrator",
- "module": "CSF KE",
+ "module": "CSF DO",
  "name": "Dominican Republic Health Insurance Contribution",
  "owner": "Administrator",
  "prepared_report": 0,

@@ -1,4 +1,4 @@
-{
+﻿{
  "actions": [],
  "autoname": "hash",
  "creation": "2020-02-21 22:37:34.448209",
@@ -110,7 +110,7 @@
  "links": [],
  "modified": "2021-02-11 21:52:28.628214",
  "modified_by": "Administrator",
- "module": "CSF KE",
+ "module": "CSF DO",
  "name": "Packing List Sales Invoice",
  "owner": "Administrator",
  "permissions": [],
