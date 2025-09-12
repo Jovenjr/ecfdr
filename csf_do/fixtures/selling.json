@@ -1,4 +1,6 @@
-{
+[
+ {
+  "doctype": "Workspace",
   "charts": [
     {
       "chart_name": "Sales Order Trends",
@@ -9,7 +11,6 @@
   "creation": "2020-01-28 11:49:12.092882",
   "custom_blocks": [],
   "docstatus": 0,
-  "doctype": "Workspace",
   "type": "Module",
   "for_user": "",
   "hide_custom": 0,
@@ -710,4 +711,5 @@
     }
   ],
   "title": "Selling"
-}
+ }
+]
