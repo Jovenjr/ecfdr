@@ -4,6 +4,7 @@ import io
 import csv
 import frappe
 from frappe import _
+from csf_do.csf_do.utils.field_validators import validate_rnc, validate_encf
 
 
 def execute(filters=None) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
@@ -93,30 +94,74 @@ def execute(filters=None) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
 
 @frappe.whitelist()
 def export_csv(filters=None) -> Dict[str, Any]:
-    """Genera un CSV del 607 con las columnas actuales del reporte y devuelve un File público."""
+    """Genera un CSV del 607 con layout consistente DGII y validaciones básicas."""
     cols, rows = execute(filters)
-    # Orden de columnas según definición
-    fieldnames = [c.get("fieldname") for c in cols]
-    headers = [c.get("label") for c in cols]
+
+    def _to_yyyymmdd(d: Any) -> str:
+        if not d:
+            return ""
+        try:
+            return frappe.utils.formatdate(d, "yyyyMMdd")
+        except Exception:
+            return ""
+
+    def _infer_id_type(rnc: str) -> str:
+        # 1=RNC (9), 2=Cédula (11), 3=Pasaporte/Extranjero (otro)
+        s = (rnc or "").strip()
+        if s.isdigit() and len(s) == 9:
+            return "1"
+        if s.isdigit() and len(s) == 11:
+            return "2"
+        return "3"
+
+    def _num(v: Any) -> str:
+        try:
+            return f"{float(v or 0):.2f}"
+        except Exception:
+            return "0.00"
+
+    # Layout propuesto: [TipoId, RNC/Cedula, eNCF, Fecha, Monto, ITBIS]
+    headers = [
+        "TipoId",
+        "RncCedula",
+        "eNCF",
+        "Fecha",
+        "Monto",
+        "ITBIS",
+    ]
 
     out = io.StringIO()
     writer = csv.writer(out)
     writer.writerow(headers)
+
     for r in rows:
-        writer.writerow([r.get(fn) for fn in fieldnames])
+        rnc = r.get("rnc") or ""
+        encf = r.get("encf") or ""
+        fecha = r.get("fecha")
+        monto = r.get("monto")
+        itbis = r.get("itbis")
+
+        # Validaciones
+        validate_rnc(rnc, field_name="RNC/Cédula")
+        if encf:
+            validate_encf(encf)
+
+        writer.writerow([
+            _infer_id_type(rnc),
+            rnc,
+            encf,
+            _to_yyyymmdd(fecha),
+            _num(monto),
+            _num(itbis),
+        ])
+
     content = out.getvalue()
 
     f = frappe._dict(filters or {})
     # Periodo YYYYMM si hay from_date; fallback a hoy
-    period = None
     try:
-        if f.from_date:
-            period = frappe.utils.formatdate(f.from_date, "yyyyMM")
-        elif f.to_date:
-            period = frappe.utils.formatdate(f.to_date, "yyyyMM")
+        period = frappe.utils.formatdate(f.get("from_date") or f.get("to_date") or frappe.utils.nowdate(), "yyyyMM")
     except Exception:
-        period = None
-    if not period:
         period = frappe.utils.formatdate(frappe.utils.nowdate(), "yyyyMM")
 
     company_abbr = (f.company or "").replace(" ", "_") or "COMPANY"
