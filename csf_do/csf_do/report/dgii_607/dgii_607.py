@@ -215,9 +215,4 @@ def export_csv(filters=None) -> Dict[str, Any]:
         "content": content,
         "is_private": 0,
     }).insert(ignore_permissions=True)
-
-<<<<<<< Current (Your changes)
-    return columns, data
-=======
     return {"file_url": filedoc.file_url, "file_name": filename}
->>>>>>> Incoming (Background Agent changes)
