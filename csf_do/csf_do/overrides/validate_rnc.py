@@ -4,6 +4,10 @@ from frappe.model.document import Document
 
 
 def validate_rnc(doctype: Document, customer: Document) -> None:
+    # Permitir omisión bajo flag explícito
+    if getattr(frappe.flags, "ignore_customer_rnc_validation", False):
+        return
+
     is_rnc_mandatory = frappe.get_value(
         "Customer Group", customer.customer_group, "custom_is_rnc_mandatory_in"
     )
