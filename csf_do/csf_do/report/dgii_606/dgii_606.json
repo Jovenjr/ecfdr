@@ -5,7 +5,7 @@
  "disabled": 0,
  "doctype": "Report",
  "is_standard": "Yes",
- "json": "{}",
+ "json": "{\n  \"filters\": [\n    {\n      \"fieldname\": \"company\",\n      \"label\": \"Company\",\n      \"fieldtype\": \"Link\",\n      \"options\": \"Company\"\n    },\n    {\n      \"fieldname\": \"from_date\",\n      \"label\": \"From Date\",\n      \"fieldtype\": \"Date\"\n    },\n    {\n      \"fieldname\": \"to_date\",\n      \"label\": \"To Date\",\n      \"fieldtype\": \"Date\"\n    }\n  ]\n}",
  "letter_head": "",
  "modified": "2025-09-12 00:00:00",
  "module": "CSF DO",

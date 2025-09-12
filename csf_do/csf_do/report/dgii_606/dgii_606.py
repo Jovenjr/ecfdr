@@ -1,5 +1,7 @@
 from __future__ import annotations
 from typing import List, Tuple, Dict, Any
+import io
+import csv
 import frappe
 from frappe import _
 
@@ -88,3 +90,44 @@ def execute(filters=None) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
         row["itbis"] = calc_itbis if calc_itbis > 0 else diff_itbis
 
     return columns, data
+
+
+@frappe.whitelist()
+def export_csv(filters=None) -> Dict[str, Any]:
+    """Genera un CSV del 606 con las columnas actuales del reporte y devuelve un File público."""
+    cols, rows = execute(filters)
+    # Orden de columnas según definición
+    fieldnames = [c.get("fieldname") for c in cols]
+    headers = [c.get("label") for c in cols]
+
+    out = io.StringIO()
+    writer = csv.writer(out)
+    writer.writerow(headers)
+    for r in rows:
+        writer.writerow([r.get(fn) for fn in fieldnames])
+    content = out.getvalue()
+
+    f = frappe._dict(filters or {})
+    # Periodo YYYYMM si hay from_date; fallback a hoy
+    period = None
+    try:
+        if f.from_date:
+            period = frappe.utils.formatdate(f.from_date, "yyyyMM")
+        elif f.to_date:
+            period = frappe.utils.formatdate(f.to_date, "yyyyMM")
+    except Exception:
+        period = None
+    if not period:
+        period = frappe.utils.formatdate(frappe.utils.nowdate(), "yyyyMM")
+
+    company_abbr = (f.company or "").replace(" ", "_") or "COMPANY"
+    filename = f"DGII_606_{company_abbr}_{period}.csv"
+
+    filedoc = frappe.get_doc({
+        "doctype": "File",
+        "file_name": filename,
+        "content": content,
+        "is_private": 0,
+    }).insert(ignore_permissions=True)
+
+    return {"file_url": filedoc.file_url, "file_name": filename}
