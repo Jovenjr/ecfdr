@@ -165,9 +165,12 @@ doc_events = {
 # ---------------
 
 scheduler_events = {
-    "hourly": [
-        "csf_do.csf_do.scheduler.dgii_status_auto_consult.run",
-    ],
+    "cron": {
+        # cada 10 minutos
+        "*/10 * * * *": [
+            "csf_do.csf_do.tasks.poll_ecf_statuses",
+        ]
+    }
 }
 
 
