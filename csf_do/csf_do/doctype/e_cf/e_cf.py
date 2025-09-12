@@ -180,18 +180,6 @@ def anular(name: str, motivo: str | None = None) -> Dict:
     doc.last_response = frappe.as_json(resp or {})
     doc.save(ignore_permissions=True)
     frappe.db.commit()
-<<<<<<< Current (Your changes)
-<<<<<<< Current (Your changes)
-<<<<<<< Current (Your changes)
-    return {"status": "ok", "estado": doc.estado_dgii}
-=======
     return {"status": "ok", "estado": doc.estado_dgii, "track_id": resp.get("track_id")}
->>>>>>> Incoming (Background Agent changes)
-=======
-    return {"status": "ok", "estado": doc.estado_dgii, "track_id": resp.get("track_id")}
->>>>>>> Incoming (Background Agent changes)
-=======
-    return {"status": "ok", "estado": doc.estado_dgii, "track_id": resp.get("track_id")}
->>>>>>> Incoming (Background Agent changes)
 
 
