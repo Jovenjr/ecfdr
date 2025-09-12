@@ -1,9 +1,27 @@
 {
- "report_name": "e-CF Status Dashboard",
+ "add_total_row": 0,
+ "creation": "2025-09-12 00:00:00",
+ "disable_prepared_report": 0,
+ "disabled": 0,
  "doctype": "Report",
- "ref_doctype": "e-CF",
- "report_type": "Script Report",
  "is_standard": "Yes",
- "module": "CSF DO"
+ "json": "{}",
+ "letter_head": "",
+ "modified": "2025-09-12 00:00:00",
+ "module": "CSF DO",
+ "name": "ECF Status Dashboard",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "e-CF",
+ "report_name": "ECF Status Dashboard",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Administrador e-CF"
+  }
+ ]
 }
 
