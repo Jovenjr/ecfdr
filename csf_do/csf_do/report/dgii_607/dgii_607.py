@@ -94,7 +94,7 @@ def execute(filters=None) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
 
 @frappe.whitelist()
 def export_csv(filters=None) -> Dict[str, Any]:
-    """Genera un CSV del 607 con layout consistente DGII y validaciones básicas."""
+    """Genera un CSV del 607 con layout extendido y validaciones básicas."""
     cols, rows = execute(filters)
 
     def _to_yyyymmdd(d: Any) -> str:
@@ -120,19 +120,39 @@ def export_csv(filters=None) -> Dict[str, Any]:
         except Exception:
             return "0.00"
 
-    # Layout propuesto: [TipoId, RNC/Cedula, eNCF, Fecha, Monto, ITBIS]
+    # Layout extendido propuesto DGII: incluir NCF modificado, propina, forma de pago e indicador de anulación
     headers = [
         "TipoId",
         "RncCedula",
-        "eNCF",
-        "Fecha",
-        "Monto",
-        "ITBIS",
+        "NCF",
+        "NCFModificado",
+        "FechaComprobante",
+        "MontoFacturado",
+        "ITBISFacturado",
+        "PropinaLegal",
+        "FormaPago",
+        "IndicadorAnulacion",
     ]
 
     out = io.StringIO()
     writer = csv.writer(out)
     writer.writerow(headers)
+
+    # Pre-cargar mapa SI -> datos necesarios (outstanding, is_return, return_against)
+    si_names = [r.get("si_name") for r in rows if r.get("si_name")]
+    extra_by_si: Dict[str, Dict[str, Any]] = {}
+    if si_names:
+        si_extras = frappe.get_all(
+            "Sales Invoice",
+            filters={"name": ["in", si_names]},
+            fields=["name", "outstanding_amount", "is_return", "return_against", "docstatus"],
+        )
+        extra_by_si = {x["name"]: x for x in si_extras}
+
+    # Para NCF modificado, buscar e-CF del documento original si aplica
+    def _get_encf_for_si(si_name: str) -> str:
+        row = frappe.get_all("e-CF", filters={"sales_invoice": si_name}, fields=["encf"], limit=1)
+        return (row[0]["encf"] if row and row[0].get("encf") else "")
 
     for r in rows:
         rnc = r.get("rnc") or ""
@@ -140,19 +160,41 @@ def export_csv(filters=None) -> Dict[str, Any]:
         fecha = r.get("fecha")
         monto = r.get("monto")
         itbis = r.get("itbis")
+        si_name = r.get("si_name")
 
-        # Validaciones
+        # Validaciones base
         validate_rnc(rnc, field_name="RNC/Cédula")
         if encf:
             validate_encf(encf)
+
+        ex = extra_by_si.get(si_name, {})
+        is_return = bool(ex.get("is_return"))
+        return_against = ex.get("return_against")
+        indicador_anulacion = "1" if int(ex.get("docstatus") or 1) == 2 else "0"
+
+        ncf_mod = ""
+        if is_return and return_against:
+            ncf_mod = _get_encf_for_si(str(return_against)) or str(return_against)
+
+        forma_pago = "1"
+        try:
+            forma_pago = "1" if abs(float(ex.get("outstanding_amount") or 0)) < 0.01 else "2"
+        except Exception:
+            forma_pago = "1"
+
+        propina = "0.00"  # no distinguimos propina legal aquí
 
         writer.writerow([
             _infer_id_type(rnc),
             rnc,
             encf,
+            ncf_mod,
             _to_yyyymmdd(fecha),
             _num(monto),
             _num(itbis),
+            propina,
+            forma_pago,
+            indicador_anulacion,
         ])
 
     content = out.getvalue()

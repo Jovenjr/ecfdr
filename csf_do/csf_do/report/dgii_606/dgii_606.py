@@ -95,7 +95,7 @@ def execute(filters=None) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
 
 @frappe.whitelist()
 def export_csv(filters=None) -> Dict[str, Any]:
-    """Genera un CSV del 606 con layout consistente DGII y validaciones básicas."""
+    """Genera un CSV del 606 con layout extendido y validaciones básicas."""
     cols, rows = execute(filters)
 
     def _to_yyyymmdd(d: Any) -> str:
@@ -121,19 +121,37 @@ def export_csv(filters=None) -> Dict[str, Any]:
         except Exception:
             return "0.00"
 
-    # Layout propuesto: [TipoId, RNC/Cedula, NCF, Fecha, Monto, ITBIS]
+    # Layout extendido propuesto DGII: incluir NCF modificado, tipo de pago e indicador de anulación
     headers = [
         "TipoId",
         "RncCedula",
         "NCF",
-        "Fecha",
-        "Monto",
-        "ITBIS",
+        "NCFModificado",
+        "FechaComprobante",
+        "MontoFacturado",
+        "ITBISFacturado",
+        "FormaPago",
+        "IndicadorAnulacion",
     ]
 
     out = io.StringIO()
     writer = csv.writer(out)
     writer.writerow(headers)
+
+    # Pre-cargar info complementaria de PI
+    pi_names = [r.get("pi_name") for r in rows if r.get("pi_name")]
+    extra_by_pi: Dict[str, Dict[str, Any]] = {}
+    if pi_names:
+        pi_extras = frappe.get_all(
+            "Purchase Invoice",
+            filters={"name": ["in", pi_names]},
+            fields=["name", "is_return", "return_against", "docstatus"],
+        )
+        extra_by_pi = {x["name"]: x for x in pi_extras}
+
+    def _get_encf_for_pi(pi_name: str) -> str:
+        row = frappe.get_all("e-CF", filters={"purchase_invoice": pi_name}, fields=["encf"], limit=1)
+        return (row[0]["encf"] if row and row[0].get("encf") else "")
 
     for r in rows:
         rnc = r.get("rnc") or ""
@@ -141,21 +159,35 @@ def export_csv(filters=None) -> Dict[str, Any]:
         fecha = r.get("fecha")
         monto = r.get("monto")
         itbis = r.get("itbis")
+        pi_name = r.get("pi_name")
 
         # Validaciones
         validate_rnc(rnc, field_name="RNC/Cédula")
-        if ncf:
-            # Si el NCF fuese electrónico (13), validar como eNCF
-            if len(str(ncf)) == 13:
-                validate_encf(ncf)
+        if ncf and len(str(ncf)) == 13:
+            validate_encf(ncf)
+
+        ex = extra_by_pi.get(pi_name, {})
+        is_return = bool(ex.get("is_return"))
+        return_against = ex.get("return_against")
+        indicador_anulacion = "1" if int(ex.get("docstatus") or 1) == 2 else "0"
+
+        ncf_mod = ""
+        if is_return and return_against:
+            ncf_mod = _get_encf_for_pi(str(return_against)) or str(return_against)
+
+        # Forma de pago en 606 se reporta a veces por convenio; aquí dejamos "1" por defecto
+        forma_pago = "1"
 
         writer.writerow([
             _infer_id_type(rnc),
             rnc,
             ncf,
+            ncf_mod,
             _to_yyyymmdd(fecha),
             _num(monto),
             _num(itbis),
+            forma_pago,
+            indicador_anulacion,
         ])
 
     content = out.getvalue()
