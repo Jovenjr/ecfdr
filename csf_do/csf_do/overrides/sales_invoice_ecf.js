@@ -28,8 +28,6 @@ frappe.ui.form.on('Sales Invoice', {
             }, 'Enviar e-CF');
         }, 'e-CF');
 
-<<<<<<< Current (Your changes)
-=======
         // RFCE (Resumen Factura Consumo) - Envío mínimo a partir de la factura
         frm.add_custom_button('Enviar RFCE 32', () => {
             // Construcción mínima: reutiliza datos de la factura para RFCE
@@ -66,8 +64,6 @@ frappe.ui.form.on('Sales Invoice', {
                 frappe.msgprint(__('Respuesta RFCE: {0}', [JSON.stringify(r && r.message || {}, null, 2)]));
             });
         }, 'e-CF');
-
->>>>>>> Incoming (Background Agent changes)
         // Consult status button (desde Sales Invoice)
         frm.add_custom_button('Consultar Estado e-CF', () => {
             frappe.call({
