@@ -89,8 +89,8 @@ doctype_js = {
 # Installation
 # ------------
 
-# before_install = "csf_do.install.before_install"
-# after_install = "csf_do.install.after_install"
+before_install = "csf_do.install.before_install"
+after_install = "csf_do.install.after_install"
 after_migrate = "csf_do.csf_do.doctype.ncf_hscode.ncf_hscode.insert_new_records"
 
 # Uninstallation

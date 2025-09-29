@@ -198,6 +198,33 @@ After installation, configure the app to suit your business needs:
 
 ---
 
+## Environment variables and local scripts
+
+For local development and the helper script `run_enviar_ecf.py`, you may set:
+
+- `P12_PATH` — absolute path to your PKCS#12 file (.p12/.pfx)
+- `P12_PASSWORD` — the PKCS#12 password
+
+See the example file `.env.example`. Do not commit real secrets.
+
+---
+
+## Testing
+
+This repository contains both pure-Python tests and tests that require a running Frappe/ERPNext bench.
+
+- To run pure-Python tests locally or in CI:
+  
+  ```sh
+  pytest -m "not requires_bench"
+  ```
+
+- Tests that interact with Frappe/ERPNext are marked with `@pytest.mark.requires_bench` and should be executed inside a bench context.
+
+Note: Frappe/ERPNext/HRMS are installed via Bench; they are not Python package dependencies in `requirements.txt`.
+
+---
+
 ## Usage Examples
 
 ### Generating a RST Declaration Report

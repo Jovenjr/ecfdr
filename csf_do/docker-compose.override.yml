@@ -1,0 +1,30 @@
+# Docker Compose override para CSF DO
+# Copyright (c) 2025, Navari Ltd and contributors
+
+version: '3.8'
+
+services:
+  backend:
+    volumes:
+      # Montar la aplicación CSF DO
+      - ./csf_do:/tmp/csf_do:ro
+      # Script de instalación
+      - ./csf_do/docker-install.sh:/tmp/docker-install.sh:ro
+    environment:
+      # Variables de entorno para CSF DO
+      - CSF_DO_ENABLED=true
+      - CSF_DO_VERSION=2.1.5
+    command: >
+      bash -c "
+        if [ ! -d '/home/frappe/frappe-bench/apps/csf_do' ]; then
+          echo 'Instalando CSF DO...';
+          chmod +x /tmp/docker-install.sh;
+          /tmp/docker-install.sh;
+        fi;
+        /home/frappe/frappe-bench/entrypoint.sh
+      "
+
+  frontend:
+    volumes:
+      # Montar archivos estáticos de CSF DO
+      - ./csf_do/csf_do/public:/home/frappe/frappe-bench/sites/assets/csf_do:ro
