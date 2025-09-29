@@ -12,42 +12,55 @@ This module provides a typed interface and environment configuration. Replace th
 with real requests once endpoints and credentials are configured.
 """
 from __future__ import annotations
-from dataclasses import dataclass
-from typing import Optional, Dict, Any
-import time
+
+import json
+import logging
 import re
+import time
+from dataclasses import dataclass
+from typing import Any, Dict, Optional
+
+from csf_do.csf_do.utils.dgii_config import get_active_dgii_config
 
 # requests es opcional para no romper entornos sin conectividad/dep
 try:  # pragma: no cover
     import requests  # type: ignore
+
     _HAS_REQUESTS = True
 except Exception:  # pragma: no cover
     requests = None  # type: ignore
     _HAS_REQUESTS = False
 
-# Firma opcional
 try:  # pragma: no cover
     from .xml_signer import sign_with_pkcs12
+
     _HAS_SIGNER = True
 except Exception:  # pragma: no cover
     sign_with_pkcs12 = None  # type: ignore
     _HAS_SIGNER = False
 
 
+LOGGER = logging.getLogger(__name__)
+
+
 @dataclass
 class DGIIEnv:
-    name: str  # e.g., precert, cert, prod
+    name: str
     base_url: str
+    verify_ssl: bool
+    timeout: int
+    max_retries: int
+    retry_backoff: int
     client_id: Optional[str] = None
     client_secret: Optional[str] = None
-    verify_ssl: bool = True
-    ttl_token: int = 3600  # segundos
+    token_ttl: int = 3600
+    estatus_api_key: Optional[str] = None
 
 
 @dataclass
 class Token:
     access_token: str
-    expires_at: float  # epoch seconds
+    expires_at: float
 
     def is_expired(self) -> bool:
         return time.time() >= self.expires_at
@@ -57,21 +70,22 @@ class DGIIClient:
     def __init__(self, env: DGIIEnv):
         self.env = env
         self._token: Optional[Token] = None
+        self._circuit_open_until: Optional[float] = None
+        self._last_status_check: float = 0
 
     # ---- Auth flow (stubs) ----
     def get_seed(self) -> str:
         """Request seed from DGII (stub)."""
-        # Intento real si requests está disponible y el endpoint está definido
-        if _HAS_REQUESTS:
-            try:
-                url = self.endpoints().get("semilla") or f"{self.env.base_url.rstrip('/')}/semilla"
-                resp = requests.get(url, timeout=20, verify=self.env.verify_ssl)
-                resp.raise_for_status()
-                return resp.text
-            except Exception:
-                pass
-        # Fallback stub
-        return "<Semilla>placeholder</Semilla>"
+        if not _HAS_REQUESTS:
+            return "<Semilla>placeholder</Semilla>"
+
+        url = self.endpoints().get("semilla") or f"{self.env.base_url.rstrip('/')}/semilla"
+        try:
+            resp = self._request("get", url)
+            return resp.text
+        except Exception as exc:  # noqa: BLE001
+            LOGGER.warning("DGII seed request failed: %s", exc)
+            return "<Semilla>placeholder</Semilla>"
 
     def sign_seed(self, seed_xml: str, *, cert_path: str, key_path: str, p12_path: Optional[str] = None, p12_password: Optional[str] = None) -> str:
         """Sign the seed using the configured certificate (stub)."""
@@ -88,30 +102,46 @@ class DGIIClient:
 
     def exchange_token(self, signed_seed_xml: str) -> Token:
         """Exchange signed seed for a bearer token (stub)."""
-        # Intento real si requests está disponible
-        if _HAS_REQUESTS:
-            try:
-                url = self.endpoints().get("token") or f"{self.env.base_url.rstrip('/')}/token"
-                headers = {"Content-Type": "text/xml"}
-                resp = requests.post(url, data=signed_seed_xml.encode("utf-8"), headers=headers, timeout=20, verify=self.env.verify_ssl)
-                resp.raise_for_status()
-                data = resp.json() if "application/json" in resp.headers.get("Content-Type", "") else None
-                access = (data or {}).get("access_token") if data else None
-                ttl = (data or {}).get("expires_in") if data else None
-                if not access:
-                    # como fallback, use el cuerpo como token
-                    access = resp.text.strip() or "stub-token"
-                ttl_secs = int(ttl) if ttl else int(self.env.ttl_token or 3600)
-                return Token(access_token=access, expires_at=time.time() + ttl_secs)
-            except Exception:
-                pass
-        # Fallback stub
-        return Token(access_token="stub-token", expires_at=time.time() + int(self.env.ttl_token or 3600))
+        if not _HAS_REQUESTS:
+            return Token(access_token="stub-token", expires_at=time.time() + self.env.token_ttl)
 
-    def ensure_token(self, *, cert_path: str, key_path: str, p12_path: Optional[str] = None, p12_password: Optional[str] = None) -> str:
+        url = self.endpoints().get("token") or f"{self.env.base_url.rstrip('/')}/token"
+        headers = {"Content-Type": "text/xml"}
+        try:
+            resp = self._request(
+                "post",
+                url,
+                data=signed_seed_xml.encode("utf-8"),
+                headers=headers,
+            )
+            resp.raise_for_status()
+            data: Dict[str, Any] = {}
+            if "application/json" in resp.headers.get("Content-Type", ""):
+                data = resp.json()
+            token_value = data.get("access_token") or resp.text.strip() or "stub-token"
+            ttl_secs = int(data.get("expires_in") or self.env.token_ttl)
+            return Token(access_token=token_value, expires_at=time.time() + ttl_secs)
+        except Exception as exc:  # noqa: BLE001
+            LOGGER.error("DGII token exchange failed: %s", exc)
+            return Token(access_token="stub-token", expires_at=time.time() + self.env.token_ttl)
+
+    def ensure_token(
+        self,
+        *,
+        cert_path: str,
+        key_path: str,
+        p12_path: Optional[str] = None,
+        p12_password: Optional[str] = None,
+    ) -> str:
         if self._token is None or self._token.is_expired():
             seed = self.get_seed()
-            signed = self.sign_seed(seed, cert_path=cert_path, key_path=key_path, p12_path=p12_path, p12_password=p12_password)
+            signed = self.sign_seed(
+                seed,
+                cert_path=cert_path,
+                key_path=key_path,
+                p12_path=p12_path,
+                p12_password=p12_password,
+            )
             self._token = self.exchange_token(signed)
         return self._token.access_token
 
@@ -166,7 +196,7 @@ class DGIIClient:
                     "Authorization": f"Bearer {token}",
                     "Content-Type": "text/xml; charset=utf-8",
                 }
-                resp = requests.post(url, data=xml_payload.encode("utf-8"), headers=headers, timeout=30, verify=self.env.verify_ssl)
+                resp = self._request("post", url, data=xml_payload.encode("utf-8"), headers=headers)
                 resp.raise_for_status()
                 content_type = resp.headers.get("Content-Type", "")
                 # La DGII puede responder JSON o XML; detectar y extraer track_id/estado
@@ -204,7 +234,7 @@ class DGIIClient:
             try:
                 token = self.ensure_token(cert_path="", key_path="")
                 headers = {"Authorization": f"Bearer {token}"}
-                resp = requests.get(f"{url}/{track_id}", headers=headers, timeout=20, verify=self.env.verify_ssl)
+                resp = self._request("get", f"{url}/{track_id}", headers=headers)
                 resp.raise_for_status()
                 content_type = resp.headers.get("Content-Type", "")
                 if "application/json" in content_type:
@@ -234,7 +264,7 @@ class DGIIClient:
             try:
                 token = self.ensure_token(cert_path="", key_path="")
                 headers = {"Authorization": f"Bearer {token}"}
-                resp = requests.get(f"{url}/{rnc}", headers=headers, timeout=20, verify=self.env.verify_ssl)
+                resp = self._request("get", f"{url}/{rnc}", headers=headers)
                 resp.raise_for_status()
                 if "application/json" in resp.headers.get("Content-Type", ""):
                     return resp.json()
@@ -262,6 +292,61 @@ class DGIIClient:
             client_id=cfg.get("client_id"),
             client_secret=cfg.get("client_secret"),
             verify_ssl=bool(cfg.get("verify_ssl", True)),
-            ttl_token=int(cfg.get("ttl_token", 3600)),
+            timeout=int(cfg.get("timeout_seconds", 30)),
+            max_retries=int(cfg.get("max_retries", 3)),
+            retry_backoff=int(cfg.get("retry_backoff_seconds", 5)),
+            token_ttl=int(cfg.get("ttl_token", 3600)),
+            estatus_api_key=cfg.get("estatus_api_key"),
         )
         return DGIIClient(env)
+
+    # ---- Internals -----------------------------------------------------------------
+    def _request(self, method: str, url: str, **kwargs: Any):
+        if not _HAS_REQUESTS:
+            raise RuntimeError("Requests no disponible")
+
+        now = time.time()
+        if self._circuit_open_until and now < self._circuit_open_until:
+            raise RuntimeError("Circuito DGII abierto temporalmente")
+
+        headers = kwargs.pop("headers", {}) or {}
+        kwargs["headers"] = headers
+        kwargs.setdefault("timeout", self.env.timeout)
+        kwargs.setdefault("verify", self.env.verify_ssl)
+
+        last_exc: Optional[Exception] = None
+        for attempt in range(1, self.env.max_retries + 2):
+            try:
+                resp = requests.request(method.upper(), url, **kwargs)
+                if resp.status_code >= 500:
+                    raise RuntimeError(f"DGII 5xx: {resp.status_code}")
+                return resp
+            except Exception as exc:  # noqa: BLE001
+                last_exc = exc
+                LOGGER.warning("DGII request error (attempt %s/%s): %s", attempt, self.env.max_retries + 1, exc)
+                if attempt > self.env.max_retries:
+                    self._open_circuit()
+                    self._maybe_check_service_status()
+                    raise
+                time.sleep(self.env.retry_backoff)
+        if last_exc:
+            raise last_exc
+
+    def _open_circuit(self) -> None:
+        self._circuit_open_until = time.time() + (self.env.retry_backoff * max(1, self.env.max_retries))
+
+    def _maybe_check_service_status(self) -> None:
+        if not self.env.estatus_api_key or not _HAS_REQUESTS:
+            return
+        now = time.time()
+        if now - self._last_status_check < 60:
+            return
+        self._last_status_check = now
+        url = f"{self.env.base_url.rstrip('/')}/api/estatusservicios/obtenerestatus"
+        try:
+            headers = {"Apikey": self.env.estatus_api_key}
+            resp = requests.get(url, headers=headers, timeout=self.env.timeout, verify=self.env.verify_ssl)
+            resp.raise_for_status()
+            LOGGER.info("Estatus DGII: %s", resp.text)
+        except Exception as exc:  # noqa: BLE001
+            LOGGER.warning("No se pudo verificar estatus DGII: %s", exc)

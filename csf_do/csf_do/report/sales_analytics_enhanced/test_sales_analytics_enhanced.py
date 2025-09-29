@@ -1,3 +1,4 @@
+import pytest
 import frappe
 from erpnext.selling.doctype.sales_order.test_sales_order import make_sales_order
 from frappe.tests.utils import FrappeTestCase
@@ -5,6 +6,7 @@ from frappe.tests.utils import FrappeTestCase
 from .sales_analytics_enhanced import execute
 
 
+@pytest.mark.requires_bench
 class TestSalesAnalyticsEnhanced(FrappeTestCase):
     def test_sales_analytics_enhanced(self) -> None:
         frappe.db.sql("delete from `tabSales Order` where company='_Test Company 2'")

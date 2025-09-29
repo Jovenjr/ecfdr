@@ -1,10 +1,12 @@
 # Copyright (c) 2025, Navari Ltd and contributors
 # For license information, please see license.txt
 
+import pytest
 import unittest
 import frappe
 from frappe.tests.utils import FrappeTestCase
 
+@pytest.mark.requires_bench
 class TestCSFDOInstallation(FrappeTestCase):
     """Tests para validar la instalación de CSF DO"""
     

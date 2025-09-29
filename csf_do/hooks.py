@@ -142,7 +142,8 @@ doc_events = {
         "on_submit": "csf_do.csf_do.doctype.api.update_item_price_list.update_item_prices"
     },
     "Purchase Invoice": {
-        "on_submit": "csf_do.csf_do.doctype.api.update_item_price_list.update_item_prices"
+        "on_submit": "csf_do.csf_do.doctype.api.update_item_price_list.update_item_prices",
+        "on_cancel": "csf_do.csf_do.integrations.ecf.handlers.on_purchase_invoice_cancel"
     },
     "Item": {
         "before_save": "csf_do.csf_do.utils.get_ncf_hscode.validate_mandatory_hscode"
@@ -157,7 +158,10 @@ doc_events = {
         "before_submit": "csf_do.csf_do.overrides.sales_doc.validate_customer_rnc"
     },
     "Sales Invoice": {
-        "before_submit": "csf_do.csf_do.overrides.sales_doc.validate_customer_rnc"
+        "before_submit": "csf_do.csf_do.integrations.ecf.handlers.before_sales_invoice_submit",
+        "on_submit": "csf_do.csf_do.integrations.ecf.handlers.on_sales_invoice_submit",
+        "on_cancel": "csf_do.csf_do.integrations.ecf.handlers.on_sales_invoice_cancel",
+        "on_update_after_submit": "csf_do.csf_do.integrations.ecf.handlers.on_sales_invoice_update_after_submit"
     },
     "Job Card": {"before_submit": "csf_do.csf_do.overrides.job_card.before_submit"},
 }

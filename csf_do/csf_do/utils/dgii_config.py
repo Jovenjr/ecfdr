@@ -53,6 +53,10 @@ def get_active_dgii_config(ambiente: str = "custom") -> Optional[Dict[str, Any]]
     if ttl_token is None:
         ttl_token = getattr(doc, "ttl_token", 3600)
 
+    timeout_seconds = getattr(doc, "timeout_seconds", 30)
+    max_retries = getattr(doc, "max_retries", 3)
+    retry_backoff_seconds = getattr(doc, "retry_backoff_seconds", 5)
+
     try:
         verify_ssl_bool = bool(int(verify_ssl))
     except Exception:
@@ -90,6 +94,14 @@ def get_active_dgii_config(ambiente: str = "custom") -> Optional[Dict[str, Any]]
         "ttl_token": int(ttl_token) if ttl_token else 3600,
         "client_id": client_id,
         "client_secret": client_secret,
+        "timeout_seconds": int(timeout_seconds) if timeout_seconds else 30,
+        "max_retries": int(max_retries) if max_retries is not None else 3,
+        "retry_backoff_seconds": int(retry_backoff_seconds) if retry_backoff_seconds else 5,
         "overrides": {k: v for k, v in overrides.items() if v},
         "contingency_mode": bool(getattr(doc, "contingency_mode", 0)),
+        "estatus_api_key": getattr(doc, "estatus_api_key", None),
+        "recepcion_endpoint": getattr(doc, "recepcion_endpoint", None),
+        "aprobacion_endpoint": getattr(doc, "aprobacion_endpoint", None),
+        "autenticacion_endpoint": getattr(doc, "autenticacion_endpoint", None),
+        "cert_serial_number": getattr(doc, "cert_serial_number", None),
     }

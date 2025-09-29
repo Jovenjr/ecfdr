@@ -60,8 +60,8 @@ def test_file_structure():
         print("\nArchivos faltantes:")
         for file in missing_files:
             print(f"  [ERROR] {file}")
-    
-    return len(missing_files) == 0
+
+    assert len(missing_files) == 0, f"Faltan {len(missing_files)} archivos requeridos"
 
 def test_python_imports():
     """Verificar que los módulos Python se pueden importar"""
@@ -72,7 +72,7 @@ def test_python_imports():
         print("[OK] csf_do importado correctamente")
     except ImportError as e:
         print(f"[ERROR] Error importando csf_do: {e}")
-        return False
+        assert False, f"Error importando csf_do: {e}"
     
     # Verificar módulos que no dependen de Frappe
     try:
@@ -80,9 +80,9 @@ def test_python_imports():
         print("[OK] Modulos de configuracion importados correctamente")
     except ImportError as e:
         print(f"[ERROR] Error importando modulos de configuracion: {e}")
-        return False
-    
-    return True
+        assert False, f"Error importando modulos de configuracion: {e}"
+
+    assert True
 
 def test_requirements():
     """Verificar que las dependencias estén instaladas"""
@@ -105,8 +105,8 @@ def test_requirements():
         except ImportError:
             print(f"[ERROR] {package} NO instalado")
             missing_packages.append(package)
-    
-    return len(missing_packages) == 0
+
+    assert len(missing_packages) == 0, f"Faltan instalar los siguientes paquetes: {missing_packages}"
 
 def main():
     """Función principal de prueba"""

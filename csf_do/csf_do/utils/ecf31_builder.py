@@ -19,10 +19,7 @@ Incluye:
 from __future__ import annotations
 from typing import Dict, List, Tuple, Optional
 from xml.etree import ElementTree as ET
-from datetime import datetime
 from decimal import Decimal, InvalidOperation
-import json
-import importlib.resources as pkg_resources
 
 from .xml_utils import escape_text, remove_empty_elements
 from .xsd_validator import validate_xml
@@ -34,6 +31,12 @@ from .field_validators import (
     validate_email,
 )
 from .amount_utils import round_money_2, round_unit_price_4, round_subquantity_3, to_str
+from .xml_builder_common import (
+    add_text_if_not_empty,
+    to_dmy,
+    to_dmy_hms,
+    validate_catalog_value,
+)
 
 
 REQUIRED_EMISOR_FIELDS = [
@@ -66,52 +69,6 @@ REQUIRED_ITEM_FIELDS = [
     "MontoItem",
 ]
 
-CATALOG_FILES = {
-    "UnidadMedidaType": "unidad_medida.json",
-    "TipoMonedaType": "tipo_moneda.json",
-    "ProvinciaMunicipioType": "provincia_municipio.json",
-}
-
-
-def _load_catalog_values(catalog_json_file: str) -> List[str]:
-    data_pkg = "csf_do.csf_do.data"
-    try:
-        with pkg_resources.files(data_pkg).joinpath(catalog_json_file).open("r", encoding="utf-8") as f:
-            payload = json.load(f)
-            values = payload.get("values")
-            if values is None:
-                entries = payload.get("entries", [])
-                return [str(e.get("code")) for e in entries if e.get("code") is not None]
-            return [str(v) for v in values]
-    except FileNotFoundError:
-        return []
-
-
-def _validate_catalog_value(field: str, value: Optional[str], *, catalog_type: str) -> None:
-    if value is None or str(value) == "":
-        return
-    json_file = CATALOG_FILES.get(catalog_type)
-    if not json_file:
-        return
-    allowed = _load_catalog_values(json_file)
-    if allowed and str(value) not in allowed:
-        raise ValueError(f"Valor inválido para {field}: '{value}'. Debe pertenecer a catálogo {catalog_type}.")
-
-
-def _add_if_present(parent: ET.Element, tag: str, value: Optional[str]) -> None:
-    if value is not None and str(value) != "":
-        ET.SubElement(parent, tag).text = escape_text(str(value))
-
-
-def _to_dmy(date_str: str) -> str:
-    s = str(date_str)
-    try:
-        dt = datetime.strptime(s, "%Y-%m-%d")
-        return dt.strftime("%d-%m-%Y")
-    except Exception:
-        return s
-
-
 def _normalize_tipo_ingresos(value: str) -> str:
     """Asegura formato '01'..'06' según TipoIngresosValidationType.
     Si viene '1'..'6' lo formatea a dos dígitos.
@@ -119,17 +76,6 @@ def _normalize_tipo_ingresos(value: str) -> str:
     s = str(value).strip()
     if s.isdigit() and len(s) == 1:
         s = f"0{s}"
-    return s
-
-
-def _to_dmy_hms(datetime_str: str) -> str:
-    s = str(datetime_str)
-    for fmt in ("%Y-%m-%dT%H:%M:%S", "%Y-%m-%d %H:%M:%S"):
-        try:
-            dt = datetime.strptime(s, fmt)
-            return dt.strftime("%d-%m-%Y %H:%M:%S")
-        except Exception:
-            pass
     return s
 
 
@@ -160,7 +106,7 @@ def build_ecf31_xml(data: Dict) -> str:
             raise ValueError(f"Falta campo requerido en IdDoc: {key}")
         text_val = str(val)
         if key in ("FechaVencimientoSecuencia", "FechaLimitePago", "FechaDesde", "FechaHasta"):
-            text_val = _to_dmy(text_val)
+            text_val = to_dmy(text_val)
         if key == "TipoIngresos":
             text_val = _normalize_tipo_ingresos(text_val)
         ET.SubElement(iddoc, key).text = escape_text(text_val)
@@ -173,8 +119,8 @@ def build_ecf31_xml(data: Dict) -> str:
         if opt in iddoc_in:
             val = iddoc_in.get(opt)
             if opt in ("FechaLimitePago", "FechaDesde", "FechaHasta") and val:
-                val = _to_dmy(str(val))
-            _add_if_present(iddoc, opt, val)
+                val = to_dmy(str(val))
+            add_text_if_not_empty(iddoc, opt, val)
 
     # Emisor
     emisor_in = encabezado_in.get("Emisor", {})
@@ -183,35 +129,35 @@ def build_ecf31_xml(data: Dict) -> str:
         val = emisor_in.get(key)
         if val is None or str(val) == "":
             raise ValueError(f"Falta campo requerido en Emisor: {key}")
-        text_val = _to_dmy(str(val)) if key == "FechaEmision" else str(val)
+        text_val = to_dmy(str(val)) if key == "FechaEmision" else str(val)
         ET.SubElement(emisor, key).text = escape_text(text_val)
     # Validaciones de formato amigables
     validate_rnc(emisor_in.get("RNCEmisor"), field_name="RNCEmisor")
     # Opcionales emisor + validación catálogo Provincia/Municipio
-    _add_if_present(emisor, "NombreComercial", emisor_in.get("NombreComercial"))
-    _add_if_present(emisor, "Sucursal", emisor_in.get("Sucursal"))
+    add_text_if_not_empty(emisor, "NombreComercial", emisor_in.get("NombreComercial"))
+    add_text_if_not_empty(emisor, "Sucursal", emisor_in.get("Sucursal"))
     municipio = emisor_in.get("Municipio")
     provincia = emisor_in.get("Provincia")
-    _validate_catalog_value("Municipio", municipio, catalog_type="ProvinciaMunicipioType")
-    _validate_catalog_value("Provincia", provincia, catalog_type="ProvinciaMunicipioType")
-    _add_if_present(emisor, "Municipio", municipio)
-    _add_if_present(emisor, "Provincia", provincia)
+    validate_catalog_value("Municipio", municipio, catalog_type="ProvinciaMunicipioType")
+    validate_catalog_value("Provincia", provincia, catalog_type="ProvinciaMunicipioType")
+    add_text_if_not_empty(emisor, "Municipio", municipio)
+    add_text_if_not_empty(emisor, "Provincia", provincia)
     if emisor_in.get("TablaTelefonoEmisor"):
         tabla = ET.SubElement(emisor, "TablaTelefonoEmisor")
         for tel in emisor_in["TablaTelefonoEmisor"]:
             validate_phone(tel, field_name="TelefonoEmisor")
-            _add_if_present(tabla, "TelefonoEmisor", tel)
+            add_text_if_not_empty(tabla, "TelefonoEmisor", tel)
     if emisor_in.get("CorreoEmisor"):
         validate_email(emisor_in.get("CorreoEmisor"), field_name="CorreoEmisor")
-        _add_if_present(emisor, "CorreoEmisor", emisor_in.get("CorreoEmisor"))
-    _add_if_present(emisor, "WebSite", emisor_in.get("WebSite"))
-    _add_if_present(emisor, "ActividadEconomica", emisor_in.get("ActividadEconomica"))
-    _add_if_present(emisor, "CodigoVendedor", emisor_in.get("CodigoVendedor"))
-    _add_if_present(emisor, "NumeroFacturaInterna", emisor_in.get("NumeroFacturaInterna"))
-    _add_if_present(emisor, "NumeroPedidoInterno", emisor_in.get("NumeroPedidoInterno"))
-    _add_if_present(emisor, "ZonaVenta", emisor_in.get("ZonaVenta"))
-    _add_if_present(emisor, "RutaVenta", emisor_in.get("RutaVenta"))
-    _add_if_present(emisor, "InformacionAdicionalEmisor", emisor_in.get("InformacionAdicionalEmisor"))
+        add_text_if_not_empty(emisor, "CorreoEmisor", emisor_in.get("CorreoEmisor"))
+    add_text_if_not_empty(emisor, "WebSite", emisor_in.get("WebSite"))
+    add_text_if_not_empty(emisor, "ActividadEconomica", emisor_in.get("ActividadEconomica"))
+    add_text_if_not_empty(emisor, "CodigoVendedor", emisor_in.get("CodigoVendedor"))
+    add_text_if_not_empty(emisor, "NumeroFacturaInterna", emisor_in.get("NumeroFacturaInterna"))
+    add_text_if_not_empty(emisor, "NumeroPedidoInterno", emisor_in.get("NumeroPedidoInterno"))
+    add_text_if_not_empty(emisor, "ZonaVenta", emisor_in.get("ZonaVenta"))
+    add_text_if_not_empty(emisor, "RutaVenta", emisor_in.get("RutaVenta"))
+    add_text_if_not_empty(emisor, "InformacionAdicionalEmisor", emisor_in.get("InformacionAdicionalEmisor"))
 
     # Comprador (requerido)
     comprador_in = encabezado_in.get("Comprador", {})
@@ -222,28 +168,28 @@ def build_ecf31_xml(data: Dict) -> str:
             raise ValueError(f"Falta campo requerido en Comprador: {key}")
         ET.SubElement(comprador, key).text = escape_text(str(val))
     # Comprador opcionales con catálogo Provincia/Municipio y fechas
-    _add_if_present(comprador, "ContactoComprador", comprador_in.get("ContactoComprador"))
+    add_text_if_not_empty(comprador, "ContactoComprador", comprador_in.get("ContactoComprador"))
     if comprador_in.get("CorreoComprador"):
         validate_email(comprador_in.get("CorreoComprador"), field_name="CorreoComprador")
-        _add_if_present(comprador, "CorreoComprador", comprador_in.get("CorreoComprador"))
-    _add_if_present(comprador, "DireccionComprador", comprador_in.get("DireccionComprador"))
+        add_text_if_not_empty(comprador, "CorreoComprador", comprador_in.get("CorreoComprador"))
+    add_text_if_not_empty(comprador, "DireccionComprador", comprador_in.get("DireccionComprador"))
     mun_c = comprador_in.get("MunicipioComprador")
     prov_c = comprador_in.get("ProvinciaComprador")
-    _validate_catalog_value("MunicipioComprador", mun_c, catalog_type="ProvinciaMunicipioType")
-    _validate_catalog_value("ProvinciaComprador", prov_c, catalog_type="ProvinciaMunicipioType")
-    _add_if_present(comprador, "MunicipioComprador", mun_c)
-    _add_if_present(comprador, "ProvinciaComprador", prov_c)
+    validate_catalog_value("MunicipioComprador", mun_c, catalog_type="ProvinciaMunicipioType")
+    validate_catalog_value("ProvinciaComprador", prov_c, catalog_type="ProvinciaMunicipioType")
+    add_text_if_not_empty(comprador, "MunicipioComprador", mun_c)
+    add_text_if_not_empty(comprador, "ProvinciaComprador", prov_c)
     if comprador_in.get("FechaEntrega"):
-        _add_if_present(comprador, "FechaEntrega", _to_dmy(str(comprador_in.get("FechaEntrega"))))
-    _add_if_present(comprador, "ContactoEntrega", comprador_in.get("ContactoEntrega"))
-    _add_if_present(comprador, "DireccionEntrega", comprador_in.get("DireccionEntrega"))
-    _add_if_present(comprador, "TelefonoAdicional", comprador_in.get("TelefonoAdicional"))
+        add_text_if_not_empty(comprador, "FechaEntrega", to_dmy(str(comprador_in.get("FechaEntrega"))))
+    add_text_if_not_empty(comprador, "ContactoEntrega", comprador_in.get("ContactoEntrega"))
+    add_text_if_not_empty(comprador, "DireccionEntrega", comprador_in.get("DireccionEntrega"))
+    add_text_if_not_empty(comprador, "TelefonoAdicional", comprador_in.get("TelefonoAdicional"))
     if comprador_in.get("FechaOrdenCompra"):
-        _add_if_present(comprador, "FechaOrdenCompra", _to_dmy(str(comprador_in.get("FechaOrdenCompra"))))
-    _add_if_present(comprador, "NumeroOrdenCompra", comprador_in.get("NumeroOrdenCompra"))
-    _add_if_present(comprador, "CodigoInternoComprador", comprador_in.get("CodigoInternoComprador"))
-    _add_if_present(comprador, "ResponsablePago", comprador_in.get("ResponsablePago"))
-    _add_if_present(comprador, "InformacionAdicionalComprador", comprador_in.get("InformacionAdicionalComprador"))
+        add_text_if_not_empty(comprador, "FechaOrdenCompra", to_dmy(str(comprador_in.get("FechaOrdenCompra"))))
+    add_text_if_not_empty(comprador, "NumeroOrdenCompra", comprador_in.get("NumeroOrdenCompra"))
+    add_text_if_not_empty(comprador, "CodigoInternoComprador", comprador_in.get("CodigoInternoComprador"))
+    add_text_if_not_empty(comprador, "ResponsablePago", comprador_in.get("ResponsablePago"))
+    add_text_if_not_empty(comprador, "InformacionAdicionalComprador", comprador_in.get("InformacionAdicionalComprador"))
 
     # Totales
     totales_in = encabezado_in.get("Totales", {})
@@ -252,9 +198,9 @@ def build_ecf31_xml(data: Dict) -> str:
     if monto_total is None or str(monto_total) == "":
         raise ValueError("Falta campo requerido en Totales: MontoTotal")
     # Algunos totales opcionales (los demás se omiten por ahora)
-    _add_if_present(totales, "MontoGravadoTotal", totales_in.get("MontoGravadoTotal"))
-    _add_if_present(totales, "MontoExento", totales_in.get("MontoExento"))
-    _add_if_present(totales, "TotalITBIS", totales_in.get("TotalITBIS"))
+    add_text_if_not_empty(totales, "MontoGravadoTotal", totales_in.get("MontoGravadoTotal"))
+    add_text_if_not_empty(totales, "MontoExento", totales_in.get("MontoExento"))
+    add_text_if_not_empty(totales, "TotalITBIS", totales_in.get("TotalITBIS"))
     ET.SubElement(totales, "MontoTotal").text = escape_text(str(monto_total))
 
     # OtraMoneda (opcional)
@@ -263,15 +209,15 @@ def build_ecf31_xml(data: Dict) -> str:
     if otra_in:
         otra = ET.SubElement(encabezado, "OtraMoneda")
         tipo_moneda = otra_in.get("TipoMoneda")
-        _validate_catalog_value("TipoMoneda", tipo_moneda, catalog_type="TipoMonedaType")
-        _add_if_present(otra, "TipoMoneda", tipo_moneda)
-        _add_if_present(otra, "TipoCambio", otra_in.get("TipoCambio"))
-        _add_if_present(otra, "MontoGravadoTotalOtraMoneda", otra_in.get("MontoGravadoTotalOtraMoneda"))
-        _add_if_present(otra, "MontoExentoOtraMoneda", otra_in.get("MontoExentoOtraMoneda"))
-        _add_if_present(otra, "TotalITBISOtraMoneda", otra_in.get("TotalITBISOtraMoneda"))
+        validate_catalog_value("TipoMoneda", tipo_moneda, catalog_type="TipoMonedaType")
+        add_text_if_not_empty(otra, "TipoMoneda", tipo_moneda)
+        add_text_if_not_empty(otra, "TipoCambio", otra_in.get("TipoCambio"))
+        add_text_if_not_empty(otra, "MontoGravadoTotalOtraMoneda", otra_in.get("MontoGravadoTotalOtraMoneda"))
+        add_text_if_not_empty(otra, "MontoExentoOtraMoneda", otra_in.get("MontoExentoOtraMoneda"))
+        add_text_if_not_empty(otra, "TotalITBISOtraMoneda", otra_in.get("TotalITBISOtraMoneda"))
         if otra_in.get("MontoTotalOtraMoneda") is not None:
             otra_total_om = otra_in.get("MontoTotalOtraMoneda")
-            _add_if_present(otra, "MontoTotalOtraMoneda", otra_total_om)
+            add_text_if_not_empty(otra, "MontoTotalOtraMoneda", otra_total_om)
 
     # DetallesItems
     detalles_in = data.get("detalles", {})
@@ -303,19 +249,19 @@ def build_ecf31_xml(data: Dict) -> str:
             tabla = ET.SubElement(item_el, "TablaCodigosItem")
             for code in it_in["TablaCodigosItem"]:
                 cod_el = ET.SubElement(tabla, "CodigosItem")
-                _add_if_present(cod_el, "TipoCodigo", code.get("TipoCodigo"))
-                _add_if_present(cod_el, "CodigoItem", code.get("CodigoItem"))
-        _add_if_present(item_el, "DescripcionItem", it_in.get("DescripcionItem"))
+                add_text_if_not_empty(cod_el, "TipoCodigo", code.get("TipoCodigo"))
+                add_text_if_not_empty(cod_el, "CodigoItem", code.get("CodigoItem"))
+        add_text_if_not_empty(item_el, "DescripcionItem", it_in.get("DescripcionItem"))
         unidad = it_in.get("UnidadMedida")
-        _validate_catalog_value("UnidadMedida", unidad, catalog_type="UnidadMedidaType")
-        _add_if_present(item_el, "UnidadMedida", unidad)
+        validate_catalog_value("UnidadMedida", unidad, catalog_type="UnidadMedidaType")
+        add_text_if_not_empty(item_el, "UnidadMedida", unidad)
         if it_in.get("OtraMonedaDetalle"):
             omd = ET.SubElement(item_el, "OtraMonedaDetalle")
-            _add_if_present(omd, "PrecioOtraMoneda", it_in["OtraMonedaDetalle"].get("PrecioOtraMoneda"))
-            _add_if_present(omd, "DescuentoOtraMoneda", it_in["OtraMonedaDetalle"].get("DescuentoOtraMoneda"))
-            _add_if_present(omd, "RecargoOtraMoneda", it_in["OtraMonedaDetalle"].get("RecargoOtraMoneda"))
+            add_text_if_not_empty(omd, "PrecioOtraMoneda", it_in["OtraMonedaDetalle"].get("PrecioOtraMoneda"))
+            add_text_if_not_empty(omd, "DescuentoOtraMoneda", it_in["OtraMonedaDetalle"].get("DescuentoOtraMoneda"))
+            add_text_if_not_empty(omd, "RecargoOtraMoneda", it_in["OtraMonedaDetalle"].get("RecargoOtraMoneda"))
             monto_item_om = it_in["OtraMonedaDetalle"].get("MontoItemOtraMoneda")
-            _add_if_present(omd, "MontoItemOtraMoneda", monto_item_om)
+            add_text_if_not_empty(omd, "MontoItemOtraMoneda", monto_item_om)
             if monto_item_om is not None:
                 try:
                     sum_items_otra_moneda += Decimal(str(monto_item_om))
@@ -326,7 +272,7 @@ def build_ecf31_xml(data: Dict) -> str:
     fecha_firma = data.get("fecha_hora_firma")
     if not fecha_firma:
         raise ValueError("Falta campo requerido: fecha_hora_firma")
-    ET.SubElement(root, "FechaHoraFirma").text = escape_text(_to_dmy_hms(str(fecha_firma)))
+    ET.SubElement(root, "FechaHoraFirma").text = escape_text(to_dmy_hms(str(fecha_firma)))
 
     # xs:any → Signature placeholder (no vacío)
     ET.SubElement(root, "Signature").text = "-"
