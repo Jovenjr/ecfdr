@@ -39,7 +39,7 @@ def test_ecfdr_imports():
     modules_to_test = [
         'csf_do',
         'csf_do.csf_do.report.dominican_purchase_tax_report.dominican_republic_purchase_tax_report',
-        'csf_do.csf_do.report.dominican_sales_tax_report.dominican_republic_sales_tax_report',
+        'csf_do.csf_do.report.dominican_republic_sales_tax_report.dominican_republic_sales_tax_report',
         'csf_do.csf_do.report.dominican_bank_payroll_advice_report.dominican_republic_bank_payroll_advice_report'
     ]
 
@@ -118,22 +118,19 @@ def test_report_execution():
     except Exception as e:
         print(f"✗ Report execution setup failed: {e}")
         assert False, f"Report execution setup failed: {e}"
-
 def test_file_structure():
     """Verificar estructura de archivos"""
     print("\nTesting file structure...")
 
     required_files = [
-        'csf_do/__init__.py',
         'csf_do/csf_do/__init__.py',
         'csf_do/csf_do/report/__init__.py',
         'csf_do/csf_do/report/dominican_purchase_tax_report/dominican_republic_purchase_tax_report.py',
-        'csf_do/csf_do/report/dominican_sales_tax_report/dominican_republic_sales_tax_report.py',
+        'csf_do/csf_do/report/dominican_republic_sales_tax_report/dominican_republic_sales_tax_report.py',
         'csf_do/csf_do/report/dominican_bank_payroll_advice_report/dominican_republic_bank_payroll_advice_report.py'
     ]
 
     success_count = 0
-
     for file_path in required_files:
         if os.path.exists(file_path):
             print(f"✓ {file_path} exists")

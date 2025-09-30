@@ -50,7 +50,7 @@ frappe.query_reports["Dominican Republic Sales Tax Report"] = {
     "onload": function(report) {
         report.page.add_menu_item('Export CSVs', function() {
             frappe.call({
-                method: "csf_do.csf_do.report.dominican_sales_tax_report.dominican_sales_tax_report.download_custom_csv_format",
+                method: "csf_do.csf_do.report.dominican_republic_sales_tax_report.dominican_republic_sales_tax_report.download_custom_csv_format",
                 args: {
                     company: report.get_filter_value("company"),
                     from_date: report.get_filter_value("from_date"),

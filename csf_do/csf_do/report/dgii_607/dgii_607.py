@@ -2,13 +2,23 @@ from __future__ import annotations
 from typing import List, Tuple, Dict, Any
 import io
 import csv
+import json
 import frappe
 from frappe import _
 from csf_do.csf_do.utils.field_validators import validate_rnc, validate_encf
 
 
+def _parse_filters(filters: Any) -> frappe._dict:
+    if isinstance(filters, str):
+        try:
+            filters = json.loads(filters or "{}")
+        except json.JSONDecodeError:
+            filters = {}
+    return frappe._dict(filters or {})
+
+
 def execute(filters=None) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
-    f = frappe._dict(filters or {})
+    f = _parse_filters(filters)
 
     columns = [
         {"label": _("RNC Cliente"), "fieldname": "rnc", "fieldtype": "Data", "width": 140},

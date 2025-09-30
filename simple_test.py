@@ -16,7 +16,7 @@ except ImportError as e:
 # Test 2: Import reports
 reports = [
     'csf_do.csf_do.report.dominican_purchase_tax_report.dominican_republic_purchase_tax_report',
-    'csf_do.csf_do.report.dominican_sales_tax_report.dominican_republic_sales_tax_report',
+    'csf_do.csf_do.report.dominican_republic_sales_tax_report.dominican_republic_sales_tax_report',
     'csf_do.csf_do.report.dominican_bank_payroll_advice_report.dominican_republic_bank_payroll_advice_report'
 ]
 

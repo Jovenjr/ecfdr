@@ -53,7 +53,7 @@ class TestECFDRImports(ECFDRTestCase):
         """Probar importación de módulos de reportes"""
         reports_to_test = [
             'csf_do.csf_do.report.dominican_purchase_tax_report.dominican_republic_purchase_tax_report',
-            'csf_do.csf_do.report.dominican_sales_tax_report.dominican_republic_sales_tax_report',
+            'csf_do.csf_do.report.dominican_republic_sales_tax_report.dominican_republic_sales_tax_report',
             'csf_do.csf_do.report.dominican_bank_payroll_advice_report.dominican_republic_bank_payroll_advice_report'
         ]
 
@@ -150,7 +150,7 @@ class TestECFDRIntegration(ECFDRTestCase):
         """Verificar que todos los archivos de reportes existen"""
         report_files = [
             'csf_do/csf_do/report/dominican_purchase_tax_report/dominican_republic_purchase_tax_report.py',
-            'csf_do/csf_do/report/dominican_sales_tax_report/dominican_republic_sales_tax_report.py',
+            'csf_do/csf_do/report/dominican_republic_sales_tax_report/dominican_republic_sales_tax_report.py',
             'csf_do/csf_do/report/dominican_bank_payroll_advice_report/dominican_republic_bank_payroll_advice_report.py'
         ]
 
@@ -164,7 +164,7 @@ class TestECFDRIntegration(ECFDRTestCase):
         """Verificar que los archivos JSON de configuración sean válidos"""
         json_files = [
             'csf_do/csf_do/report/dominican_purchase_tax_report/dominican_purchase_tax_report.json',
-            'csf_do/csf_do/report/dominican_sales_tax_report/dominican_sales_tax_report.json',
+            'csf_do/csf_do/report/dominican_republic_sales_tax_report/dominican_sales_tax_report.json',
             'csf_do/csf_do/report/dominican_bank_payroll_advice_report/dominican_bank_payroll_advice_report.json'
         ]
 
