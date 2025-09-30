@@ -150,20 +150,22 @@ def setup_currency():
 
 def setup_default_warehouses():
     """Crear almacenes por defecto para República Dominicana"""
+    default_company = frappe.defaults.get_user_default("Company")
+
     warehouses = [
-        {
-            "warehouse_name": "Almacén Principal - RD",
-            "warehouse_type": "Store",
-            "is_group": 0,
-            "parent_warehouse": "All Warehouses - RD",
-            "company": frappe.defaults.get_user_default("Company")
-        },
         {
             "warehouse_name": "All Warehouses - RD",
             "warehouse_type": "Store",
             "is_group": 1,
             "parent_warehouse": "",
-            "company": frappe.defaults.get_user_default("Company")
+            "company": default_company
+        },
+        {
+            "warehouse_name": "Almacén Principal - RD",
+            "warehouse_type": "Store",
+            "is_group": 0,
+            "parent_warehouse": "All Warehouses - RD",
+            "company": default_company
         }
     ]
     
