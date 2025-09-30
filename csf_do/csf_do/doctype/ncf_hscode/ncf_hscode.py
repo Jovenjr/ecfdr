@@ -24,6 +24,15 @@ def insert_new_records():
 
     for record in data:
 
+        uom_code = record.get("uom") or "Nos"
+
+        if not frappe.db.exists("UOM", uom_code):
+            frappe.get_doc({
+                "doctype": "UOM",
+                "uom_name": uom_code,
+                "enabled": 1
+            }).insert(ignore_permissions=True)
+
         existing_record = frappe.get_all("NCF HSCode", filters={"name": record["name"]}, fields=["name"])
 
         if not existing_record:
@@ -36,7 +45,7 @@ def insert_new_records():
                 "disabled": record["disabled"],
                 "docstatus": record["docstatus"],
                 "item_tax": record["item_tax"],
-                "uom": record["uom"],
+                "uom": uom_code,
                 "itbis_": record["itbis_"]
             })
             doc.insert(ignore_permissions=True)
