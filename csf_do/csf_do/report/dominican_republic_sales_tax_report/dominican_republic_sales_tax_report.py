@@ -21,6 +21,14 @@ class DominicanRepublicSalesTaxReport(object):
         self.unregistered_customers_total_sales = 0
         self.unregistered_customers_total_vat = 0
 
+    def _get_report_currency(self) -> str:
+        company = self.filters.get("company") or frappe.defaults.get_user_default("Company")
+        if company:
+            currency = frappe.db.get_value("Company", company, "default_currency")
+            if currency:
+                return currency
+        return "DOP"
+
     def run(self):
         columns = self.get_columns()
         data = self.get_data()
@@ -232,30 +240,32 @@ class DominicanRepublicSalesTaxReport(object):
 
 
     def get_report_summary(self):
+        currency = self._get_report_currency()
+
         return [{
             "value": self.registered_customers_total_sales,
             "indicator": "Green",
-            "label": _("Registered customers total sales"),
+            "label": _("Ventas clientes registrados"),
             "datatype": "Currency",
-            "currency": "KES"
+            "currency": currency
         }, {
             "value": self.registered_customers_total_vat,
             "indicator": "Green",
-            "label": _("Registered customers total ITBIS"),
+            "label": _("ITBIS clientes registrados"),
             "datatype": "Currency",
-            "currency": "KES"
+            "currency": currency
         }, {
             "value": self.unregistered_customers_total_sales,
             "indicator": "Green",
-            "label": _("Unregistered customers total sales"),
+            "label": _("Ventas clientes no registrados"),
             "datatype": "Currency",
-            "currency": "KES"
+            "currency": currency
         }, {
             "value": self.unregistered_customers_total_vat,
             "indicator": "Green",
-            "label": _("Unregistered customers total ITBIS"),
+            "label": _("ITBIS clientes no registrados"),
             "datatype": "Currency",
-            "currency": "KES"
+            "currency": currency
         }]
 
 @frappe.whitelist()
