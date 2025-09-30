@@ -8,6 +8,7 @@ import os
 import csv
 import re
 from datetime import datetime
+from frappe.utils import getdate
 
 def execute(filters=None):
     return DominicanRepublicSalesTaxReport(filters).run()
@@ -186,8 +187,12 @@ class DominicanRepublicSalesTaxReport(object):
         return items_or_services
 
     def get_data(self):
-        if self.filters.from_date > self.filters.to_date:
-            frappe.throw(_("To Date cannot be before From Date. {}").format(self.filters.to_date))
+        from_date = self.filters.get('from_date')
+        to_date = self.filters.get('to_date')
+
+        if from_date and to_date:
+            if getdate(from_date) > getdate(to_date):
+                frappe.throw(_("To Date cannot be before From Date. {}").format(to_date))
         report_details = []
 
         sales_invoices = self.get_sales_invoices()
