@@ -17,9 +17,9 @@ class DominicanRepublicSalesTaxReport(object):
     def __init__(self, filters=None):
         self.filters = frappe._dict(filters or {})
         self.registered_customers_total_sales = 0
-        self.registered_customers_total_itbis = 0
+        self.registered_customers_total_vat = 0
         self.unregistered_customers_total_sales = 0
-        self.unregistered_customers_total_itbis = 0
+        self.unregistered_customers_total_vat = 0
 
     def run(self):
         columns = self.get_columns()
