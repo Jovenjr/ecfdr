@@ -6,6 +6,7 @@ from frappe import _
 from frappe.utils import now, today
 import json
 import os
+from importlib import import_module
 
 
 def before_install():
@@ -56,13 +57,27 @@ def after_migrate():
     from csf_do.csf_do.doctype.ncf_hscode.ncf_hscode import insert_new_records
     insert_new_records()
 
+def _get_app_version(app_name: str) -> str | None:
+    """Obtain the `__version__` attribute of an installed app."""
+    try:
+        module = import_module(app_name)
+    except ModuleNotFoundError:
+        return None
+
+    return getattr(module, "__version__", None)
+
 
 def validate_erpnext_version():
     """Validar que la versión de ERPNext sea compatible"""
-    erpnext_version = frappe.get_installed_version("erpnext")
-    
-    if not erpnext_version:
+    installed_apps = set(frappe.get_installed_apps())
+
+    if "erpnext" not in installed_apps:
         frappe.throw(_("ERPNext no está instalado. CSF DO requiere ERPNext v13 o superior."))
+
+    erpnext_version = _get_app_version("erpnext")
+
+    if not erpnext_version:
+        frappe.throw(_("No se pudo determinar la versión instalada de ERPNext."))
     
     # Verificar versión mínima (v13)
     major_version = int(erpnext_version.split('.')[0])
@@ -73,9 +88,11 @@ def validate_erpnext_version():
 def validate_dependencies():
     """Validar dependencias requeridas"""
     required_apps = ["erpnext", "hrms"]
-    
+
+    installed_apps = set(frappe.get_installed_apps())
+
     for app in required_apps:
-        if not frappe.get_installed_version(app):
+        if app not in installed_apps:
             frappe.throw(_("Aplicación requerida {0} no está instalada").format(app))
 
 
