@@ -16,6 +16,7 @@ def execute(filters=None):
 class DominicanRepublicSalesTaxReport(object):
     def __init__(self, filters=None):
         self.filters = frappe._dict(filters or {})
+        self.report_currency = self._get_report_currency()
         self.registered_customers_total_sales = 0
         self.registered_customers_total_vat = 0
         self.unregistered_customers_total_sales = 0
@@ -39,78 +40,85 @@ class DominicanRepublicSalesTaxReport(object):
     def get_columns(self):
         columns =  [
                 {
-                    "label": _("RNC of purchaser"),
-                    "fieldname": "rnc_of_purchaser",
+                    "label": _("RNC del cliente"),
+                    "fieldname": "pin_of_purchaser",
                     "fieldtype": "Data",
-                    "width": 160
+                    "width": 140
                 },
                 {
-                    "label": _("Name of purchaser"),
+                    "label": _("Nombre del cliente"),
                     "fieldname": "name_of_purchaser",
                     "fieldtype": "Data",
-                    "width": 240
+                    "width": 220
                 },
                 {
-                    "label":_("Invoice Date"),
+                    "label": _("Fecha de factura"),
                     "fieldname": "invoice_date",
                     "fieldtype": "Date",
-                    "width": 160
+                    "width": 120
                 },
                 {
-                    "label": _("Invoice Number"),
+                    "label": _("Factura"),
                     "fieldname": "invoice_name",
                     "fieldtype": "Link",
                     "options": "Sales Invoice",
-                    "width": 200
+                    "width": 170
                 },
                 {
-                    "label": _("ETR Serial Number"),
-                    "fieldname": "etr_serial_number",
+                    "label": _("Moneda de la factura"),
+                    "fieldname": "invoice_currency",
                     "fieldtype": "Data",
-                    "width": 200
+                    "width": 110
                 },
                 {
-                    "label": _("ETR Invoice Number"),
-                    "fieldname": "etr_invoice_number",
-                    "fieldtype": "Data",
-                    "width": 200
+                    "label": _("Tasa de cambio"),
+                    "fieldname": "conversion_rate",
+                    "fieldtype": "Float",
+                    "precision": 6,
+                    "width": 110
                 },
                 {
-                    "fieldname": _("cu_link"),
-                    "label": "CU Link",
-                    "fieldtype": "Data",
-                    "width": 200
+                    "label": _("Total factura (moneda original)"),
+                    "fieldname": "invoice_total_sales_currency",
+                    "fieldtype": "Currency",
+                    "options": "invoice_currency",
+                    "width": 170
                 },
                 {
-                    "label": _("CU Invoice Date"),
-                    "fieldname": "cu_invoice_date",
-                    "fieldtype": "Date",
-                    "width": 200
-                   },
+                    "label": _("Total factura (DOP)"),
+                    "fieldname": "invoice_total_sales",
+                    "fieldtype": "Currency",
+                    "options": "currency",
+                    "width": 150
+                },
                 {
-                    "label": _("Taxable Value(Ksh)"),
+                    "label": _("Valor gravado (moneda original)"),
+                    "fieldname": "taxable_value_currency",
+                    "fieldtype": "Currency",
+                    "options": "invoice_currency",
+                    "width": 170
+                },
+                {
+                    "label": _("Valor gravado (DOP)"),
                     "fieldname": "taxable_value",
                     "fieldtype": "Currency",
-                    "width": 160
+                    "options": "currency",
+                    "width": 150
                 },
                 {
-                    "label": _("Amount of ITBIS(Ksh)"),
+                    "label": _("ITBIS (moneda original)"),
+                    "fieldname": "amount_of_vat_currency",
+                    "fieldtype": "Currency",
+                    "options": "invoice_currency",
+                    "width": 150
+                },
+                {
+                    "label": _("ITBIS (DOP)"),
                     "fieldname": "amount_of_vat",
                     "fieldtype": "Currency",
-                    "width": 160
+                    "options": "currency",
+                    "width": 140
                 },
-                {
-                    "label": _("Return CU Invoice Number"),
-                    "fieldname": "return_cu_invoice_number",
-                    "fieldtype": "Data",
-                    "width": 200
-                },
-                {
-                    "label": _("Return CU Invoice Date"),
-                    "fieldname": "return_cu_invoice_date",
-                    "fieldtype": "Date",
-                    "width": 160
-                }
         ]
 
         if self.filters.is_return == "Is Return":
@@ -141,12 +149,11 @@ class DominicanRepublicSalesTaxReport(object):
             .select(
                 sale_invoice_doc.tax_id.as_('pin_of_purchaser') if sale_invoice_doc.tax_id else "".as_('pin_of_purchaser'),
                 sale_invoice_doc.customer_name.as_('name_of_purchaser'),
-                    sale_invoice_doc.etr_serial_number.as_('etr_serial_number'),
-                    sale_invoice_doc.etr_invoice_number.as_('etr_invoice_number'),
-                    sale_invoice_doc.cu_link.as_('cu_link'),
-                    sale_invoice_doc.cu_invoice_date.as_('cu_invoice_date'),
                     sale_invoice_doc.posting_date.as_('invoice_date'),
                     sale_invoice_doc.name.as_('invoice_name'),
+                    sale_invoice_doc.currency.as_('invoice_currency'),
+                    sale_invoice_doc.conversion_rate.as_('conversion_rate'),
+                    sale_invoice_doc.grand_total.as_('invoice_total_sales_currency'),
                     sale_invoice_doc.base_grand_total.as_('invoice_total_sales'),
                     sale_invoice_doc.return_against.as_('return_against')) \
             .where(sale_invoice_doc.docstatus == 1)
@@ -182,8 +189,8 @@ class DominicanRepublicSalesTaxReport(object):
         sales_invoice_item_doc = frappe.qb.DocType('Sales Invoice Item')
         sales_invoice_items_query = frappe.qb.from_(sales_invoice_item_doc) \
             .select(
-                sales_invoice_item_doc.amount.as_('amount'),
                 sales_invoice_item_doc.base_net_amount.as_('taxable_value'),
+                sales_invoice_item_doc.net_amount.as_('taxable_value_currency'),
                 sales_invoice_item_doc.item_tax_template.as_('item_tax_template')
             ) \
             .where(sales_invoice_item_doc.parent == sales_invoice_name)
@@ -206,25 +213,50 @@ class DominicanRepublicSalesTaxReport(object):
         sales_invoices = self.get_sales_invoices()
 
         for sales_invoice in sales_invoices:
+            sales_invoice['invoice_currency'] = sales_invoice.get('invoice_currency') or self.report_currency
+            sales_invoice['conversion_rate'] = float(sales_invoice.get('conversion_rate') or 1)
+            sales_invoice['invoice_total_sales_currency'] = float(sales_invoice.get('invoice_total_sales_currency') or 0)
+            sales_invoice['currency'] = self.report_currency
+            sales_invoice['taxable_value'] = 0
+            sales_invoice['taxable_value_currency'] = 0
+            sales_invoice['amount_of_vat'] = 0
+            sales_invoice['amount_of_vat_currency'] = 0
+            sales_invoice['indent'] = 0
+
             report_details.append(sales_invoice)
 
             items_or_services = self.get_sales_invoice_items(sales_invoice.invoice_name, self.filters.tax_template)
 
-            total_taxable_value = 0
-            total_vat = 0
+            total_taxable_value = 0.0
+            total_taxable_value_currency = 0.0
+            total_vat = 0.0
+            total_vat_currency = 0.0
 
             for item_or_service in items_or_services:
                 tax_rate = frappe.db.get_value('Item Tax Template Detail',
                                             {'parent': item_or_service['item_tax_template']},
                                             ['tax_rate'])
-                item_or_service['amount_of_vat'] = 0 if not tax_rate else item_or_service['taxable_value'] * (tax_rate / 100)
 
-                total_taxable_value += item_or_service['taxable_value']
+                base_taxable = float(item_or_service.get('taxable_value') or 0)
+                currency_taxable = float(item_or_service.get('taxable_value_currency') or 0)
+
+                item_or_service['amount_of_vat'] = 0 if not tax_rate else base_taxable * (tax_rate / 100)
+                item_or_service['amount_of_vat_currency'] = 0 if not tax_rate else currency_taxable * (tax_rate / 100)
+
+                total_taxable_value += base_taxable
+                total_taxable_value_currency += currency_taxable
                 total_vat += item_or_service['amount_of_vat']
+                total_vat_currency += item_or_service['amount_of_vat_currency']
+
+                item_or_service['invoice_currency'] = sales_invoice['invoice_currency']
+                item_or_service['currency'] = self.report_currency
+                item_or_service['conversion_rate'] = sales_invoice['conversion_rate']
                 item_or_service['indent'] = 1
 
             sales_invoice['taxable_value'] = total_taxable_value
+            sales_invoice['taxable_value_currency'] = total_taxable_value_currency
             sales_invoice['amount_of_vat'] = total_vat
+            sales_invoice['amount_of_vat_currency'] = total_vat_currency
 
         report_details = list(filter(lambda report_entry: report_entry['taxable_value'], report_details))
 

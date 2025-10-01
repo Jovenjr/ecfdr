@@ -9,6 +9,7 @@ from frappe.utils import flt, now_datetime
 from csf_do.csf_do.doctype.e_cf_sequence.e_cf_sequence import ECFSequence, ExhaustedSequenceError
 from csf_do.csf_do.overrides.validate_rnc import validate_rnc
 from csf_do.csf_do.utils.field_validators import validate_rnc as validate_rnc_format
+from csf_do.csf_do.utils.amount_utils import format_exchange_rate, format_money
 
 
 def before_sales_invoice_submit(doc: Document, method: str) -> None:
@@ -134,6 +135,14 @@ def _calculate_dgii_totals(doc: Document) -> None:
     conversion_rate = flt(doc.get("conversion_rate") or 1.0)
     is_foreign_currency = bool(company_currency and doc_currency and doc_currency != company_currency)
 
+    currency_precision = doc.precision("grand_total") or 2
+    base_currency_precision = doc.precision("base_grand_total") or 2
+
+    if is_foreign_currency and conversion_rate <= 0:
+        frappe.throw(
+            _("Debe configurar un tipo de cambio mayor a cero para facturas en {0}.".format(doc_currency))
+        )
+
     total_itbis_18 = 0.0
     total_itbis_16 = 0.0
     total_itbis_0 = 0.0
@@ -146,10 +155,11 @@ def _calculate_dgii_totals(doc: Document) -> None:
 
     for item in doc.get("items", []):
         indicator = item.get("dgii_indicator", "")
-        base_amount = flt(item.get("base_amount"))
+        base_amount = flt(item.get("base_amount") or 0.0, base_currency_precision)
         if not base_amount and conversion_rate:
-            base_amount = flt(item.get("amount") or 0.0) * conversion_rate
-        foreign_amount = flt(item.get("amount") or 0.0)
+            base_amount = flt((item.get("amount") or 0.0) * conversion_rate, base_currency_precision)
+
+        foreign_amount = flt(item.get("amount") or 0.0, currency_precision)
 
         itbis_percentage = None
         if "18%" in indicator or indicator.startswith("1"):
@@ -173,19 +183,19 @@ def _calculate_dgii_totals(doc: Document) -> None:
         if item.get("dgii_propina_flag"):
             total_propina += base_amount * 0.10  # 10% propina legal
 
-    doc.dgii_total_itbis_tasa1 = total_itbis_18
-    doc.dgii_total_itbis_tasa2 = total_itbis_16
-    doc.dgii_total_itbis_tasa3 = total_itbis_0
-    doc.dgii_total_itbis_exento = total_itbis_exento
-    doc.dgii_total_itbis_retenido = total_itbis_retenido
-    doc.dgii_total_isr_retenido = total_isr_retenido
-    doc.dgii_total_isc = total_isc
-    doc.dgii_total_propina_legal = total_propina
+    doc.dgii_total_itbis_tasa1 = flt(total_itbis_18, base_currency_precision)
+    doc.dgii_total_itbis_tasa2 = flt(total_itbis_16, base_currency_precision)
+    doc.dgii_total_itbis_tasa3 = flt(total_itbis_0, base_currency_precision)
+    doc.dgii_total_itbis_exento = flt(total_itbis_exento, base_currency_precision)
+    doc.dgii_total_itbis_retenido = flt(total_itbis_retenido, base_currency_precision)
+    doc.dgii_total_isr_retenido = flt(total_isr_retenido, base_currency_precision)
+    doc.dgii_total_isc = flt(total_isc, base_currency_precision)
+    doc.dgii_total_propina_legal = flt(total_propina, base_currency_precision)
 
     if is_foreign_currency:
         doc.dgii_tipo_moneda = doc_currency
-        doc.dgii_tipo_cambio = conversion_rate
-        doc.dgii_total_itbis_moneda_alterna = total_itbis_foreign
+        doc.dgii_tipo_cambio = flt(conversion_rate, doc.precision("conversion_rate") or 4)
+        doc.dgii_total_itbis_moneda_alterna = flt(total_itbis_foreign, currency_precision)
     else:
         doc.dgii_tipo_moneda = ""
         doc.dgii_tipo_cambio = 1.0
@@ -311,20 +321,20 @@ def _build_ecf_payload_from_invoice(doc: Document) -> dict:
     base_grand_total = flt(doc.get("base_grand_total") or 0.0)
     base_net_total = flt(doc.get("base_net_total") or 0.0)
     if not base_grand_total and conversion_rate:
-        base_grand_total = flt(doc.get("grand_total") or 0.0) * conversion_rate
+        base_grand_total = flt((doc.get("grand_total") or 0.0) * conversion_rate, doc.precision("base_grand_total") or 2)
     if not base_net_total and conversion_rate:
-        base_net_total = flt(doc.get("net_total") or 0.0) * conversion_rate
+        base_net_total = flt((doc.get("net_total") or 0.0) * conversion_rate, doc.precision("base_net_total") or 2)
 
-    base_total_itbis = flt(doc.dgii_total_itbis_tasa1 or 0.0) + flt(doc.dgii_total_itbis_tasa2 or 0.0)
-    base_total_exento = flt(doc.dgii_total_itbis_exento or 0.0)
+    base_total_itbis = flt((doc.dgii_total_itbis_tasa1 or 0.0) + (doc.dgii_total_itbis_tasa2 or 0.0), doc.precision("base_grand_total") or 2)
+    base_total_exento = flt(doc.dgii_total_itbis_exento or 0.0, doc.precision("base_grand_total") or 2)
 
     totales = {
-        "MontoTotal": base_grand_total,
-        "MontoGravadoTotal": base_net_total,
-        "TotalITBIS": base_total_itbis,
+        "MontoTotal": format_money(base_grand_total),
+        "MontoGravadoTotal": format_money(base_net_total),
+        "TotalITBIS": format_money(base_total_itbis),
     }
     if base_total_exento:
-        totales["MontoExento"] = base_total_exento
+        totales["MontoExento"] = format_money(base_total_exento)
 
     payload = {
         "encabezado": {
@@ -395,15 +405,15 @@ def _build_ecf_payload_from_invoice(doc: Document) -> dict:
     if is_foreign_currency:
         otra_moneda_totales = {
             "TipoMoneda": doc.dgii_tipo_moneda or doc_currency,
-            "TipoCambio": flt(conversion_rate, 6),
-            "MontoTotalOtraMoneda": flt(doc.get("grand_total") or 0.0, 2),
+            "TipoCambio": format_exchange_rate(conversion_rate, 4),
+            "MontoTotalOtraMoneda": format_money(doc.get("grand_total") or 0.0),
         }
         if foreign_gravado:
-            otra_moneda_totales["MontoGravadoTotalOtraMoneda"] = flt(foreign_gravado, 2)
+            otra_moneda_totales["MontoGravadoTotalOtraMoneda"] = format_money(foreign_gravado)
         if foreign_exento:
-            otra_moneda_totales["MontoExentoOtraMoneda"] = flt(foreign_exento, 2)
+            otra_moneda_totales["MontoExentoOtraMoneda"] = format_money(foreign_exento)
         if doc.dgii_total_itbis_moneda_alterna:
-            otra_moneda_totales["TotalITBISOtraMoneda"] = flt(doc.dgii_total_itbis_moneda_alterna, 2)
+            otra_moneda_totales["TotalITBISOtraMoneda"] = format_money(doc.dgii_total_itbis_moneda_alterna)
 
         payload["encabezado"]["OtraMoneda"] = otra_moneda_totales
 

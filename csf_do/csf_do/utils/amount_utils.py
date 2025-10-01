@@ -31,3 +31,16 @@ def to_str(d: Decimal) -> str:
     return format(d, 'f')
 
 
+def format_decimal(value: str | float | int, places: int) -> str:
+    """Return *value* formatted with the requested number of decimal places."""
+    return to_str(quantize(value, places))
+
+
+def format_money(value: str | float | int, places: int = 2) -> str:
+    return format_decimal(value, places)
+
+
+def format_exchange_rate(value: str | float | int, places: int = 4) -> str:
+    return format_decimal(value, places)
+
+
