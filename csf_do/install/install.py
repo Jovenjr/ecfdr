@@ -54,8 +54,12 @@ def after_migrate():
     frappe.logger().info("Ejecutando migraciones posteriores para CSF DO...")
     
     # Insertar datos de NCF HSCode
-    from csf_do.csf_do.doctype.ncf_hscode.ncf_hscode import insert_new_records
-    insert_new_records()
+    try:
+        from csf_do.csf_do.doctype.ncf_hscode.ncf_hscode import insert_new_records
+        insert_new_records()
+    except Exception as e:
+        frappe.logger().error(f"Error al insertar registros de NCF HSCode: {str(e)}")
+        # No lanzar la excepción para no detener las migraciones
 
 def _get_app_version(app_name: str) -> str | None:
     """Obtain the `__version__` attribute of an installed app."""
