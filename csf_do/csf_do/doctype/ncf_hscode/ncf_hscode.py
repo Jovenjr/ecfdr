@@ -12,8 +12,8 @@ class NCFHSCode(Document):
 	
 def insert_new_records():
 
-    base_path = frappe.get_module_path("csf_do")
-    json_file_path = os.path.join(base_path, "doctype", "ncf_hscode", "ncf_hscode_data.json")
+    base_path = frappe.get_app_path("csf_do")
+    json_file_path = os.path.join(base_path, "csf_do", "doctype", "ncf_hscode", "ncf_hscode_data.json")
 
     if not os.path.exists(json_file_path):
         frappe.log_error("NCF HSCode JSON file not found", "Migration Error")
