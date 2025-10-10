@@ -155,31 +155,48 @@ def setup_currency():
 def setup_default_warehouses():
     """Crear almacenes por defecto para República Dominicana"""
     default_company = frappe.defaults.get_user_default("Company")
+    
+    # Verificar si el campo warehouse_type existe
+    has_warehouse_type = frappe.db.exists("DocField", {
+        "parent": "Warehouse",
+        "fieldname": "warehouse_type"
+    })
 
     warehouses = [
         {
             "warehouse_name": "All Warehouses - RD",
-            "warehouse_type": "Store",
             "is_group": 1,
             "parent_warehouse": "",
             "company": default_company
         },
         {
             "warehouse_name": "Almacén Principal - RD",
-            "warehouse_type": "Store",
             "is_group": 0,
             "parent_warehouse": "All Warehouses - RD",
             "company": default_company
         }
     ]
     
+    # Solo agregar warehouse_type si el campo existe y hay un tipo válido
+    if has_warehouse_type:
+        # Buscar un warehouse type existente
+        warehouse_type = frappe.db.get_value("Warehouse Type", {"name": ["in", ["Store", "Almacén", "Default"]]})
+        if warehouse_type:
+            for wh in warehouses:
+                wh["warehouse_type"] = warehouse_type
+    
     for warehouse_data in warehouses:
         if not frappe.db.exists("Warehouse", warehouse_data["warehouse_name"]):
-            warehouse = frappe.get_doc({
-                "doctype": "Warehouse",
-                **warehouse_data
-            })
-            warehouse.insert(ignore_permissions=True)
+            try:
+                warehouse = frappe.get_doc({
+                    "doctype": "Warehouse",
+                    **warehouse_data
+                })
+                warehouse.insert(ignore_permissions=True)
+            except Exception as e:
+                frappe.log_error(f"Error creating warehouse {warehouse_data.get('warehouse_name')}: {str(e)}")
+                # Continuar con el siguiente almacén
+                continue
     
     frappe.db.commit()
 
