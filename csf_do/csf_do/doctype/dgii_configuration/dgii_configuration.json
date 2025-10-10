@@ -10,6 +10,13 @@
   "version_ecf",
   "column_break_general",
   "api_mode",
+  "section_empresa",
+  "logo_empresa",
+  "column_break_empresa",
+  "representante_legal",
+  "direccion_fiscal",
+  "telefono_contacto",
+  "email_contacto",
   "section_cert",
   "p12_file",
   "p12_password",
@@ -71,6 +78,45 @@
    "options": "simulator\ntest\nproduction",
    "default": "simulator",
    "description": "Modo de operación: simulator (desarrollo), test (certificación), production (producción)"
+  },
+  {
+   "fieldname": "section_empresa",
+   "fieldtype": "Section Break",
+   "label": "Información de la Empresa"
+  },
+  {
+   "fieldname": "logo_empresa",
+   "fieldtype": "Attach Image",
+   "label": "Logo de la Empresa",
+   "description": "Logo para incluir en reportes oficiales DGII"
+  },
+  {
+   "fieldname": "column_break_empresa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "representante_legal",
+   "fieldtype": "Data",
+   "label": "Representante Legal",
+   "description": "Nombre del representante legal de la empresa"
+  },
+  {
+   "fieldname": "direccion_fiscal",
+   "fieldtype": "Small Text",
+   "label": "Dirección Fiscal",
+   "description": "Dirección fiscal registrada en DGII"
+  },
+  {
+   "fieldname": "telefono_contacto",
+   "fieldtype": "Data",
+   "label": "Teléfono de Contacto",
+   "description": "Teléfono principal de la empresa"
+  },
+  {
+   "fieldname": "email_contacto",
+   "fieldtype": "Data",
+   "label": "Email de Contacto",
+   "description": "Email de contacto para asuntos DGII"
   },
   {
    "fieldname": "section_cert",

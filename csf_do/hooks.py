@@ -143,7 +143,11 @@ doc_events = {
     },
     "Purchase Invoice": {
         "on_submit": "csf_do.csf_do.doctype.api.update_item_price_list.update_item_prices",
-        "on_cancel": "csf_do.csf_do.integrations.ecf.handlers.on_purchase_invoice_cancel"
+        "on_cancel": "csf_do.csf_do.integrations.ecf.handlers.on_purchase_invoice_cancel",
+        "before_submit": "csf_do.utils.validators.validate_invoice_itbis"
+    },
+    "Sales Invoice": {
+        "before_submit": "csf_do.utils.validators.validate_invoice_itbis"
     },
     "Item": {
         "before_save": "csf_do.csf_do.utils.get_ncf_hscode.validate_mandatory_hscode"

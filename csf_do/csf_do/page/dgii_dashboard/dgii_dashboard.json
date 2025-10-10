@@ -1,0 +1,27 @@
+{
+ "custom_format": 1,
+ "docstatus": 0,
+ "doctype": "Page",
+ "icon": "fa fa-chart-line",
+ "idx": 0,
+ "modified": "2025-01-15 12:00:00",
+ "module": "Csf Do",
+ "name": "dgii-dashboard",
+ "page_name": "dgii-dashboard",
+ "roles": [
+  {
+   "role": "Accounts Manager"
+  },
+  {
+   "role": "Accounts User"
+  },
+  {
+   "role": "Emisor e-CF"
+  },
+  {
+   "role": "Administrador e-CF"
+  }
+ ],
+ "standard": "No",
+ "title": "Dashboard DGII"
+}

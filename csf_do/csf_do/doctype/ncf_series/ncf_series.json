@@ -1,0 +1,246 @@
+{
+ "actions": [],
+ "autoname": "format:NCF-{tipo_ncf}-{####}",
+ "creation": "2025-10-10 14:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_1",
+  "tipo_ncf",
+  "tipo_ncf_name",
+  "serie",
+  "column_break_2",
+  "company",
+  "estado",
+  "section_numeracion",
+  "desde",
+  "hasta",
+  "column_break_num",
+  "actual",
+  "disponibles",
+  "section_vigencia",
+  "fecha_autorizacion",
+  "fecha_vencimiento",
+  "column_break_vig",
+  "dias_restantes",
+  "alerta_vencimiento",
+  "section_estadisticas",
+  "total_emitidos",
+  "porcentaje_uso",
+  "column_break_stats",
+  "ultimo_ncf_emitido",
+  "fecha_ultimo_uso",
+  "section_notas",
+  "notas"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Section Break",
+   "label": "Información General"
+  },
+  {
+   "fieldname": "tipo_ncf",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Tipo NCF",
+   "options": "B01\nB02\nB03\nB04\nB11\nB12\nB13\nB14\nB15\nB16\nB17",
+   "reqd": 1
+  },
+  {
+   "depends_on": "tipo_ncf",
+   "fieldname": "tipo_ncf_name",
+   "fieldtype": "Data",
+   "label": "Descripción Tipo",
+   "read_only": 1
+  },
+  {
+   "fieldname": "serie",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Serie",
+   "length": 1,
+   "reqd": 1,
+   "description": "A para producción, B para contingencia"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "default": "Activo",
+   "fieldname": "estado",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Estado",
+   "options": "Activo\nInactivo\nVencido\nAgotado"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_numeracion",
+   "fieldtype": "Section Break",
+   "label": "Numeración"
+  },
+  {
+   "fieldname": "desde",
+   "fieldtype": "Int",
+   "label": "Desde",
+   "reqd": 1,
+   "description": "Número inicial de la secuencia"
+  },
+  {
+   "fieldname": "hasta",
+   "fieldtype": "Int",
+   "label": "Hasta",
+   "reqd": 1,
+   "description": "Número final de la secuencia"
+  },
+  {
+   "fieldname": "column_break_num",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "actual",
+   "fieldtype": "Int",
+   "label": "Número Actual",
+   "read_only": 1,
+   "default": "0",
+   "description": "Próximo número a emitir"
+  },
+  {
+   "fieldname": "disponibles",
+   "fieldtype": "Int",
+   "label": "Números Disponibles",
+   "read_only": 1,
+   "description": "Cantidad de números sin usar"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_vigencia",
+   "fieldtype": "Section Break",
+   "label": "Vigencia"
+  },
+  {
+   "fieldname": "fecha_autorizacion",
+   "fieldtype": "Date",
+   "label": "Fecha Autorización",
+   "reqd": 1
+  },
+  {
+   "fieldname": "fecha_vencimiento",
+   "fieldtype": "Date",
+   "label": "Fecha Vencimiento",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_vig",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "dias_restantes",
+   "fieldtype": "Int",
+   "label": "Días Restantes",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "alerta_vencimiento",
+   "fieldtype": "Check",
+   "label": "Alerta de Vencimiento",
+   "read_only": 1,
+   "description": "Se activa cuando faltan menos de 30 días"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_estadisticas",
+   "fieldtype": "Section Break",
+   "label": "Estadísticas de Uso"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_emitidos",
+   "fieldtype": "Int",
+   "label": "Total Emitidos",
+   "read_only": 1
+  },
+  {
+   "fieldname": "porcentaje_uso",
+   "fieldtype": "Percent",
+   "label": "Porcentaje de Uso",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_stats",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "ultimo_ncf_emitido",
+   "fieldtype": "Data",
+   "label": "Último NCF Emitido",
+   "read_only": 1
+  },
+  {
+   "fieldname": "fecha_ultimo_uso",
+   "fieldtype": "Datetime",
+   "label": "Fecha Último Uso",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_notas",
+   "fieldtype": "Section Break",
+   "label": "Notas"
+  },
+  {
+   "fieldname": "notas",
+   "fieldtype": "Text",
+   "label": "Notas"
+  }
+ ],
+ "links": [],
+ "modified": "2025-10-10 14:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "CSF DO",
+ "name": "NCF Series",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_views": 1
+}
