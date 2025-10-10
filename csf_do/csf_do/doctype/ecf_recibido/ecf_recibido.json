@@ -1,0 +1,337 @@
+{
+ "actions": [],
+ "autoname": "format:ECF-REC-{YYYY}-{#####}",
+ "creation": "2025-01-10 14:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_1",
+  "encf",
+  "tipo_ecf",
+  "fecha_emision",
+  "column_break_2",
+  "status",
+  "purchase_invoice",
+  "company",
+  "section_emisor",
+  "rnc_emisor",
+  "razon_social_emisor",
+  "column_break_emisor",
+  "direccion_emisor",
+  "telefono_emisor",
+  "correo_emisor",
+  "section_totales",
+  "monto_total",
+  "monto_gravado",
+  "total_itbis",
+  "column_break_totales",
+  "monto_exento",
+  "otros_impuestos",
+  "section_validacion",
+  "firma_valida",
+  "certificado_valido",
+  "column_break_validacion",
+  "fecha_validacion",
+  "validado_por",
+  "section_xml",
+  "xml_content",
+  "section_procesamiento",
+  "fecha_recepcion",
+  "fecha_procesamiento",
+  "column_break_proc",
+  "procesado_por",
+  "notas",
+  "section_acuse",
+  "acuse_enviado",
+  "fecha_acuse",
+  "column_break_acuse",
+  "estado_acuse",
+  "track_id_acuse"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Section Break",
+   "label": "Información del e-CF"
+  },
+  {
+   "fieldname": "encf",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "e-NCF",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "tipo_ecf",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Tipo e-CF",
+   "options": "31\n32\n33\n34\n41\n43\n44\n45\n46\n47",
+   "reqd": 1
+  },
+  {
+   "fieldname": "fecha_emision",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Fecha Emisión",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Pendiente",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Estado",
+   "options": "Pendiente\nValidado\nProcesado\nRechazado\nDuplicado\nError",
+   "reqd": 1
+  },
+  {
+   "fieldname": "purchase_invoice",
+   "fieldtype": "Link",
+   "label": "Purchase Invoice",
+   "options": "Purchase Invoice",
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_emisor",
+   "fieldtype": "Section Break",
+   "label": "Datos del Emisor (Proveedor)"
+  },
+  {
+   "fieldname": "rnc_emisor",
+   "fieldtype": "Data",
+   "in_standard_filter": 1,
+   "label": "RNC Emisor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "razon_social_emisor",
+   "fieldtype": "Data",
+   "label": "Razón Social Emisor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_emisor",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "direccion_emisor",
+   "fieldtype": "Small Text",
+   "label": "Dirección"
+  },
+  {
+   "fieldname": "telefono_emisor",
+   "fieldtype": "Data",
+   "label": "Teléfono"
+  },
+  {
+   "fieldname": "correo_emisor",
+   "fieldtype": "Data",
+   "label": "Correo"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_totales",
+   "fieldtype": "Section Break",
+   "label": "Totales"
+  },
+  {
+   "fieldname": "monto_total",
+   "fieldtype": "Currency",
+   "label": "Monto Total",
+   "reqd": 1
+  },
+  {
+   "fieldname": "monto_gravado",
+   "fieldtype": "Currency",
+   "label": "Monto Gravado"
+  },
+  {
+   "fieldname": "total_itbis",
+   "fieldtype": "Currency",
+   "label": "Total ITBIS"
+  },
+  {
+   "fieldname": "column_break_totales",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "monto_exento",
+   "fieldtype": "Currency",
+   "label": "Monto Exento"
+  },
+  {
+   "fieldname": "otros_impuestos",
+   "fieldtype": "Currency",
+   "label": "Otros Impuestos"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_validacion",
+   "fieldtype": "Section Break",
+   "label": "Validación de Firma"
+  },
+  {
+   "default": "0",
+   "fieldname": "firma_valida",
+   "fieldtype": "Check",
+   "label": "Firma Válida"
+  },
+  {
+   "default": "0",
+   "fieldname": "certificado_valido",
+   "fieldtype": "Check",
+   "label": "Certificado Válido"
+  },
+  {
+   "fieldname": "column_break_validacion",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "fecha_validacion",
+   "fieldtype": "Datetime",
+   "label": "Fecha Validación",
+   "read_only": 1
+  },
+  {
+   "fieldname": "validado_por",
+   "fieldtype": "Link",
+   "label": "Validado Por",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "xml_content",
+   "fieldname": "section_xml",
+   "fieldtype": "Section Break",
+   "label": "XML Original"
+  },
+  {
+   "fieldname": "xml_content",
+   "fieldtype": "Code",
+   "label": "Contenido XML",
+   "options": "XML"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_procesamiento",
+   "fieldtype": "Section Break",
+   "label": "Procesamiento"
+  },
+  {
+   "default": "Now",
+   "fieldname": "fecha_recepcion",
+   "fieldtype": "Datetime",
+   "label": "Fecha Recepción",
+   "read_only": 1
+  },
+  {
+   "fieldname": "fecha_procesamiento",
+   "fieldtype": "Datetime",
+   "label": "Fecha Procesamiento",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_proc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "procesado_por",
+   "fieldtype": "Link",
+   "label": "Procesado Por",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "notas",
+   "fieldtype": "Text",
+   "label": "Notas"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_acuse",
+   "fieldtype": "Section Break",
+   "label": "Acuse de Recibo"
+  },
+  {
+   "default": "0",
+   "fieldname": "acuse_enviado",
+   "fieldtype": "Check",
+   "label": "Acuse Enviado"
+  },
+  {
+   "fieldname": "fecha_acuse",
+   "fieldtype": "Datetime",
+   "label": "Fecha Acuse",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_acuse",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "estado_acuse",
+   "fieldtype": "Select",
+   "label": "Estado Acuse",
+   "options": "\nAceptado\nRechazado"
+  },
+  {
+   "fieldname": "track_id_acuse",
+   "fieldtype": "Data",
+   "label": "Track ID Acuse",
+   "read_only": 1
+  }
+ ],
+ "links": [],
+ "modified": "2025-01-10 14:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "CSF DO",
+ "name": "e-CF Recibido",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

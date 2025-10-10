@@ -8,6 +8,8 @@
   "general_section",
   "rnc_emisor",
   "version_ecf",
+  "column_break_general",
+  "api_mode",
   "section_cert",
   "p12_file",
   "p12_password",
@@ -57,6 +59,18 @@
    "reqd": 1,
    "options": "1.0\n1.1",
    "default": "1.0"
+  },
+  {
+   "fieldname": "column_break_general",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "api_mode",
+   "fieldtype": "Select",
+   "label": "Modo API",
+   "options": "simulator\ntest\nproduction",
+   "default": "simulator",
+   "description": "Modo de operación: simulator (desarrollo), test (certificación), production (producción)"
   },
   {
    "fieldname": "section_cert",

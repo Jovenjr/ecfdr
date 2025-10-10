@@ -1,0 +1,148 @@
+{
+ "actions": [],
+ "creation": "2025-01-10 12:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_1",
+  "enabled",
+  "mode_info",
+  "column_break_2",
+  "show_notifications",
+  "section_break_scenarios",
+  "scenario_envio",
+  "scenario_consulta",
+  "scenario_acuse",
+  "section_break_stats",
+  "total_ecf_enviados",
+  "total_consultas",
+  "column_break_stats",
+  "ultimo_envio",
+  "ultimo_track_id",
+  "section_break_actions",
+  "html_actions"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Section Break",
+   "label": "Configuración General"
+  },
+  {
+   "default": "1",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Simulador Activo"
+  },
+  {
+   "fieldname": "mode_info",
+   "fieldtype": "Data",
+   "label": "Modo Actual",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "show_notifications",
+   "fieldtype": "Check",
+   "label": "Mostrar Notificaciones"
+  },
+  {
+   "fieldname": "section_break_scenarios",
+   "fieldtype": "Section Break",
+   "label": "Escenarios de Simulación"
+  },
+  {
+   "default": "success",
+   "fieldname": "scenario_envio",
+   "fieldtype": "Select",
+   "label": "Escenario Envío e-CF",
+   "options": "success\nvalidation_error\ntimeout\nserver_error"
+  },
+  {
+   "default": "success",
+   "fieldname": "scenario_consulta",
+   "fieldtype": "Select",
+   "label": "Escenario Consulta Estado",
+   "options": "success\nnot_found\ntimeout"
+  },
+  {
+   "default": "success",
+   "fieldname": "scenario_acuse",
+   "fieldtype": "Select",
+   "label": "Escenario Acuse Recibo",
+   "options": "success\nerror"
+  },
+  {
+   "fieldname": "section_break_stats",
+   "fieldtype": "Section Break",
+   "label": "Estadísticas"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_ecf_enviados",
+   "fieldtype": "Int",
+   "label": "Total e-CF Enviados",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "total_consultas",
+   "fieldtype": "Int",
+   "label": "Total Consultas",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_stats",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "ultimo_envio",
+   "fieldtype": "Datetime",
+   "label": "Último Envío",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ultimo_track_id",
+   "fieldtype": "Data",
+   "label": "Último Track ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_actions",
+   "fieldtype": "Section Break",
+   "label": "Acciones"
+  },
+  {
+   "fieldname": "html_actions",
+   "fieldtype": "HTML",
+   "label": "Acciones Rápidas"
+  }
+ ],
+ "issingle": 1,
+ "links": [],
+ "modified": "2025-01-10 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "CSF DO",
+ "name": "DGII Simulator Config",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
