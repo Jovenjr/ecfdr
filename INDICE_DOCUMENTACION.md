@@ -8,12 +8,18 @@
    - Lo más rápido para probar el simulador
    - **Empieza aquí**
 
-2. **[INSTRUCCIONES_PRUEBA.md](INSTRUCCIONES_PRUEBA.md)** 🧪
+2. **[INSTALACION_DOCKER.md](INSTALACION_DOCKER.md)** 🐳
+   - **Instalación completa en Docker**
+   - Paso a paso desde GitHub
+   - Scripts automatizados
+   - **Lee esto para instalar en contenedor**
+
+3. **[INSTRUCCIONES_PRUEBA.md](INSTRUCCIONES_PRUEBA.md)** 🧪
    - Cómo ejecutar las pruebas
    - 3 opciones diferentes
    - Checklist completo
 
-3. **[GUIA_RAPIDA_SIMULADOR.md](GUIA_RAPIDA_SIMULADOR.md)** 📖
+4. **[GUIA_RAPIDA_SIMULADOR.md](GUIA_RAPIDA_SIMULADOR.md)** 📖
    - Guía completa de uso
    - Ejemplos prácticos
    - Solución de problemas
@@ -65,6 +71,12 @@
 ---
 
 ## 🚀 Scripts Disponibles
+
+### Scripts de Instalación Docker
+| Script | Descripción | Cuándo usar |
+|--------|-------------|-------------|
+| **install_docker_windows.ps1** | Instalación automática desde Windows | Para instalar en Docker desde PowerShell |
+| **install_docker.sh** | Instalación dentro del contenedor | Para ejecutar dentro del contenedor |
 
 ### Scripts de Prueba
 | Script | Descripción | Cuándo usar |
